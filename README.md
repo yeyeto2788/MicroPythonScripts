@@ -1,7 +1,21 @@
 # MicroPythonScripts
 
+Repository for MicroPython scripts for different applications.
 
+## Structure for the code
 
+```
+**Script Folder**
+  |
+  |__ **Code**
+  |    |
+  |    |_ Commented code
+  |__ **Release**
+  |    |
+  |    |_ Uncomment Code
+  |__ **Doc**
+  |__ README
+```
 
 ## TO DO:
 
