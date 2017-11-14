@@ -1,24 +1,19 @@
-import network
 import socket
 
 html = b"""<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Message board</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <h1>Message board</h1>
-<table align="center">
-  <tr>
-    <th>Messages</th>
-    <th>Time</th>
-  </tr>
-  %s
-</table>
- <form align="center" method="post">
+<table><tr><th>Messages</th><th>Time</th></tr>%s</table>
+<form>
     <br><h3>Type a message:</h3><br>
-    <input type="text" name="messageinput">
+    <input type="text" name="messageinput"></input>
     <input type="submit" value="Send"></input>
 </form>
 </body>
@@ -33,9 +28,8 @@ def ReadFile():
             tabledata.append("<tr>\n<td>%s</td>\n<td>%s</td>\n</tr>" % (message[0], message[1]))
     return tabledata
     
-
+addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
 s = socket.socket()    
-addr = socket.getaddrinfo('192.168.4.1', 8080)[0][-1]
 s.bind(addr)
 s.listen(5)
 
@@ -47,7 +41,7 @@ while True:
         h = cl_file.readline()
         if h == b"" or h == b"\r\n":
             break
-    rows = ["<tr>\n<td>hola</td>\n<td>hola</td>\n</tr>", "<tr>\n<td>hola</td>\n<td>pepito</td>\n</tr>"] #ReadFile()
+    rows = ReadFile()
     response = html % '\n'.join(rows)
     cl.send(response)
     cl.close()
