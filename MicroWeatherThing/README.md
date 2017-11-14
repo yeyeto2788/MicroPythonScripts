@@ -7,7 +7,7 @@ It connects to OpenWeatherMap API in order to get the current weather from a loc
 What we need to do is download all the code from the `Relase` folder and rename the `MicroWeatherThing.py` file to `main.py` so it will be executed after booting up.
 
 
-# TO DO:
+### TO DO:
 
 - [ ] Add execution for the DHT11 sensor.
 
