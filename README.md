@@ -2,7 +2,7 @@
 
 Repository for MicroPython scripts for different applications.
 
-## Structure for the code
+## Structure for the Repository
 
 ```
 **Script Folder**
@@ -16,23 +16,19 @@ Repository for MicroPython scripts for different applications.
   |__ **Doc**
   |__ README
 ```
+
 ### Script Folder
 Folder contaning everything related the script.
 
-### Code
+### Code Folder
 Commented code for better understanding of it.
 
-### Release
+### Release Folder
 Code without comment and trying to be as small as possible in order to save memory for the microcontroller.
 
+
+### Doc Folder
+Folder containing the files like images and so on for documentation purposes.
+
 ### README
-Documentation of the script
-
-
-
-
-## TO DO:
-
-- [ ] Add execution for the code on the WeatherThing
-
-- [ ] Add readme and pictures on the WeatherThing
+Documentation of the script.
