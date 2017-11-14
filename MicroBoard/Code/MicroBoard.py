@@ -25,7 +25,7 @@ def ReadFile():
     with open("messages.txt", "r") as messages:
         for line in messages.readlines():
             message = line.split(",")
-            tabledata.append("<tr>\n<td>%s</td>\n<td>%s</td>\n</tr>" % (message[0], message[1]))
+            tabledata.append("<tr>\n<td>%s</td>\n<td align="right">%s</td>\n</tr>" % (message[0], message[1]))
     return tabledata
     
 addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
