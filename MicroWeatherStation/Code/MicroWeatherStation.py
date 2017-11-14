@@ -1,20 +1,13 @@
+"""
+IMPORT MODULES NEEDED
+"""
 import socket
 import dht
 import machine
 
-html = b"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Weather Station</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>ESP8266 Weather Station</h1>
-<table><tr><th>Temperature</th><th>Humidity</th></tr>%s</table>
-</body>
-</html>
+
+"""
+DECLARE FUNCTIONS
 """
 
 def ReadSensors():
@@ -25,8 +18,8 @@ def ReadSensors():
             An array with the temperature and the humidity.
     """
     d = dht.DHT11(machine.Pin(4))
-    Temperature = d.temperature()
-    Humidity = d.humidity()
+    Temperature = str(d.temperature())
+    Humidity = str(d.humidity())
     data = "<tr><td>%s ºC</td><td>%s %</td></tr>" % (Temperature, Humidity)
     return data
 
@@ -37,6 +30,20 @@ def main():
 
     Returns:
             None
+    """
+    html = b"""<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <title>Weather Station</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <h1>ESP8266 Weather Station</h1>
+    <table><tr><th>Temperature</th><th>Humidity</th></tr>%s</table>
+    </body>
+    </html>
     """
     addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
     s = socket.socket()
@@ -56,4 +63,8 @@ def main():
         cl.send(response)
         cl.close()
 
+
+"""
+EXECUTE THE CODE
+"""
 main()
