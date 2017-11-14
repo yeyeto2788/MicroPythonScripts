@@ -1,4 +1,4 @@
-# WeatherThing 
+# MicroWeatherThing 
 
 This script is used on the Wemos D1 mini running MicroPython port for the ESP8266.
 
