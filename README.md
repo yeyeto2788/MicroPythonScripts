@@ -5,14 +5,15 @@ Repository for MicroPython scripts for different applications.
 ## Structure for the Repository
 
 ```
-Script Folder
-  |
-  ├── Code
-  |    └── Commented code
-  ├── Release
-  |    └── Uncomment Code
-  ├── Doc
-  └──README
+Main Repository Folder(MicroPythonScripts)
+        └── Script Folder
+                |
+                ├── Code
+                |    └── Commented code
+                ├── Release
+                |    └── Uncomment Code
+                ├── Doc
+                └──README
 ```
 
 ### Script Folder
