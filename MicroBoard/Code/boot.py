@@ -12,9 +12,10 @@ DECLARE FUNCTIONS
 
 def CheckMSG_File():
     """
+    Check the file lines, if the line number is above 10 it will overwrite the file empty
     
     Returns:
-
+            Nothing.
     """
     Files = os.listdir()
     MSG_file = 'messages.txt'
