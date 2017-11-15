@@ -40,6 +40,7 @@ def main():
       <title>Weather Station</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <META HTTP-EQUIV="refresh" CONTENT="15">
     </head>
     <body>
     <h1 align="center">ESP8266 Weather Station</h1>
