@@ -36,9 +36,10 @@ def WriteFile(msgString):
     Returns:
             Nothing
     """
-    with open('messages.txt', 'ab') as f:
-        f.write(msgString + "\n")
-        f.close()
+    if (msgString != '#') or (len(msgString) > 2):
+        with open('messages.txt', 'ab') as f:
+            f.write(msgString + "\n")
+            f.close()
 
 def ReadFile():
     """
