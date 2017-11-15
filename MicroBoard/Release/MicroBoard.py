@@ -37,7 +37,6 @@ def main():
       <title>Message board</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <META HTTP-EQUIV="refresh" CONTENT="15">
     </head>
     <body>
     <h1>Message board</h1>
