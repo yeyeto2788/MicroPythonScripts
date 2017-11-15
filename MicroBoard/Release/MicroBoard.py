@@ -12,9 +12,10 @@ def CheckFile():
         return True
 
 def WriteFile(msgString):
-    with open('messages.txt', 'ab') as f:
-        f.write(msgString + "\n")
-        f.close()
+    if (msgString != '#') or (len(msgString) > 2):
+        with open('messages.txt', 'ab') as f:
+            f.write(msgString + "\n")
+            f.close()
 
 def ReadFile():
     tabledata = []
