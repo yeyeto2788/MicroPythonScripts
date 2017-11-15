@@ -6,5 +6,5 @@ The idea of this script is to host a bulleting board where it will read the mess
 
 What we need to do is download all the code from the `Relase` folder and rename the `MicroBoard.py` file to `main.py` so it will be executed after booting up.
 
-### Image of the testing:
+### Image of how it should look like:
 ![Server testing running image](https://github.com/yeyeto2788/MicroPythonScripts/blob/master/MicroBoard/Doc/index.png)
