@@ -15,12 +15,15 @@ def ReadSensors():
     Read the DHT11 sensor for Temperature and
 
     Returns:
-            An array with the temperature and the humidity.
+            An array with the temperature and the humidity read from the sensor.
     """
-    d = dht.DHT11(machine.Pin(4))
-    Temperature = str(d.temperature())
-    Humidity = str(d.humidity())
-    data = "<tr><td>%s ºC</td><td>%s %</td></tr>" % (Temperature, Humidity)
+    data = []
+    d = dht.DHT11(machine.Pin(2))
+    d.measure()
+    Temperature = d.temperature()
+    Humidity = d.humidity()
+    for i in range(0,1):
+        data.append( '<tr><td align="center">%s C</td><td align="center">%s </td></tr>' % (str(Temperature), str(Humidity)))
     return data
 
 
@@ -37,11 +40,10 @@ def main():
       <title>Weather Station</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <h1>ESP8266 Weather Station</h1>
-    <table><tr><th>Temperature</th><th>Humidity</th></tr>%s</table>
+    <h1 align="center">ESP8266 Weather Station</h1>
+    <table align="center"><tr><th>Temperature</th><th>Humidity</th></tr>%s</table>
     </body>
     </html>
     """
