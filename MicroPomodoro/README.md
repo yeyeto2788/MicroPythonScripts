@@ -17,7 +17,7 @@ This uses the OLED LCD display on the board to show the remaining time, once the
 
 ## Usefull links:
 
-[Pomodoro Technique] (https://en.wikipedia.org/wiki/Pomodoro_Technique)
+[Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
 
 ## TO DO:
 
