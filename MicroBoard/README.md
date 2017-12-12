@@ -10,6 +10,10 @@ If you want to clean the `messages.txt` just go ahead and also put the `boot.py`
 ![Server testing running image](https://github.com/yeyeto2788/MicroPythonScripts/blob/master/MicroBoard/Doc/index.png)
 
 
+## Parts needed:
+
+  * ESP8266
+
 ## TO DO:
 
 - [ ] Add real execution image.
