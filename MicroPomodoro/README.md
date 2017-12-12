@@ -29,6 +29,6 @@ What we need to do is download all the code from the Relase folder and rename th
 
 - [ ] Add buzzer ring alaram when finish.
 
-- [ ] Add led or neopixel signal (Optional).
+- [x] Add led or neopixel (Optional).
 
-- [ ] Add button execution.
+- [x] Add button execution.
