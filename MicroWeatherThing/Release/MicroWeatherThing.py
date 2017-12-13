@@ -63,7 +63,7 @@ def ParseWeatherData(parrData):
 def GetTime():
     import ntptime
     ntptime.settime()
-    ts = utime.localtime()
+    ts = time.localtime()
     year = ts[0]
     Month = ts[1]
     day = ts[2]
