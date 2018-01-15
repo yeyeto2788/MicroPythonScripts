@@ -3,8 +3,7 @@ import json
 import urequests
 import time
 import dht
-
-from machine import I2C, Pin
+import machine
 
 def ConnectWifi(SSID, pwd):
     """
@@ -49,9 +48,9 @@ def Getweather(CITY, API_KEY):
     ActualTemp = int(r["main"]["temp"] - 273.15)
     Data.append("Current: %s C" % ActualTemp)
     Humidity = int(r["main"]["humidity"])
-    Data.append("Humidity: %s C" % Humidity)
+    Data.append("Humidity: %s" % Humidity)
     Condition = str(r["weather"][0]["description"])
-    Data.append("Condition: %s C" % Condition)
+    Data.append("Condition: %s" % Condition)
     return Data
 
 
@@ -122,14 +121,16 @@ def ParseWeatherData(parrData):
     Returns: Nothing
 
     """
+    ClearDisplay()
     for i in range(0, len(parrData)):
         if i < (len(parrData) - 1):
             DisplayMsg(parrData[i], int(i * 8))
         else:
             FinalLine = parrData[i].split(": ")
             DisplayMsg(FinalLine[0], 40)
-            DisplayMsg(FinalLine[1].rstrip(" C"), 48)
+            DisplayMsg('{:^16}'.format(FinalLine[1]), 48)
             DrawHLine(Width, 37)
+        display.show()
 
 
 def GetTime():
@@ -141,7 +142,7 @@ def GetTime():
     """
     import ntptime
     ntptime.settime()
-    ts = utime.localtime()
+    ts = time.localtime()
     year = ts[0]
     Month = ts[1]
     day = ts[2]
@@ -160,10 +161,10 @@ def ShowTime():
 
     """
     ClearDisplay()
-    DisplayMsg("CLOCK", 16, 50)
+    DisplayMsg('{:^16}'.format("CLOCK"), 8)
     strData = GetTime().split(" ")
-    DisplayMsg(strData[0], 32, 48)
-    DisplayMsg(strData[1], 32, 56)
+    DisplayMsg('{:^16}'.format(strData[0]), 32)
+    DisplayMsg('{:^16}'.format(strData[1]), 40)
     display.show()
 
 
@@ -177,13 +178,14 @@ def GetLocalTH():
     """
     ClearDisplay()
     d = dht.DHT11(machine.Pin(4))
-    LocalTemp = "Temp: " + str(d.temperature()) + " ºC"
-    LocalHum = "Humidity: " + str(d.humidity())
-    DisplayMsg(LocalTemp, 8)
-    DisplayMsg(LocalHum, 8)
+    DisplayMsg('{:16}'.format("Local Temp:"), 16)
+    DisplayMsg('{:^16}'.format(str(d.temperature())), 24)
+    DisplayMsg('{:16}'.format("Local Humidity:"), 40)
+    DisplayMsg('{:^16}'.format(str(d.humidity())), 48)
+    display.show()
 
 
-i2c = I2C(scl=Pin(4), sda=Pin(5))
+i2c = machine.I2C(scl=machine.Pin(4), sda=machine.Pin(5))
 Width = 128
 Height = 64
 display = ssd1306.SSD1306_I2C(Width, Height, i2c)
