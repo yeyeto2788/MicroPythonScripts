@@ -65,7 +65,26 @@ class WittyBoard:
         return machine.ADC(0).read()
 
     @classmethod
-    def set_led_value(cls, strled, intduty):
+    def set_boolean_value(cls, strled, blnstatus):
+        """
+        Turns off and on the given led.
+        
+        Args:
+            strled: String with the name of the led
+            blnstatus: Boolean to which you want to set the led to.
+
+        Returns:
+            Nothing.
+        """
+        if strled in cls.pins['leds']:
+            if cls.pins['leds'][strled]['mode'] == cls.PWM:
+                machine.PWM(machine.Pin(cls.pins['leds'][strled]['pin'])).deinit()
+                cls.pins['leds'][strled]['mode'] = cls.OUT
+            machine.Pin(cls.pins['leds'][strled]['pin'], machine.Pin.OUT).value(blnstatus)
+
+
+    @classmethod
+    def set_pwm_value(cls, strled, intduty):
         """
         Will set a PWM pin for setting brightness off the led. There are some parameter to take into account which are
         written below.
