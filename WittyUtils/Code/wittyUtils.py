@@ -41,7 +41,6 @@ class WittyBoard:
             if pin != 'builtin_led':
                 if cls.pins['leds'][pin]['mode'] == cls.PWM:
                     machine.PWM(machine.Pin(cls.pins['leds'][pin]['pin'])).deinit()
-                    print("deiniting pin since its mode is PWM")
                 cls.pins['leds'][pin]['mode'] = cls.OUT
                 machine.Pin(cls.pins['leds'][pin]['pin'], machine.Pin.OUT).off()
 
