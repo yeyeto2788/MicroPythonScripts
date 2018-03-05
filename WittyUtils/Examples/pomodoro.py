@@ -34,5 +34,4 @@ while True:
         toggle_led(25, "red_led")
         toggle_led(5, "green_led")
     else:
-        pass
         witty.set_boolean_value('blue_led', 1)
