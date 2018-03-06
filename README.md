@@ -6,29 +6,44 @@ Repository for MicroPython scripts for different applications.
 
 ```
 Main Repository Folder(MicroPythonScripts)
-        └── Script Folder
+        └── Script Folders
                 |
                 ├── Code
                 |    └── Commented code
                 ├── Release
                 |    └── Uncomment Code
                 ├── Doc
-                ├── Examples
                 └──README
+        └── HelpScript Folder
+                |
+                ├── Classes
+				|   ├── Code
+				|	|    └── Commented code
+				|	├── Release
+				|	|    └── Uncomment Code
+				|	├── Doc
+				|	└── Examples
+                ├── HTML
+                └── CSS
 ```
 ___
-### Script Folder
-Folder contaning everything related the script.
-___
+## Script Folder
+Folder contaning everything related to the script.
 ### Code Folder
 Commented code for better understanding of it.
-___
 ### Release Folder
 Code without comment and trying to be as small as possible in order to save memory for the microcontroller.
-___
 ### Doc Folder
 Folder containing the files like images and so on for documentation purposes.
 ___
+## HelpScript Folder
+Folder contaning everything related to MicroPython and some help classes and scripts.
+### Code Folder
+Commented code for better understanding of it.
+### Release Folder
+Code without comment and trying to be as small as possible in order to save memory for the microcontroller.
+### Doc Folder
+Folder containing the files like images and so on for documentation purposes.
 ### Example Folder
 Folder containing the example files that will need to be renamed into `main.py` so it will be run at boot time.
 
