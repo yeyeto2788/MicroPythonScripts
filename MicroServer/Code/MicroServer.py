@@ -5,13 +5,12 @@ app = picoweb.WebApp("app")
 
 @app.route("/")
 def index(req, resp):
-    yield from picoweb.start_response(resp, content_type = "text/html")
+    yield from picoweb.start_response(resp, content_type="text/html")
 
     htmlFile = open('index.html', 'r')
 
     for line in htmlFile:
       yield from resp.awrite(line)
-
 
 def getIP():
     wlan = network.WLAN(network.STA_IF)
@@ -23,7 +22,7 @@ def getIP():
             addr = wlan.ifconfig()[0]
         else:
             print("No active connection")
-            return addr
+    return addr
 
-
-app.run(debug=True, host = getIP)
+HostIP = getIP()
+app.run(debug=True, host=HostIP)
