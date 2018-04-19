@@ -9,7 +9,9 @@ import os
 DECLARE FUNCTIONS
 """
 
-def CheckFile():
+file_name = "messages.txt"
+
+def check_file():
     """
     Check that the file for the messages exist, if not create the file so when we read it
     we don't get an error.
@@ -17,48 +19,75 @@ def CheckFile():
     Returns:
             True after checking if the file exists or after creating it.
     """
-    Files = os.listdir()
-    File = "messages.txt"
-    if File in Files:
+    if file_name in os.listdir():
         return True
     else:
-        with open(File, 'w') as f:
+        with open(file_name, 'w') as f:
             f.close()
         return True
 
-def WriteFile(msgString):
+def get_file_size():
     """
-    Write messages to the file 'messages.txt' comming from the input form.
+    This will return the number of lines of the file.
+
+    Returns:
+        An integer with the lines on file.
+    """
+    with open(file_name, 'r') as f:
+        lines = f.readlines()
+        f.close()
+        return len(lines)
+
+def write_file(strMessage):
+    """
+    Write messages to the file 'messages.txt' coming from the input form.
     
     Args:
-        msgString: String to be stored on the file
+        strMessage: String to be stored on the file
 
     Returns:
             Nothing
     """
-    if (msgString != '#') or (len(msgString) > 2):
+    if (strMessage != '#') or (len(strMessage) > 2):
+        total_messages = read_file()
+        if get_file_size() > 15:
+            total_messages.pop(0)
+        total_messages.append(strMessage)
         with open('messages.txt', 'ab') as f:
-            f.write(msgString + "\n")
+            for item in total_messages:
+                f.write(item + "\n")
             f.close()
 
-def ReadFile():
+def read_file():
     """
-     Read the 'messages.txt' file for the messages stored in it.
+    Read the 'messages.txt' file for the messages stored in it.
 
     Returns:
             An array with the messages and the 'time' next to the message.
     """
-    tabledata = []
-    if CheckFile() is True:
+    filedata = []
+    if check_file() is True:
         with open("messages.txt", "r") as messages:
             Data = messages.readlines()
             if len(Data) > 0:
                 for line in Data:
                     message = line.rstrip()
-                    tabledata.append('<tr>\n<td>%s</td>\n</tr>' % message)
+                    filedata.append(message)
             else:
-                tabledata.append('<tr><td>NO MESSAGES</td>\n</tr>')
-    return tabledata
+                filedata.append('NO MESSAGES')
+    return filedata
+
+def linted_data():
+    """
+    Add the HTML tags for each line on the file return by read_file method.
+
+    Returns:
+        data: A list with the linted data.
+    """
+    data = []
+    for element in read_file():
+        data.append('<tr>\n<td>%s</td>\n</tr>' % element)
+    return data
 
 
 def main():
@@ -68,24 +97,25 @@ def main():
     Returns:
             Nothing.
     """
+    check_file()
     html = """<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <title>Message board</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-    <h1>Message board</h1>
-    <table><tr><th>Messages</th></tr>%s</table>
-    <form>
-        <br><h3>Type a message:</h3><br>
-        <input type="text" name="messageinput"></input>
-        <input type="submit" value="Send"></input>
-    </form>
-    </body>
-    </html>
-    """
+        <html lang="en">
+        <head>
+          <title>Message board</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+        <body>
+        <h1>Message board</h1>
+        <table><tr><th>Messages</th></tr>%s</table>
+        <form>
+            <br><h3>Type a message:</h3><br>
+            <input type="text" name="messageinput"></input>
+            <input type="submit" value="Send"></input>
+        </form>
+        </body>
+        </html>
+        """
     
     addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
     s = socket.socket()    
@@ -98,14 +128,14 @@ def main():
         cl_file = cl.makefile('rwb', 0)
         while True:
             h = cl_file.readline()
-            GetMsg = b"GET /?messageinput="
-            if GetMsg in h:
+            gotten_msg = b"GET /?messageinput="
+            if gotten_msg in h:
                 msg = h.decode('utf-8').split('/?messageinput=')
-                Final_msg = msg[1][:(len(msg)-12)]
-                WriteFile(Final_msg)
+                final_msg = msg[1][:(len(msg)-12)]
+                write_file(final_msg)
             if h == b"" or h == b"\r\n":
                 break
-        rows = ReadFile()
+        rows = linted_data()
         response = html % '\n'.join(rows)
         cl.send(response)
         cl.close()
