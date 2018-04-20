@@ -49,11 +49,13 @@ def write_file(strMessage):
             Nothing
     """
     if (strMessage != '#') or (len(strMessage) > 2):
+        if "+" in strMessage:
+            strMessage = strMessage.replace("+", " ")
         total_messages = read_file()
         if get_file_size() > 15:
-            total_messages.pop(0)
+            del total_messages[0]
         total_messages.append(strMessage)
-        with open('messages.txt', 'ab') as f:
+        with open(file_name, 'w') as f:
             for item in total_messages:
                 f.write(item + "\n")
             f.close()
@@ -67,7 +69,7 @@ def read_file():
     """
     filedata = []
     if check_file() is True:
-        with open("messages.txt", "r") as messages:
+        with open(file_name, "r") as messages:
             Data = messages.readlines()
             if len(Data) > 0:
                 for line in Data:
@@ -101,9 +103,9 @@ def main():
     html = """<!DOCTYPE html>
         <html lang="en">
         <head>
-          <title>Message board</title>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Message board</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
         </head>
         <body>
         <h1>Message board</h1>
