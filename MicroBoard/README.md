@@ -4,8 +4,8 @@ The idea of this script is to host a bulleting board on a webserver based on the
 
 What we need to do is download all the code from the `Relase` folder and rename the `MicroBoard.py` file to `main.py` so it will be executed after booting up.
 
-### Image of how it should look like:
-![Server testing running image](https://github.com/yeyeto2788/MicroPythonScripts/blob/master/MicroBoard/Doc/index.png)
+### Image of code running on the witty cloud board:
+![Server testing running image](./Doc/index.png)
 
 
 ## Parts needed:
@@ -14,6 +14,8 @@ What we need to do is download all the code from the `Relase` folder and rename 
 
 ## TO DO:
 
-- [ ] Add real execution image.
+- [ ] Add real execution image / video.
+    <ul><li> - [x] Execution image</li>
+    <li> - [ ] Execution video.</li></ul>
 
 - [ ] Better documentation.
