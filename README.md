@@ -18,12 +18,12 @@ Main Repository Folder(MicroPythonScripts)
                 |
                 ├── Classes
 		|   ├── Code
-		|	|    └── Commented code
-		|	├── Release
-		|	|    └── Uncomment Code
-		|	├── Doc
-		|	└── Examples
-		|	└── README
+		|   |    └── Commented code
+		|   ├── Release
+		|   |    └── Uncomment Code
+		|   ├── Doc
+		|   └── Examples
+		|   └── README
                 ├── HTML
                 └── CSS
 ```
