@@ -38,6 +38,26 @@ def get_file_size():
         f.close()
         return len(lines)
 
+def quick_decode(strdecode):
+    """
+    This will perform a nasty url decode on a given string.
+    Args:
+        strdecode: String to be decoded.
+
+    Returns:
+        strdecode: String decoded.
+    """
+    elements = {";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A", "#": "%23", "&": "%26", "=": "%3D", "+": "%2B",
+                "$": "%24", ",": "%2C", "%": "%25", "<": "%3C", ">": "%3E"}
+    if "+" in strdecode:
+        strdecode = strdecode.replace("+", " ")
+    if "%20" in strdecode:
+        strdecode = strdecode.replace("%20", " ")
+    for element in elements:
+        if elements[element] in strdecode:
+            strdecode = strdecode.replace(elements[element], element)
+    return strdecode
+
 def write_file(strMessage):
     """
     Write messages to the file 'messages.txt' coming from the input form.
@@ -49,8 +69,7 @@ def write_file(strMessage):
             Nothing
     """
     if (strMessage != '#') or (len(strMessage) > 2):
-        if "+" in strMessage:
-            strMessage = strMessage.replace("+", " ")
+        strMessage = quick_decode(strMessage)
         total_messages = read_file()
         if get_file_size() > 15:
             del total_messages[0]

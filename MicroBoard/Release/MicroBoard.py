@@ -11,18 +11,27 @@ def check_file():
             f.close()
         return True
 
-
 def get_file_size():
     with open(file_name, 'r') as f:
         lines = f.readlines()
         f.close()
         return len(lines)
 
+def quick_decode(strdecode):
+    elements = {";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A", "#": "%23", "&": "%26", "=": "%3D", "+": "%2B",
+                "$": "%24", ",": "%2C", "%": "%25", "<": "%3C", ">": "%3E"}
+    if "+" in strdecode:
+        strdecode = strdecode.replace("+", " ")
+    if "%20" in strdecode:
+        strdecode = strdecode.replace("%20", " ")
+    for element in elements:
+        if elements[element] in strdecode:
+            strdecode = strdecode.replace(elements[element], element)
+    return strdecode
 
 def write_file(strMessage):
     if (strMessage != '#') or (len(strMessage) > 2):
-        if "+" in strMessage:
-            strMessage = strMessage.replace("+", " ")
+        strMessage = quick_decode(strMessage)
         total_messages = read_file()
         if get_file_size() > 15:
             del total_messages[0]
@@ -31,7 +40,6 @@ def write_file(strMessage):
             for item in total_messages:
                 f.write(item + "\n")
             f.close()
-
 
 def read_file():
     filedata = []
@@ -45,7 +53,6 @@ def read_file():
             else:
                 filedata.append('NO MESSAGES')
     return filedata
-
 
 def linted_data():
     data = []
