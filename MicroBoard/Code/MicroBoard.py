@@ -159,7 +159,7 @@ def main():
                 break
         rows = linted_data()
         response = html % '\n'.join(rows)
-        cl.send(response)
+        cl.sendall(response)
         cl.close()
 
 """
