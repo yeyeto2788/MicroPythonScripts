@@ -5,8 +5,9 @@ The idea of this script is to host a bulleting board on a webserver based on the
 What we need to do is download all the code from the `Release` folder and rename the `MicroBoard.py` file to `main.py` so it will be executed after booting up.
 
 ### Image of code running on the witty cloud board:
-![Server testing running image](./Doc/images/index.png)
-
+<p align="center">
+<img src="./Doc/images/index.png" alt="Drawing"  style="width: 300px;"/>
+</p>
 
 ## Parts needed:
 
@@ -14,7 +15,9 @@ What we need to do is download all the code from the `Release` folder and rename
 
   I'm using the Witty Cloud (ESP8266 based) board
 
-  ![witty cloud board](./Doc/images/witty-cloud.jpg)
+  <p align="center">
+  <img src="./Doc/images/witty-cloud.jpg" alt="Drawing" style="width: 300px;"/>
+  </p>
 
 ## TO DO:
 
