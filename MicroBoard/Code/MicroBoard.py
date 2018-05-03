@@ -3,6 +3,7 @@ IMPORT MODULES NEEDED
 """
 import socket
 import os
+import gc
 
 
 """
@@ -152,13 +153,17 @@ def main():
         """
     
     addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
-    s = socket.socket()    
+    s = socket.socket()
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(addr)
     s.listen(5)
-    
+    connection_count = 0
+
     while True:
         cl, addr = s.accept()
-        print('client connected from', addr)
+        print(connection_count, 'connection on', addr)
+        print("Free in: %d" % gc.mem_free())
+        connection_count += 1
         cl_file = cl.makefile('rwb', 0)
         while True:
             h = cl_file.readline()
@@ -171,8 +176,13 @@ def main():
                 break
         rows = linted_data()
         response = html % '\n'.join(rows)
-        cl.sendall(response)
+        try:
+            cl.sendall(response)
+        except OSError as error:
+            print("Error trying to send all information. %s" % error)
+            pass
         cl.close()
+        print("Free out: %d" % gc.mem_free())
 
 """
 EXECUTE THE CODE

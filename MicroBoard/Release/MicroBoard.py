@@ -1,5 +1,6 @@
 import socket
 import os
+import gc
 
 file_name = "messages.txt"
 
@@ -97,25 +98,33 @@ def main():
 
     addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
     s = socket.socket()
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(addr)
     s.listen(5)
+    connection_count = 0
 
     while True:
         cl, addr = s.accept()
-        print('client connected from', addr)
+        print(connection_count, 'connection on', addr)
+        gc.mem_free()
+        connection_count += 1
         cl_file = cl.makefile('rwb', 0)
         while True:
             h = cl_file.readline()
             gotten_msg = b"GET /?messageinput="
             if gotten_msg in h:
                 msg = h.decode('utf-8').split('/?messageinput=')
-                final_msg = msg[1][:(len(msg) - 12)]
+                final_msg = msg[1][:(len(msg)-12)]
                 write_file(final_msg)
             if h == b"" or h == b"\r\n":
                 break
         rows = linted_data()
         response = html % '\n'.join(rows)
-        cl.sendall(response)
+        try:
+            cl.sendall(response)
+        except OSError as error:
+            pass
         cl.close()
+        gc.mem_free()
 
 main()
