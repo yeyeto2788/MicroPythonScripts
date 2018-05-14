@@ -13,13 +13,13 @@ What we need to do is download all the code from the Relase folder and rename th
   I'm using the Wemos D1 Mini board.
 
   <p align="center">
-  <img src="./Doc/images/wemos_d1_mini.png" alt="Drawing"  width="500"/>
+  <img src="./Doc/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="150"/>
   </p>
 
   * OLED display (I2C)
 
   <p align="center">
-  <img src="./Doc/images/wemos_mini_oled.png" alt="Drawing"  width="500"/>
+  <img src="./Doc/images/wemos_mini_oled.png" alt="Wemos D1 Oled Display"  width="150"/>
   </p>
 
   * Buzzer
@@ -27,7 +27,7 @@ What we need to do is download all the code from the Relase folder and rename th
   * LEDs or Neopixel strip.
 
   <p align="center">
-  <img src="./Doc/images/12_noepixel_ring.png" alt="Drawing"  width="500"/>
+  <img src="./Doc/images/12_neopixel_ring.png" alt="12 neopixel ring pcb"  width="150"/>
   </p>
 
 
