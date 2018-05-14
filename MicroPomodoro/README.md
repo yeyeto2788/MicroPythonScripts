@@ -13,21 +13,13 @@ What we need to do is download all the code from the Relase folder and rename th
   I'm using the Wemos D1 Mini board.
 
   <p align="center">
-<<<<<<< HEAD
-  <img src="./Doc/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="150"/>
-=======
-  <img src="./Doc/images/wemos_d1_mini.png" alt="Wemos D1 Mini board"  width="200"/>
->>>>>>> 814328c89eb07d458b71d18a298310c4c5270b45
+  <img src="./Doc/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="200"/>
   </p>
 
   * OLED display (I2C)
 
   <p align="center">
-<<<<<<< HEAD
-  <img src="./Doc/images/wemos_mini_oled.png" alt="Wemos D1 Oled Display"  width="150"/>
-=======
-  <img src="./Doc/images/wemos_mini_oled.png" alt="Wemos Oled shield"  width="200"/>
->>>>>>> 814328c89eb07d458b71d18a298310c4c5270b45
+  <img src="./Doc/images/wemos_mini_oled.png" alt="Wemos D1 Oled Display"  width="200"/>
   </p>
 
   * Buzzer
@@ -35,12 +27,55 @@ What we need to do is download all the code from the Relase folder and rename th
   * LEDs or Neopixel strip.
 
   <p align="center">
-<<<<<<< HEAD
-  <img src="./Doc/images/12_neopixel_ring.png" alt="12 neopixel ring pcb"  width="150"/>
-=======
-  <img src="./Doc/images/12_neopixel_ring.png" alt="12 neopixel ring"  width="200"/>
->>>>>>> 814328c89eb07d458b71d18a298310c4c5270b45
+  <img src="./Doc/images/12_neopixel_ring.png" alt="12 neopixel ring pcb"  width="200"/>
   </p>
+
+## Custom PCB for the project.
+<p align="center">
+<table align="center">
+  <tr>
+    <th>Top side of the board</th>
+    <th>Placement of components</th>
+  </tr>
+  <tr>
+    <td><img src="./Doc/images/PCB_top.png" alt="Top side of board"  width="300"/></td>
+    <td><img src="./Doc/images/PCB_placement_top.png" alt="Placement of components"  width="300"/></td>
+  </tr>
+</table>
+</p>
+
+The idea with this board it not to have wires all over and also makes it better for fitting it into a 3D printed case and also for connecting it to the Wemos D1 mini board. The design is for single side PCB.
+
+#### Bill of materials
+<table align="center">
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+  </tr>
+  <tr>
+    <td>WS2812B Neopixel</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>100 pf Capacitor (SMD 1206)</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>SMD 1k Resistor (SMD 1206)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>6mm Push button</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Plain PCB (around 6x6 cm)</td>
+    <td>1</td>
+  </tr>
+</table>
+
+
+**The PCB is still in development** and I will upload the Gerber file and the Eagle CAD files.
 
 
 ## Usefull links:
@@ -53,7 +88,9 @@ What we need to do is download all the code from the Relase folder and rename th
 
 - [ ] Better documentation.
 
-- [ ] Add buzzer ring alaram when finish.
+- [ ] Add buzzer ring alarm when finish.
+
+- [ ] Add Eagle CAD design file, Gerber files and PDF to manual PCB manufacturing.
 
 - [x] Add led or neopixel (Optional).
 
