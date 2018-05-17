@@ -1,18 +1,24 @@
 """
 IMPORT MODULES NEEDED
 """
-import ssd1306
 import time
+import json
 import machine
 import neopixel
 
+try:
+    import ssd1306
+    blndisplay = True
+except ImportError as error:
+    print("Seems like there is no such module", error)
+    blndisplay = False
 
 """
 DECLARE FUNCTIONS
 """
 
 
-def DisplayMsg(pstrMessage, pintLine, pintStart=0, blnShow=0):
+def display_msg(pstrMessage, pintLine, pintStart=0, blnShow=0):
     """
     Display a message on the OLED screen
     
@@ -23,7 +29,7 @@ def DisplayMsg(pstrMessage, pintLine, pintStart=0, blnShow=0):
         blnShow: 
 
     Returns:
-            Nothing
+            Nothing.
     """
     Line = [0, 8, 16, 24, 32, 40, 48]
     if pintLine in Line:
@@ -32,7 +38,7 @@ def DisplayMsg(pstrMessage, pintLine, pintStart=0, blnShow=0):
         display.show()
 
 
-def ClearDisplay(blnFill=0, blnShow=0):
+def clear_display(blnFill=0, blnShow=0):
     """
     This can be use either to clear the screen will all pixels activated or deactivated by changing the
     blnFill and if the blnShow is set to one it will immediately shown on the OLED screen
@@ -42,14 +48,14 @@ def ClearDisplay(blnFill=0, blnShow=0):
         blnShow: Boolean to show or not on the screen. 
 
     Returns:
-            Nothing
+            Nothing.
     """
     display.fill(blnFill)
     if blnShow:
         display.show()
 
 
-def PrintText(pstrString):
+def print_text(pstrString):
     """
     This will print a text center on the OLED screen.
     
@@ -57,18 +63,18 @@ def PrintText(pstrString):
         pstrString: String with data to show.
 
     Returns:
-            Nothing
+            Nothing.
     """
-    ClearDisplay()
+    clear_display()
     FillAmount = 16
-    DisplayMsg("*" * FillAmount, 24, 0, 1)
-    DisplayMsg('{:*^16}'.format(pstrString), 32, 0, 1)
-    DisplayMsg("*" * FillAmount, 40, 0, 1)
+    display_msg("*" * FillAmount, 24, 0, 1)
+    display_msg('{:*^16}'.format(pstrString), 32, 0, 1)
+    display_msg("*" * FillAmount, 40, 0, 1)
     time.sleep(1)
-    ClearDisplay(0, 1)
+    clear_display(0, 1)
 
 
-def Lapsetime(pintMins, pstrmsg=''):
+def lapse_time(pintMins, pstrColor, pstrmsg=''):
     """
     Countdown timer to execute on the code that will use other functions to clear the display
     add other data like string on the screen with the countdown timer.
@@ -80,83 +86,111 @@ def Lapsetime(pintMins, pstrmsg=''):
         pstrmsg: String with the data to be shown on the OLED screen.
 
     Returns:
-            Nothing
+            Nothing.
     """
     totalMins = pintMins - 1
     for Mins in range(totalMins, -1, -1):
         for Secs in range(60, 0, -1):
             Data = '{:02d} : {:02d}'.format(Mins, Secs)
-            ClearDisplay()
-            DisplayMsg(Data, 24, 32)
-            DisplayMsg('{:^16}'.format(pstrmsg), 0)
-            display.show()
-            time.sleep(1)
+            print("Remaining time:", Data)
+            for milisecs in range(40, 0, -1):
+                set_pixel_color(milisecs % 12, pstrColor)
+                time.sleep_ms(25)
+            if blndisplay:
+                clear_display()
+                display_msg(Data, 24, 32)
+                display_msg('{:^16}'.format(pstrmsg), 0)
+                display.show()
 
 
-def SetNeoColor(NeoString, pstrColor, pintPixelCount):
+def set_pixel_color(intNeopixel, pstrColor):
+    """
+
+    Args:
+        intNeopixel: Pixel to be fill with color.
+        pstrColor: String with color to be filled.
+
+    Returns:
+        Nothing.
+    """
+    if neostrip[intNeopixel] != (0, 0, 0):
+        neostrip[intNeopixel] = (0, 0, 0)
+    else:
+        if pstrColor in config['colors']:
+            neostrip[intNeopixel] = config['colors'][pstrColor]
+    neostrip.write()
+
+
+def color_neostrip(neostrip, pstrColor, pintPixelCount):
     """
     Set a color to the neopixel.
     
     Args:
-        NeoString: NeoString.
+        neostrip: neostrip.
         pstrColor: String with the color to be shown on the Neopixel.
-        pintPixelCount: Integer with the amount of the Neopixel that has the NeoString.
+        pintPixelCount: Integer with the amount of the Neopixel that has the neostrip.
 
     Returns:
             Nothing
     """
-    if pstrColor == "Red":
-        for i in range(pintPixelCount):
-            NeoString[i] = (255, 0, 0)
-    if pstrColor == "Green":
-        for i in range(pintPixelCount):
-            NeoString[i] = (0, 255, 0)
-    if pstrColor == "Blue":
-        for i in range(pintPixelCount):
-            NeoString[i] = (0, 0, 255)
-    if pstrColor == "White":
-        for i in range(pintPixelCount):
-            NeoString[i] = (255, 255, 255)
-    NeoString.write()
+    if pstrColor in config['colors']:
+        for intcounter in range(pintPixelCount):
+            neostrip[intcounter] = config['colors'][pstrColor]
+    neostrip.write()
 
 
-def ClearNeoPixel(NeoString):
+def clear_neostrip(neostrip):
     """
-    Shutdown the NeoString or set the value to 0 for all Neopixel on the NeoString.
+    Shutdown the neostrip or set the value to 0 for all Neopixel on the neostrip.
     
     Args:
-        NeoString: NeoString.
+        neostrip: neostrip.
 
     Returns:
             Nothing
     """
-    NeoString.fill = ((0, 0, 0))
-    NeoString.write()
+    neostrip.fill = (config['colors']['nocolor'])
+    neostrip.write()
+
+
+def load_config():
+    """
+    Load configuration from the config.json file.
+
+    Returns:
+        json object with configuration.
+    """
+    with open("./config.json", "r") as ConfigFile:
+        return json.load(ConfigFile)
 
 
 """
 EXECUTE THE CODE
 """
 
-i2c = machine.I2C(scl=machine.Pin(4), sda=machine.Pin(5))
-Width = 128
-Height = 64
-display = ssd1306.SSD1306_I2C(Width, Height, i2c)
-button = machine.Pin(12, machine.Pin.IN, machine.Pin.PULL_UP)
+config = load_config()
 
-PIXEL_COUNT = 3
-NeoString = neopixel.NeoPixel(machine.Pin(15), PIXEL_COUNT)
+if blndisplay:
+    try:
+        i2c = machine.I2C(scl=machine.Pin(config['screen']['sda']), sda=machine.Pin(config['screen']['scl']))
+        display = ssd1306.SSD1306_I2C(config['screen']['width'], config['screen']['height'], i2c)
+        clear_display()
+    except OSError:
+        print("Error trying to initialize the code for the OLED")
+        blndisplay = False
 
-if (button.value() == 0):
-    ClearDisplay()
-    SetNeoColor(NeoString, "Red", PIXEL_COUNT)
-    Lapsetime(25, "POMODORO")
-    SetNeoColor(NeoString, "White", PIXEL_COUNT)
-    PrintText("   DONE   ")
-    ClearDisplay(1, 1)
-    time.sleep_ms(250)
-    SetNeoColor(NeoString, "Green", PIXEL_COUNT)
-    Lapsetime(5, "FREE TIME")
-    PrintText("   DONE   ")
-    ClearNeoPixel(NeoString)
-    ClearDisplay(0, 1)
+button = machine.Pin(config['button']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
+PIXEL_COUNT = config['neopixel']['count']
+neostrip = neopixel.NeoPixel(machine.Pin(config['neopixel']['pin']), PIXEL_COUNT)
+clear_neostrip(neostrip)
+
+
+while True:
+    if (button.value() == 0):
+        # Add animation here
+        # time.sleep_ms(3000)
+        # Clear neostrip
+        lapse_time(25, "red", "POMODORO")
+        clear_neostrip(neostrip)
+        lapse_time(5, "green", "FREE TIME")
+        clear_neostrip(neostrip)

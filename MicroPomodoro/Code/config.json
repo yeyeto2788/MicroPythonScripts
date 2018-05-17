@@ -1,0 +1,23 @@
+{
+  "screen":{
+    "width":128,
+    "height":64,
+    "sda":4,
+    "scl":5
+  },
+  "neopixel":{
+    "count":12,
+    "pin":15
+  },
+  "button": {
+    "pin": 12
+  },
+  "colors":{
+    "red":[255, 0, 0],
+    "green":[0, 255, 0],
+    "blue":[0, 0, 255],
+    "yellow":[0, 255, 255],
+    "white":[255, 255, 255],
+    "nocolor":[0, 0, 0]
+  }
+}
