@@ -3,7 +3,7 @@ This is a script that is used to implement the Pomodoro Technique, with a 25 min
 
 This uses the OLED LCD display on the board to show the remaining time, once the time finishes the alarm will go off.
 
-What we need to do is download all the code from the Relase folder and rename the **`Pomodoro.py`** file to **`main.py`** so it will be executed after booting up.
+What we need to do is download all the code from the **`Release`** folder and rename the **`Pomodoro.py`** file to **`main.py`** so it will be executed after booting up.
 
 
 ## Parts needed:
@@ -34,17 +34,23 @@ What we need to do is download all the code from the Relase folder and rename th
 <p align="center">
 <table align="center">
   <tr>
+    <th>Version</th>
     <th>Top side of the board</th>
     <th>Placement of components</th>
+    <th>Comments</th>
   </tr>
   <tr>
+    <td>Version 0.1</td>
     <td><img src="./Doc/images/PCB_top.png" alt="Top side of board"  width="300"/></td>
     <td><img src="./Doc/images/PCB_placement_top.png" alt="Placement of components"  width="300"/></td>
+    <td>Use this version if you do not wish to use the OLED LCD display.</td>
   </tr>
 </table>
 </p>
 
-The idea with this board it not to have wires all over and also makes it better for fitting it into a 3D printed case and also for connecting it to the Wemos D1 mini board. The design is for single side PCB.
+The idea with this board it not to have wires all over and also makes it better for fitting it into a 3D printed case and also for connecting it to the Wemos D1 mini board. I'll try to keep the design for single side PCB.
+
+Eagle CAD files are within the **`Release`** folder
 
 #### Bill of materials
 <table align="center">
@@ -75,7 +81,7 @@ The idea with this board it not to have wires all over and also makes it better 
 </table>
 
 
-**The PCB is still in development** and I will upload the Gerber file and the Eagle CAD files.
+**The PCB is still in development.** (Currently working on Version 0.2)
 
 
 ## Usefull links:
@@ -91,6 +97,9 @@ The idea with this board it not to have wires all over and also makes it better 
 - [ ] Add buzzer ring alarm when finish.
 
 - [ ] Add Eagle CAD design file, Gerber files and PDF to manual PCB manufacturing.
+  <ul><li> - [x] Eagle Files</li>
+  <li> - [ ] Gerber files.</li>
+  <li> - [ ] PDF files.</li></ul>
 
 - [x] Add led or neopixel (Optional).
 
