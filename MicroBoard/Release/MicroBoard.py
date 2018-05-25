@@ -68,30 +68,37 @@ def main():
     html = """<!DOCTYPE html>
         <html lang="en">
         <head>
-            <title>Message board</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <style>
-            body              { font-family: 'Arial'; background: #fff; }
-            a, h1, h2         { color: #377ba8; }
-            h1, h2            { font-family: 'Arial', serif; margin: 0; }
-            h1                { border-bottom: 2px solid #eee; }
-            h2                { font-size: 1.2em; }
-            h3                {font-family: 'Arial'; color: black; text-align: center;}
-            table             {table-layout: center;	font-family: 'Arial'; color: gray;}
-            th                {font-style: bold; text-align: center; height: 15px; border-bottom: 1px solid #ddd; padding: 5px}
-            td                {border-bottom: 1px solid #ddd; text-align: left}
-            form              {text-align: center;}
-            </style>
+        <title>Message board</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        body              { font-family: 'Arial'; background: #fff; }
+        .h1_div			  { background-color: #424242; height: 90px;  line-height: 90px;  text-align: center; font-family: 'Arial';}
+        h1                { border-bottom: 1px; }
+        h3                { font-family: 'Arial'; color: #424242; text-align: center;}
+        table             { table-layout: center;	font-family: 'Arial';}
+        th                { font-style: bold; text-align: center; height: 15px; border-bottom: 1px solid #ddd; padding: 5px}
+        td                { border-bottom: 1px solid #ddd; text-align: left}
+        input[type=text]  { border: 1px solid #424242; margin: 4px 2px; width:20em;}
+        input[type=text]:focus { border: 3px solid #424242; margin: 4px 2px; -webkit-transition: width 0.4s ease-in-out; transition: width 0.4s ease-in-out;}
+        input[type=submit]{ background-color: #424242; border: 3px; color: #ffffff; padding: 4px 8px; text-decoration: none; margin: 4px 2px; cursor: pointer; width:20em; font-weight: bold; font-family: 'Arial';}
+        form              {text-align: center;}
+        </style>
         </head>
         <body>
-        <h1 align='center'>Message board</h1><br>
-        <table align='center'><tr><th>Messages</th></tr>%s</table>
+        <div>
+        <div class="h1_div">
+        <h1 align='center' style="color:#ffffff;">Message board</h1><br>
+        </div>
+        <div>
+        <table align='center'><tr><th><h1>Messages</h1></th></tr>%s</table>
         <form>
-            <br><h3>Type a message:</h3><br>
-            <input type="text" name="messageinput"></input>
-            <input type="submit" value="Send"></input>
+        <br><h3>Type a message:</h3><br>
+        <div><input type="text" name="messageinput"></input></div>
+        <div><input type="submit" value="Send"></input></div>
         </form>
+        </div>
+        </div>
         </body>
         </html>
         """
