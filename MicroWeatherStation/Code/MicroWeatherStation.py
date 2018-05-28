@@ -23,7 +23,7 @@ def ReadSensors():
     Temperature = d.temperature()
     Humidity = d.humidity()
     for i in range(0,1):
-        data.append( '<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(Temperature), str(Humidity)))
+        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(Temperature), str(Humidity)))
     return data
 
 
