@@ -1,7 +1,7 @@
 import network, machine, ssd1306, utime, gc
 gc.enable()
 
-class DisplayWifi:
+class WiFiScanner:
     def __init__(self, sda_pin=5, scl_pin=4):
         self.sda_pin = sda_pin
         self.scl_pin = scl_pin
