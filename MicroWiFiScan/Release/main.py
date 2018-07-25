@@ -1,9 +1,9 @@
 import webrepl
 import network
-import displaywifi
+import MicroWiFiScan
 webrepl.start()
 
-display = displaywifi.DisplayWifi(5,4)
+display = MicroWiFiScan.WiFiScanner(5,4)
 while True:
     display.format()
 #Uncomment code below to see the output on the REPL or WebREPL
