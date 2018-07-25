@@ -6,7 +6,7 @@ import gc
 gc.enable()
 
 
-class DisplayWifi:
+class WiFiScanner:
     def __init__(self, sda_pin=5, scl_pin=4):
         """
         Initialize the function with the pins 5,4 (sda, scl respectively) by default.
