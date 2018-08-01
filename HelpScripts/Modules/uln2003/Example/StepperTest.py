@@ -31,16 +31,16 @@ def both_simultaneously():
 
 
 
-print("Starting hundred_steps() method.")
+print("Starting hundred_steps() function.")
 hundred_steps()
-print("Method hundred_steps() finished!")
+print("Funtion hundred_steps() finished!")
 time.sleep(2)
-print("Starting one_by_one() method. It will move 2 motors one by one")
+print("Starting one_by_one() function. It will move 2 motors one by one")
 one_by_one()
-print("Method one_by_one() stopped.")
+print("Funtion one_by_one() stopped.")
 time.sleep(2)
-print("Starting both_simultaneously() method. It will move both motors at the 'same' time")
+print("Starting both_simultaneously() function. It will move both motors at the 'same' time")
 both_simultaneously()
-print("Method both_simultaneously() stopped.")
+print("Funtion both_simultaneously() stopped.")
 time.sleep(2)
 print("Script finished!. SEE YA!")
