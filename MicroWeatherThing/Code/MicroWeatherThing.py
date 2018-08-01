@@ -19,7 +19,7 @@ def ConnectWifi(SSID, pwd):
     import network
     sta_if = network.WLAN(network.STA_IF)
     if not sta_if.isconnected():
-        print('connecting to network...')
+        DisplayMsg('Connecting to network...',8)
         sta_if.active(True)
         sta_if.connect(SSID, pwd)
         while not sta_if.isconnected():
