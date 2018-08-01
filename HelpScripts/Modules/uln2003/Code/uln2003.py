@@ -91,7 +91,7 @@ class Stepper():
                 self.pin3.value(bit[2])
                 self.pin4.value(bit[3])
                 time.sleep_us(self.delay)
-        self.current_position += step_count
+        self.current_position += (direction * step_count)
 
     def rel_angle(self, angle):
         """

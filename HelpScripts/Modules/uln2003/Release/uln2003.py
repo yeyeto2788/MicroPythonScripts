@@ -1,25 +1,23 @@
 import time, machine
 
-LOW = 0
-HIGH = 1
 FULL_ROTATION = int(4075.7728395061727 / 8)
 
 HALF_STEP = [
-[LOW, LOW, LOW, HIGH],
-[LOW, LOW, HIGH, HIGH],
-[LOW, LOW, HIGH, LOW],
-[LOW, HIGH, HIGH, LOW],
-[LOW, HIGH, LOW, LOW],
-[HIGH, HIGH, LOW, LOW],
-[HIGH, LOW, LOW, LOW],
-[HIGH, LOW, LOW, HIGH],
+[0, 0, 0, 1],
+[0, 0, 1, 1],
+[0, 0, 1, 0],
+[0, 1, 1, 0],
+[0, 1, 0, 0],
+[1, 1, 0, 0],
+[1, 0, 0, 0],
+[1, 0, 0, 1],
 ]
 
 FULL_STEP = [
-[HIGH, LOW, HIGH, LOW],
-[LOW, HIGH, HIGH, LOW],
-[LOW, HIGH, LOW, HIGH],
-[HIGH, LOW, LOW, HIGH]
+[1, 0, 1, 0],
+[0, 1, 1, 0],
+[0, 1, 0, 1],
+[1, 0, 0, 1]
 ]
 
 class Command():
@@ -62,7 +60,7 @@ class Stepper():
                 self.pin3.value(bit[2])
                 self.pin4.value(bit[3])
                 time.sleep_us(self.delay)
-        self.current_position += step_count
+        self.current_position += (direction * step_count)
 
     def rel_angle(self, angle):
         steps = int(angle / 360 * self.steps_per_rev)
