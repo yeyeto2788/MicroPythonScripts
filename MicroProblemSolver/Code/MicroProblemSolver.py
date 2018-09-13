@@ -87,7 +87,7 @@ def get_random_question():
     """
     It will actually get a random number
     Returns:
-
+        String with the question selected.
     """
     with open("questions.json", "r") as questionsfile:
         questions = json.loads(questionsfile.read())

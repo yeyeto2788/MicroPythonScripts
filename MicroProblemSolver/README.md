@@ -28,7 +28,7 @@ Once all files are in the board, every time you want a random question you just 
   </p>
 
 
-## Usefull links:
+## Useful links:
 
 [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 
