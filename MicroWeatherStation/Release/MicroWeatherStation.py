@@ -1,5 +1,6 @@
 import socket
 import dht
+import gc
 import machine
 
 def ReadSensors():
@@ -53,6 +54,7 @@ def main():
     while True:
         cl, addr = s.accept()
         print('client connected from', addr)
+        print("Free in: %d" % gc.mem_free())
         cl_file = cl.makefile('rwb', 0)
         while True:
             h = cl_file.readline()
