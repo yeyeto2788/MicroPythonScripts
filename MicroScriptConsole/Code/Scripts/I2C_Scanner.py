@@ -1,22 +1,15 @@
 import time
-import machine
 from console import Display
 
-
 oled = Display()
-i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
-
 
 """
 Main code to execute below
 """
 
-
-oled.clear(0, 1)
-oled.print_wrapped('Scanning devices on the I2C bus...')
-devices = i2c.scan()
+oled.print_wrapped("Scanning I2C Devices on the bus...")
 time.sleep(0.5)
-
+devices = oled.i2c.scan()
 
 if len(devices) == 0:
     oled.clear(0, 1)
@@ -29,8 +22,9 @@ else:
     for intloop in range(1,2):
         for device in devices:
             oled.clear(0, 1)
-            oled.print_on_line("Decimal address:")
-            oled.print_on_line(str(device))
-            oled.print_on_line("Hex address:")
-            oled.print_on_line(str(hex(device)))
+            oled.print_on_line("Decimal address:", 2)
+            oled.print_on_line(str(device), 3)
+            oled.print_on_line("Hex address:", 4)
+            oled.print_on_line(str(hex(device)), 5)
             time.sleep(1)
+        oled.clear(0, 1)
