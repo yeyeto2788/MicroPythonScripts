@@ -77,6 +77,10 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 - [ ] Add documentation for `console.py` module.
 
+- [ ] Scripts to be added:
+<ul><li> - [ ] Bitcoin price tracker.</li>
+<li> - [ ] NeoPixels example.</li>
+<li> - [ ] DHT mqtt publisher.</li></ul>
 
 ## Special thanks to:
 

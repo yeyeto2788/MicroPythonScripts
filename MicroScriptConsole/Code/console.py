@@ -4,7 +4,6 @@ import time
 
 
 class Display(object):
-
     def __init__(self, width=128, height=64):
         self.i2c = machine.I2C(scl=machine.Pin(4), sda=machine.Pin(5))
         self.width = width
@@ -149,6 +148,10 @@ class Display(object):
 
             pint_x0 += 1
         self.display.show()
+
+    def pixel(self, x, y, color):
+        super(self.display, self).pixel(x, y, color)
+
 
     def draw_hline(self, pint_x, pint_y, width, pbln_show=1):
         """
@@ -362,6 +365,21 @@ class Display(object):
         """
         if pint_contrast <= 255:
             self.display.contrast(pint_contrast)
+
+class Button(object):
+
+  def __init__(self, pin):
+    self._pin = machine.Pin(pin, machine.Pin.IN, machine.Pin.PULL_UP)
+
+  def read(self):
+    return not self._pin.value()
+
+  def isPressed(self):
+    return self.read()
+
+  def isReleased(self):
+    return not self.read()
+
 
 
 class Keypad(object):

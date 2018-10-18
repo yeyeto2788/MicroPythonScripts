@@ -208,6 +208,20 @@ class Display(object):
         if pint_contrast <= 255:
             self.display.contrast(pint_contrast)
 
+class Button(object):
+
+  def __init__(self, pin):
+    self._pin = machine.Pin(pin, machine.Pin.IN, machine.Pin.PULL_UP)
+
+  def read(self):
+    return not self._pin.value()
+
+  def isPressed(self):
+    return self.read()
+
+  def isReleased(self):
+    return not self.read()
+
 class Keypad(object):
 
     def __init__(self, up=14, down=13, select=12, start=0):
