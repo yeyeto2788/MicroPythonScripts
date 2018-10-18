@@ -1,4 +1,4 @@
-from console import Display, ConsoleError
+from console import Display
 import time
 
 def show():
