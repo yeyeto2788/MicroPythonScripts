@@ -96,17 +96,17 @@ What we need to do is download all the code from the **`Release`** folder so it 
 - [ ] Add documentation for `console.py` module.
 
 - [ ] **Scripts to be added:**
-<ul><li> - [ ] Bitcoin price tracker.</li>
-<li> - [ ] NeoPixels example.</li>
-<li> - [ ] DHT mqtt publisher.</li>
-<li> - [ ] WiFi Scanner.</li>
-<li> - [ ] Analog Input reader.</li>
-<li> - [ ] PWM and/or Servo controller.</li>
-<li> - [ ] Stepper controlled (Use module [uln2003](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/HelpScripts/Modules/uln2003)).</li></ul>
+    <ul><li> - [ ] Bitcoin price tracker.</li>
+    <li> - [ ] NeoPixels example.</li>
+    <li> - [ ] DHT mqtt publisher.</li>
+    <li> - [ ] WiFi Scanner.</li>
+    <li> - [ ] Analog Input reader.</li>
+    <li> - [ ] PWM and/or Servo controller.</li>
+    <li> - [ ] Stepper controlled  [uln2003](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/HelpScripts/Modules/uln2003).</li></ul>
 
 - [ ] **Tools to be added:**
-<ul><li> - [ ] Board Code uploader.</li>
-<li> - [ ] Zip folder creation tool for all code within `Releases`.</li></ul>
+    <ul><li> - [ ] Board Code uploader.</li>
+    <li> - [ ] Zip folder creation tool for all code within `Releases`.</li></ul>
 
 ## Special thanks to:
 
