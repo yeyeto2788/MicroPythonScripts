@@ -2,7 +2,7 @@
 
 This converts your ESP8266 board into a console where you can execute all script on the board. It will look all the `.py` files on the filesystem except for the `boot.py`, `main.py` and the `console.py`.
 
-Everything is based on the `console.py` which is a wrapper for the `ssd1306` module for the display and a `keypad` class for the button so we can navigate on the system and use the buttons to operate the "MicroScriptConsole".
+Everything is based on the `console.py` which is a wrapper for the `ssd1306` module for the display and a `keypad` class for the button so we can navigate on the system and use the buttons to operate the **"MicroScriptConsole"**.
 
 What we need to do is download all the code from the **`Release`** folder so it will be executed after booting up.
 
@@ -32,13 +32,15 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 # Scripts ported / added:
 
-* **`show_graphic.py`**
+* **`Show_Graphics.py`**
 
   Script to show images on the screen, these images are converted into hexadecimal text with an application which is called [The Dot Factory application](http://www.eran.io/the-dot-factory-an-lcd-font-and-image-generator/) and the process on how to make it from a `.png` file is quite straight forward.
 
   Simply convert the `.png` image into `.bmp` extension with the software you prefer and then use the application to convert the `.bmp` into text.
 
   You can also find the software on the `Tools` folder, click [here](Tools/) to go the folder.
+
+  Link to documented code
 
   **Execution images**
 
@@ -50,11 +52,11 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <img src="./Doc/images/erni_oled.png" alt="Erni logo on display"  width="200"/>
   </p>
 
-* **`problem_solver.py`**
+* **`RubberDuck_Debug.py`**
 
   This is an implementation of the MicroProblemSolver script described [here](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/MicroProblemSolver).
 
-* **`print_test.py`**
+* **`Simple_test.py`**
 
   This is just a simple script that prints a text on the screen.
 
@@ -63,6 +65,16 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <p align="center">
   <img src="./Doc/images/print_test.png" alt="Print test script running on display"  width="200"/>
   </p>
+
+*  **`Magic8Ball.py`**
+
+    Seeking for an advice to make a decision? This script is based on the [Magic 8-Ball](https://en.wikipedia.org/wiki/Magic_8-Ball) toy which was used for "fortune-telling"
+
+*  **`I2C_Scanner.py`**
+
+    This script will scan all connected devices on the board to the I2C bus retrieving the HEX address and the decimal.
+
+    Take into account that if the OLED screen is connected this will also show the address of it, normally the address is `0x3D`.
 
 
 ## Useful links:
@@ -73,14 +85,28 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 ## TO DO:
 
-- [ ] Add all real execution image.
+- [ ] Add all real execution images.
+
+- [ ] Add all real execution videos.
+
+- [ ] Port code to ESP32 (If needed).
+
+- [ ] Try to generate firmware with `console.py` module as frozen module.
 
 - [ ] Add documentation for `console.py` module.
 
-- [ ] Scripts to be added:
+- [ ] **Scripts to be added:**
 <ul><li> - [ ] Bitcoin price tracker.</li>
 <li> - [ ] NeoPixels example.</li>
-<li> - [ ] DHT mqtt publisher.</li></ul>
+<li> - [ ] DHT mqtt publisher.</li>
+<li> - [ ] WiFi Scanner.</li>
+<li> - [ ] Analog Input reader.</li>
+<li> - [ ] PWM and/or Servo controller.</li>
+<li> - [ ] Stepper controlled (Use module [uln2003](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/HelpScripts/Modules/uln2003)).</li></ul>
+
+- [ ] **Tools to be added:**
+<ul><li> - [ ] Board Code uploader.</li>
+<li> - [ ] Zip folder creation tool for all code within `Releases`.</li></ul>
 
 ## Special thanks to:
 
