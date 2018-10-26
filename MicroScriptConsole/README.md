@@ -6,6 +6,17 @@ Everything is based on the `console.py` which is a wrapper for the `ssd1306` mod
 
 What we need to do is download all the code from the **`Release`** folder so it will be executed after booting up.
 
+**UPDATE:**
+
+* [**2018-10-26**]
+
+  I have finally generated the firmware for the ESP8266, so if you get the firmware flash onto the board and then get the all the code from the **`Release`** folder (Except for the `console.py`) and then name the `menu.py` to `main.py` so it will be executed after booting up.
+
+  I have also added the `WIFI_Scanner.py` as a new script :smiley: !
+
+  To get the firmware go to the [Firmware](./Firmware) folder and get the latest built.
+
+
 ## Parts needed:
 
   * **ESP8266**
@@ -30,9 +41,11 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <img src="./Doc/images/push_button.png" alt="Push button image"  width="60"/>
   </p>
 
+---
+
 # Scripts ported / added:
 
-* **`Show_Graphics.py`**
+## **`Show_Graphics.py`**
 
   Script to show images on the screen, these images are converted into hexadecimal text with an application which is called [The Dot Factory application](http://www.eran.io/the-dot-factory-an-lcd-font-and-image-generator/) and the process on how to make it from a `.png` file is quite straight forward.
 
@@ -42,7 +55,9 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
   Link to documented code
 
-  **Execution images**
+  [Link to documented code](./Code/Scripts/Show_Graphics.py)
+
+####  **Execution images**
 
   <p align="center">
   <img src="./Doc/images/msc_oled.png" alt="MicroScriptConsole logo on display"  width="200"/>
@@ -52,36 +67,50 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <img src="./Doc/images/erni_oled.png" alt="Erni logo on display"  width="200"/>
   </p>
 
-* **`RubberDuck_Debug.py`**
+## **`RubberDuck_Debug.py`**
 
   This is an implementation of the MicroProblemSolver script described [here](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/MicroProblemSolver).
 
-* **`Simple_test.py`**
+## **`Simple_test.py`**
 
   This is just a simple script that prints a text on the screen.
 
-  **Execution images**
+  [Link to documented code](./Code/Scripts/Simple_test.py)
+
+####  **Execution images**
 
   <p align="center">
   <img src="./Doc/images/print_test.png" alt="Print test script running on display"  width="200"/>
   </p>
 
-*  **`Magic8Ball.py`**
+##  **`Magic8Ball.py`**
 
-    Seeking for an advice to make a decision? This script is based on the [Magic 8-Ball](https://en.wikipedia.org/wiki/Magic_8-Ball) toy which was used for "fortune-telling"
+  Seeking for an advice to make a decision? This script is based on the [Magic 8-Ball](https://en.wikipedia.org/wiki/Magic_8-Ball) toy which was used for "fortune-telling"
 
-*  **`I2C_Scanner.py`**
+  [Link to documented code](./Code/Scripts/Magic8Ball.py)
 
-    This script will scan all connected devices on the board to the I2C bus retrieving the HEX address and the decimal.
+##  **`I2C_Scanner.py`**
 
-    Take into account that if the OLED screen is connected this will also show the address of it, normally the address is `0x3D`.
+  This script will scan all connected devices on the board to the I2C bus retrieving the HEX address and the decimal.
 
+  Take into account that if the OLED screen is connected this will also show the address of it, normally the address is `0x3D`.
+
+  [Link to documented code](./Code/Scripts/I2C_Scanner.py)
+
+##  **`WIFI_Scanner.py`**
+
+  This script will scan all available WiFi networks on the area and it will output the strength, chanel, name, and authmode of them
+
+  [Link to documented code](./Code/Scripts/WIFI_Scanner.py)
+
+---
 
 ## Useful links:
 
 [Micropython forum](https://forum.micropython.org/viewtopic.php?f=16&t=4901&p=28154&hilit=oled+display#p28154)
 [The Dot Factory application](http://www.eran.io/the-dot-factory-an-lcd-font-and-image-generator/)
 
+---
 
 ## TO DO:
 
@@ -91,7 +120,7 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 - [ ] Port code to ESP32 (If needed).
 
-- [ ] Try to generate firmware with `console.py` module as frozen module.
+- [x] Try to generate firmware with `console.py` module as frozen module.
 
 - [ ] Add documentation for `console.py` module.
 
@@ -99,10 +128,10 @@ What we need to do is download all the code from the **`Release`** folder so it 
     <ul><li> - [ ] Bitcoin price tracker.</li>
     <li> - [ ] NeoPixels example.</li>
     <li> - [ ] DHT mqtt publisher.</li>
-    <li> - [ ] WiFi Scanner.</li>
+    <li> - [x] WiFi Scanner.</li>
     <li> - [ ] Analog Input reader.</li>
     <li> - [ ] PWM and/or Servo controller.</li>
-    <li> - [ ] Stepper controlled  [uln2003](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/HelpScripts/Modules/uln2003).</li></ul>
+    <li> - [ ] Stepper controlled [uln2003](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/HelpScripts/Modules/uln2003).</li></ul>
 
 - [ ] **Tools to be added:**
     <ul><li> - [ ] Board Code uploader.</li>
