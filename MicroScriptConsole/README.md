@@ -16,6 +16,12 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
   To get the firmware go to the [Firmware](./Firmware) folder and get the latest built.
 
+* [**2018-10-30**]
+
+  I have ported the Conway's Game of Life from [Mike Causer](https://github.com/mcauser) to work with the `SSD1306` Oled display.
+
+  With the new [firmware](./Firmware) created it really works better than I expected, it saves more memory and I can run the script with ease. I will add more functionalities to the script to manage WiFi so everything is located within the same script.
+
 
 ## Parts needed:
 
@@ -73,7 +79,7 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 ## **`Simple_test.py`**
 
-  This is just a simple script that prints a text on the screen.
+  This is just a simple script that prints a text and the count of the button presses on the screen.
 
   [Link to documented code](./Code/Scripts/Simple_test.py)
 
@@ -102,6 +108,16 @@ What we need to do is download all the code from the **`Release`** folder so it 
   This script will scan all available WiFi networks on the area and it will output the strength, chanel, name, and authmode of them
 
   [Link to documented code](./Code/Scripts/WIFI_Scanner.py)
+
+##  **`conways_game_of_life.py`**
+
+  This script is a zero-player game which emulates the cellular life creation.
+
+  The script was taken from the repository of [Mike Causer](https://github.com/mcauser/MicroPython-ESP8266-Nokia-5110-Conways-Game-of-Life)
+
+  More [info](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+
+  [Link to documented code](./Code/Scripts/conways_game_of_life.py)
 
 ---
 
@@ -140,3 +156,4 @@ What we need to do is download all the code from the **`Release`** folder so it 
 ## Special thanks to:
 
 * [Radomir Dopieralski](https://github.com/deshipu) for the reply on the [MicroPython Forum](https://forum.micropython.org/viewtopic.php?f=16&t=5119)
+* [Mike Causer](https://github.com/mcauser) for letting me port the Conway's Game of Life [script](https://github.com/mcauser/MicroPython-ESP8266-Nokia-5110-Conways-Game-of-Life)

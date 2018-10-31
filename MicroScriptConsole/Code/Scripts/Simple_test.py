@@ -1,9 +1,33 @@
 import console, time
 
-def show():
-    display = console.Display()
-    display.print_on_line("Wujuuu imported", 0, 1)
-    time.sleep(3)
-    display.clear(0, 1)
+buttonSelect = console.Button(0)
+display = console.Display()
 
-show()
+def center_text(txt):
+    """
+    This function will center all incomming strings to a fix size of the display
+    max_char property.
+
+    Args:
+        txt: String to be centered.
+
+    Returns:
+        type: String with the text centered
+    """
+    return '{: ^{}}'.format(txt, display.max_char)
+
+display.print_on_line(center_text("Wujuuu imported"), 0)
+display.print_on_line(center_text("Press the"), 3)
+display.print_on_line(center_text("button 0 to"), 4)
+display.print_on_line(center_text("count presses"), 5)
+
+intCounter = 0
+
+while True:
+    if not buttonSelect.isReleased():
+        intCounter += 1
+        display.clear(0, 1)
+        display.print_on_line(center_text("IT IS WORKING!!!"), 0)
+        display.print_on_line(center_text("Button presses"), 3)
+        display.print_on_line(center_text(str(intCounter)), 5)
+        time.sleep_ms(250)
