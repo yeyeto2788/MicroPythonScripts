@@ -104,13 +104,13 @@ API_KEY = 'OpenWeatherAPI'
 SSID = 'Name of the WIFI connection'
 pwd = 'Wifi connection password'
 
-Counter = 0
 ReceivedData = Getweather(CITY, API_KEY)
+start_time = time.ticks_ms() // 1000
 
 while ConnectWifi(SSID, pwd):
-    Counter = Counter + 1
+    time_now = time.ticks_ms() // 1000
 
-    if Counter < 40:
+    if (time_now - start_time) < (3 * 60):
         ShowTime()
         time.sleep(30)
         GetLocalTH()
@@ -119,4 +119,4 @@ while ConnectWifi(SSID, pwd):
         time.sleep(30)
     else:
         ReceivedData = Getweather(CITY, API_KEY)
-        Counter = 0
+        start_time = time.ticks_ms() // 1000

@@ -1,4 +1,4 @@
-# MicroWeatherThing 
+# MicroWeatherThing
 
 This script is used on the Wemos D1 mini running MicroPython port for the ESP8266.
 
@@ -8,11 +8,25 @@ What we need to do is download all the code from the `Relase` folder and rename 
 
 ## Parts needed:
 
-  * ESP8266.
-  
-  * OLED display (I2C).
+  * **ESP8266**
 
-  * DHT11 Humidity sensor.
+  I'm using the Wemos D1 Mini board.
+
+  <p align="center">
+  <img src="./Doc/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="200"/>
+  </p>
+
+  * **OLED display (I2C)**
+
+  <p align="center">
+  <img src="./Doc/images/wemos_mini_oled.png" alt="Wemos D1 Oled Display"  width="200"/>
+  </p>
+
+  * **DHT11 Humidity sensor.**
+
+  <p align="center">
+  <img src="./Doc/images/DHT11.png" alt="DHT11 sensor"  width="200"/>
+  </p>
 
 ### TO DO:
 
