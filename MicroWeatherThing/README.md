@@ -30,9 +30,9 @@ What we need to do is download all the code from the `Relase` folder and rename 
 
 ### TO DO:
 
-- [ ] Add delay between execution for the DHT11 sensor and the calls done to the OpenWeatherMap API.
+- [x] Add delay between execution for the DHT11 sensor and the calls done to the OpenWeatherMap API.
 
-- [ ] Better documentation.
+- [x] Better documentation.
 
 - [ ] Add images.
     <ul><li> - [ ] Execution images.</li>
