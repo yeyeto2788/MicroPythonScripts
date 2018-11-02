@@ -12,6 +12,11 @@ def check_file():
             f.close()
         return True
 
+def clear_file():
+    with open(file_name, "w") as f:
+        f.write("")
+    f.close()
+
 def get_file_size():
     with open(file_name, "r") as f:
         lines = f.readlines()
@@ -97,9 +102,20 @@ def main():
         <br><h3>Type a message:</h3><br>
         <div><input type="text" name="messageinput"></input></div>
         <div><input type="submit" value="Send"></input></div>
-        </form></div></div>
+        </form></div><br><br><br><br>
+        <div align="center">
+        <form><input id="clear_id" type="submit" value="Clear all messages" name="cl" onclick="alert_clear()"></input></form>
+        </div></div>
         <script>
-        function currentTime(){var e=new Date;datestring=e.toDateString()+" "+e.toTimeString(),document.getElementById("humanTime").innerHTML=datestring.split(" ").slice(0,5).join(" ")}var element=document.getElementById("humanTime");void 0!==element&&null!=element&&(window.load=setInterval(currentTime,1e3));
+        function alert_clear()
+        {if(confirm("Are you sure you want to clear the file?"))
+        {document.getElementById("clear_id").value="yes";document.getElementById("clear_id").submit();}
+        else
+        {document.getElementById("clear_id").value="no";}}
+        function currentTime()
+        {var date=new Date();datestring=date.toDateString()+" "+date.toTimeString();document.getElementById("humanTime").innerHTML=datestring.split(" ").slice(0,5).join(" ");}
+        var element=document.getElementById("humanTime");if(typeof(element)!="undefined"&&element!=null)
+        {window.load=setInterval(currentTime,1000);}
         </script>
         </body>
         </html>
@@ -125,6 +141,8 @@ def main():
                 msg = h.decode("utf-8").split("/?messageinput=")
                 final_msg = msg[1][:(len(msg)-12)]
                 write_file(final_msg)
+            elif b"GET /?cl=yes" in h:
+                clear_file()
             if h == b"" or h == b"\r\n":
                 break
         rows = linted_data()
@@ -132,6 +150,7 @@ def main():
         try:
             cl.sendall(response)
         except OSError as error:
+            print("Error trying to send all information. %s" % error)
             pass
         cl.close()
         print("Free out: %d" % gc.mem_free())

@@ -27,6 +27,17 @@ def check_file():
             f.close()
         return True
 
+def clear_file():
+    """
+    Clear all content in file.
+
+    Returns:
+        Nothing.
+    """
+    with open(file_name, "w") as f:
+        f.write("")
+    f.close()
+
 def get_file_size():
     """
     This will return the number of lines of the file.
@@ -153,8 +164,24 @@ def main():
         <br><h3>Type a message:</h3><br>
         <div><input type="text" name="messageinput"></input></div>
         <div><input type="submit" value="Send"></input></div>
-        </form></div></div>
+        </form></div><br><br><br><br>
+        <div align="center">
+        <form><input id="clear_id" type="submit" value="Clear all messages" name="cl" onclick="alert_clear()"></input></form>
+        </div></div>
         <script>
+        function alert_clear()
+        {
+            if (confirm("Are you sure you want to clear the file?")) 
+            {
+                document.getElementById("clear_id").value = "yes";
+                document.getElementById("clear_id").submit();
+            }
+            else 
+            {
+                document.getElementById("clear_id").value = "no";
+            }
+
+        }
         function currentTime()
         {
             var date = new Date();
@@ -191,6 +218,8 @@ def main():
                 msg = h.decode("utf-8").split("/?messageinput=")
                 final_msg = msg[1][:(len(msg)-12)]
                 write_file(final_msg)
+            elif b"GET /?cl=yes" in h:
+                clear_file()
             if h == b"" or h == b"\r\n":
                 break
         rows = linted_data()
