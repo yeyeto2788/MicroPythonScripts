@@ -25,7 +25,7 @@ What we need to do is download all the code from the `Relase` folder and rename 
   * **DHT11 Humidity sensor.**
 
   <p align="center">
-  <img src="./Doc/images/DHT11.png" alt="DHT11 sensor"  width="200"/>
+  <img src="./Doc/images/DHT11.png" alt="DHT11 sensor"  width="100"/>
   </p>
 
 ### TO DO:
