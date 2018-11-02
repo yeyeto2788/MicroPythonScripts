@@ -3,7 +3,7 @@ import dht
 import gc
 import machine
 
-def ReadSensors():
+def read_sensors():
     data = []
     d = dht.DHT11(machine.Pin(2))
     d.measure()
@@ -35,13 +35,27 @@ def main():
     <body>
     <div>
     <div class="h1_div">
-    	<h1 align='center' style="color:#424242;">ESP8266 Weather Station</h1><br>
+        <h1 align='center' style="color:#424242;">ESP8266 Weather Station</h1><br>
+        <h3 align="center" style="color:#424242;" class="current_time" id="humanTime"></h3>
     </div>
     <div>
     <table align="center"><tr><th><h2>Temperature</h2></th><th><h2>Humidity</h2></th></tr>%s</table>
     </div>
     <div><p align="center"><b>NOTE:</b> This page will automatically refresh every 30 seconds.</p></div>
     </div>
+    <script>
+        function currentTime()
+        {
+            var date = new Date();
+            datestring = date.toDateString() + " " + date.toTimeString();
+            document.getElementById("humanTime").innerHTML = datestring.split(" ").slice(0, 5).join(" ");
+        }
+        var element = document.getElementById("humanTime");
+        if (typeof(element) != "undefined" && element != null)
+        {
+            window.load = setInterval(currentTime, 1000);
+        }
+        </script>
     </body>
     </html>
     """
@@ -53,14 +67,14 @@ def main():
 
     while True:
         cl, addr = s.accept()
-        print('client connected from', addr)
+        print('Client connected from', addr)
         print("Free in: %d" % gc.mem_free())
         cl_file = cl.makefile('rwb', 0)
         while True:
             h = cl_file.readline()
             if h == b"" or h == b"\r\n":
                 break
-        rows = ReadSensors()
+        rows = read_sensors()
         response = html % '\n'.join(rows)
         try:
             cl.sendall(response)
