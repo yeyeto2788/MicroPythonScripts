@@ -49,7 +49,7 @@ What we need to do is download all the code from the **`Release`** folder and re
     <td>Version 0.2</td>
     <td><img src="./Doc/images/top_v02.png" alt="Top side of board"  width="300"/></td>
     <td><img src="./Doc/images/bottom_v02.png" alt="Placement of components"  width="300"/></td>
-    <td colspan="2">This version comes with 4 push buttons and 2 I2C connectors. You can see  [Schematics](./Doc/pdf/Schematics_v02.pdf) here.</td>
+    <td colspan="2">This version comes with 4 push buttons and 2 I2C connectors. You can see  <a href="./Doc/pdf/Schematics_v02.pdf">schematics</a> here.</td>
   </tr>
 </table>
 </p>
