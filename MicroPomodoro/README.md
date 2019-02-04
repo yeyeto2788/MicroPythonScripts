@@ -37,18 +37,26 @@ What we need to do is download all the code from the **`Release`** folder and re
     <th>Version</th>
     <th>Top side of the board</th>
     <th>Placement of components</th>
-    <th>Comments</th>
+    <th colspan="2">Comments</th>
   </tr>
   <tr>
     <td>Version 0.1</td>
     <td><img src="./Doc/images/PCB_top.png" alt="Top side of board"  width="300"/></td>
     <td><img src="./Doc/images/PCB_placement_top.png" alt="Placement of components"  width="300"/></td>
-    <td>Use this version if you do not wish to use the OLED LCD display.</td>
+    <td colspan="2">Use this version if you do not wish to use the OLED LCD display.</td>
+  </tr>
+  <tr>
+    <td>Version 0.2</td>
+    <td><img src="./Doc/images/top_v02.png" alt="Top side of board"  width="300"/></td>
+    <td><img src="./Doc/images/bottom_v02.png" alt="Placement of components"  width="300"/></td>
+    <td colspan="2">This version comes with 4 push buttons and 2 I2C connectors. You can see  [Schematics](./Doc/pdf/Schematics_v02.pdf) here.</td>
   </tr>
 </table>
 </p>
 
-The idea with this board it not to have wires all over and also makes it better for fitting it into a 3D printed case and also for connecting it to the Wemos D1 mini board. I'll try to keep the design for single side PCB.
+The idea with this board it not to have wires all over and also makes it better for fitting it into a 3D printed case (If anyone can help me out would be great) and also for connecting it to the Wemos D1 mini board.
+
+ ~~I'll try to keep the design for single side PCB.~~ Since the price of making the PCBs is not that expensive, I decided to make it double sided to add more things on the board.
 
 Eagle CAD files are within the **`Release`** folder
 
@@ -68,11 +76,11 @@ Eagle CAD files are within the **`Release`** folder
   </tr>
   <tr>
     <td>SMD 1k Resistor (SMD 1206)</td>
-    <td>1</td>
+    <td>4</td>
   </tr>
   <tr>
     <td>6mm Push button</td>
-    <td>1</td>
+    <td>4</td>
   </tr>
   <tr>
     <td>Plain PCB (around 6x6 cm)</td>
@@ -81,7 +89,7 @@ Eagle CAD files are within the **`Release`** folder
 </table>
 
 
-**The PCB is still in development.** (Currently working on Version 0.2)
+**The PCB is still in testing stage.** (Currently testing Version 0.2)
 
 
 ## Usefull links:
@@ -96,10 +104,10 @@ Eagle CAD files are within the **`Release`** folder
 
 - [ ] Add buzzer ring alarm when finish.
 
-- [ ] Add Eagle CAD design file, Gerber files and PDF to manual PCB manufacturing.
+- [ ] Add Eagle CAD design file, Gerber files and PDF for manual PCB manufacturing.
   <ul><li> - [x] Eagle Files</li>
   <li> - [ ] Gerber files.</li>
-  <li> - [ ] PDF files.</li></ul>
+  <li> - [X] PDF files.</li></ul>
 
 - [x] Add led or neopixel (Optional).
 
