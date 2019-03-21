@@ -1,0 +1,8 @@
+# Pycharm related:
+.idea/
+.cache
+*__pycache__*
+
+#Hardware files not needed:
+*.s#*
+*.b#*
