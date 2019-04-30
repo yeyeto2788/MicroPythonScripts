@@ -1,9 +1,59 @@
-body {background-color: white;}
-h1 {font-family: Lucida Console; color: black; text-align: center;}
-h3{font-family: Lucida Console; color: black; text-align: center;}
-table{table-layout: center;	width: 60%;	font-family: Lucida Console; color: gray;}
-th{font-style: bold; text-align: center; height: 15px; border-bottom: 1px solid #ddd; padding: 5px}
-td {border-bottom: 1px solid #ddd;}
-form{text-align: center;}
-input[type=text] {text-align: center; width: 60%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; font-family: Lucida Console;}
-input[type=button], input[type=submit], input[type=reset] {width: 60%; font-style: bold; background-color: #ddd; border: none; color: black; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer;}
+body {
+  background-color: white;
+}
+
+h1 {
+  font-family: Lucida Console;
+  color: black;
+  text-align: center;
+}
+
+h3 {
+  font-family: Lucida Console;
+  color: black;
+  text-align: center;
+}
+
+table {
+  table-layout: center;
+  width: 60%;
+  font-family: Lucida Console;
+  color: gray;
+}
+
+th {
+  font-style: bold;
+  text-align: center;
+  height: 15px;
+  border-bottom: 1px solid #ddd;
+  padding: 5px
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+form {
+  text-align: center;
+}
+
+input[type=text] {
+  text-align: center;
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-family: Lucida Console;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  width: 60%;
+  font-style: bold;
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
