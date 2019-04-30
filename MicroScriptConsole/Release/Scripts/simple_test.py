@@ -10,7 +10,6 @@ display.print_on_line(center_text("Wujuuu imported"), 0)
 display.print_on_line(center_text("Press the"), 3)
 display.print_on_line(center_text("button 0 to"), 4)
 display.print_on_line(center_text("count presses"), 5)
-
 intCounter = 0
 
 while True:

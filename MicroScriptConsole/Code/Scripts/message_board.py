@@ -2,7 +2,14 @@ import socket, os, gc, time, console
 
 file_name = "messages.txt"
 
+
 def check_file():
+    """
+    Check wether the file exists or not on the directory and if not create it.
+
+    Returns:
+        True
+    """
     if file_name in os.listdir():
         return True
     else:
@@ -10,14 +17,32 @@ def check_file():
             f.close()
         return True
 
+
 def get_file_size():
+    """
+    Get the number of lines on the file which should match with the number of messages.
+
+    Returns:
+        Integer with the number of lines on the file.
+
+    """
     with open(file_name, "r") as f:
         lines = f.readlines()
         f.close()
         return len(lines)
 
+
 def quick_decode(s_decode):
-    
+    """
+    Simple function to decode data coming from http request into readable format.
+
+    Args:
+        s_decode: String to be decoded.
+
+    Returns:
+        String decoded.
+
+    """
     elements = {"ñ": "%C3%B1", "€": "%E2,%AC", ";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A",
                 "#": "%23", "&": "%26", "=": "%3D", "+": "%2B", "$": "%24", ",": "%2C", "%": "%25",
                 "<": "%3C", ">": "%3E", "@": "%40", "(": "%28", ")": "%29", "‚": "%82", "!": "%21"}
@@ -30,7 +55,17 @@ def quick_decode(s_decode):
             s_decode = s_decode.replace(elements[element], element)
     return s_decode
 
+
 def write_file(message):
+    """
+    This will fill information on the file in the filesystem where all messages are stored.
+
+    Args:
+        message: Message to be saved.
+
+    Returns:
+        None
+    """
     if (message != "#") or (len(message) > 2):
         message = quick_decode(message)
         total_messages = read_file()
@@ -42,7 +77,16 @@ def write_file(message):
                 f.write(item + "\n")
             f.close()
 
+
 def read_file():
+    """
+    Read data from file in the filesystem which should have messages, in case there is no messages
+    it will return the `NO MESSAGES` in a list.
+
+    Returns:
+        file_data (lst)
+
+    """
     file_data = []
     if check_file() is True:
         with open(file_name, "r") as messages:
@@ -55,7 +99,14 @@ def read_file():
                 file_data.append("NO MESSAGES")
     return file_data
 
+
 def linted_data():
+    """
+    Return a string with data from the `read_file` function in a HTML format.
+
+    Returns:
+        data (str)
+    """
     data = []
     for element in read_file():
         data.append("<tr>\n<td>%s</td>\n</tr>" % element)
@@ -63,6 +114,9 @@ def linted_data():
 
 
 def main():
+    """
+    Main logic is on this function
+    """
     oled = console.Display()
     oled.print_wrapped("Checking messages file.")
     oled.clear(0, 1)
@@ -154,6 +208,7 @@ def main():
         oled.print_wrapped(str("Free out: %d" % gc.mem_free()))
         time.sleep(0.1)
         oled.clear(0, 1)
+
 
 if __name__ == "__main__":
     main()

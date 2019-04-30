@@ -8,13 +8,14 @@ This code was ported from the https://github.com/mcauser/MicroPython-ESP8266-Nok
 so most of the credit goes to Mike Causer
 """
 
+
 class ConwaysGameOfLife:
     def __init__(self):
         self.best = 0
         self.oled = Display()
         self.width = self.oled.width
         self.height = self.oled.height
-        self.buttonSelect = Button(0)
+        self.select_button = Button(0)
 
     def center_text(self, txt):
         """
@@ -67,7 +68,6 @@ class ConwaysGameOfLife:
         sleep_ms(2000)
         self.oled.clear(0, 1)
 
-
     def begin(self, size=4, delay=20):
         """
         Main function to check the button to stop the game or if game has ended.
@@ -91,7 +91,7 @@ class ConwaysGameOfLife:
 
         generations = 0 # Begin
         try:
-            while (tick() and self.buttonSelect.isReleased()):
+            while (tick() and self.select_button.isReleased()):
                 generations = generations + 1
                 self.oled.display.show()
                 sleep_ms(delay)
@@ -119,7 +119,6 @@ class ConwaysGameOfLife:
             for y in range(0, height, size):
                 # random bit: 0 = pixel off, 1 = pixel on
                 self.cell(x, y, getrandbits(1))
-
 
     def cell(self, x, y, colour):
         """
@@ -152,10 +151,10 @@ class ConwaysGameOfLife:
         if not 0 <= x < self.width or not 0 <= y < self.height:
             return 0
         if self.oled.display.pixel(x, y) is None:
-            blnReturn = getrandbits(1)
+            bln_return = getrandbits(1)
         else:
-            blnReturn = self.oled.display.pixel(x, y)
-        return blnReturn & 1
+            bln_return = self.oled.display.pixel(x, y)
+        return bln_return & 1
 
     def tick(self):
         """
@@ -201,6 +200,7 @@ class ConwaysGameOfLife:
                     if not something_happened:
                         something_happened = True
         return something_happened
+
 
 a = ConwaysGameOfLife()
 a.intro()

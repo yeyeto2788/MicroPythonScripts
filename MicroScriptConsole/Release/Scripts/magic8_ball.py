@@ -27,23 +27,22 @@ answers = [
     "Outlook not so good",
     "Very doubtful"]
 
-def get_random_str(lstItems):
+def get_random_str(items):
     choise = urandom.getrandbits(5)
     try:
-        strReturn = lstItems[choise]
-        return strReturn
+        s_return = items[choise]
+        return s_return
     except IndexError:
-        return get_random_str(lstItems)
+        return get_random_str(items)
 
-"""
-Main code to execute below
-"""
+def main():
+    oled.print_wrapped("  Magic 8 Ball  ")
+    time.sleep(1)
 
-oled.print_wrapped("  Magic 8 Ball  ")
-time.sleep(1)
+    while True:
+        if not buttonSelect.isReleased():
+            oled.clear(0, 1)
+            time.sleep(1)
+            oled.print_wrapped(get_random_str(answers))
 
-while True:
-    if not buttonSelect.isReleased():
-        oled.clear(0, 1)
-        time.sleep(1)
-        oled.print_wrapped(get_random_str(answers))
+main()

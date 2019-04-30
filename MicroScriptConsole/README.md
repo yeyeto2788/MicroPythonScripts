@@ -12,7 +12,7 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
   I have finally generated the firmware for the ESP8266, so if you get the firmware flash onto the board and then get the all the code from the **`Release`** folder (Except for the `console.py`) and then name the `menu.py` to `main.py` so it will be executed after booting up.
 
-  I have also added the `WIFI_Scanner.py` as a new script :smiley: !
+  I have also added the `wifi_scanner.py` as a new script :smiley: !
 
   To get the firmware go to the [Firmware](./Firmware) folder and get the latest built.
 
@@ -51,7 +51,7 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
 # Scripts ported / added:
 
-## **`Show_Graphics.py`**
+## **`show_images.py`**
 
   Script to show images on the screen, these images are converted into hexadecimal text with an application which is called [The Dot Factory application](http://www.eran.io/the-dot-factory-an-lcd-font-and-image-generator/) and the process on how to make it from a `.png` file is quite straight forward.
 
@@ -61,7 +61,7 @@ What we need to do is download all the code from the **`Release`** folder so it 
 
   Link to documented code
 
-  [Link to documented code](./Code/Scripts/Show_Graphics.py)
+  [Link to documented code](Code/Scripts/show_images.py)
 
 ####  **Execution images**
 
@@ -73,15 +73,15 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <img src="./Doc/images/erni_oled.png" alt="Erni logo on display"  width="200"/>
   </p>
 
-## **`RubberDuck_Debug.py`**
+## **`rubber_duck_debugging.py`**
 
   This is an implementation of the MicroProblemSolver script described [here](https://github.com/yeyeto2788/MicroPythonScripts/tree/master/MicroProblemSolver).
 
-## **`Simple_test.py`**
+## **`simple_test.py`**
 
   This is just a simple script that prints a text and the count of the button presses on the screen.
 
-  [Link to documented code](./Code/Scripts/Simple_test.py)
+  [Link to documented code](Code/Scripts/simple_test.py)
 
 ####  **Execution images**
 
@@ -89,25 +89,25 @@ What we need to do is download all the code from the **`Release`** folder so it 
   <img src="./Doc/images/print_test.png" alt="Print test script running on display"  width="200"/>
   </p>
 
-##  **`Magic8Ball.py`**
+##  **`magic8_ball.py`**
 
   Seeking for an advice to make a decision? This script is based on the [Magic 8-Ball](https://en.wikipedia.org/wiki/Magic_8-Ball) toy which was used for "fortune-telling"
 
-  [Link to documented code](./Code/Scripts/Magic8Ball.py)
+  [Link to documented code](Code/Scripts/magic8_ball.py)
 
-##  **`I2C_Scanner.py`**
+##  **`I2C_scanner.py`**
 
   This script will scan all connected devices on the board to the I2C bus retrieving the HEX address and the decimal.
 
   Take into account that if the OLED screen is connected this will also show the address of it, normally the address is `0x3D`.
 
-  [Link to documented code](./Code/Scripts/I2C_Scanner.py)
+  [Link to documented code](Code/Scripts/I2C_scanner.py)
 
-##  **`WIFI_Scanner.py`**
+##  **`wifi_scanner.py`**
 
   This script will scan all available WiFi networks on the area and it will output the strength, chanel, name, and authmode of them
 
-  [Link to documented code](./Code/Scripts/WIFI_Scanner.py)
+  [Link to documented code](Code/Scripts/wifi_scanner.py)
 
 ##  **`conways_game_of_life.py`**
 

@@ -3,6 +3,9 @@
 .cache
 *__pycache__*
 
-#Hardware files not needed:
+# Hardware files not needed:
 *.s#*
 *.b#*
+
+# Virtual environment
+/venv/*

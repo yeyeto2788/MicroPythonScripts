@@ -9,7 +9,7 @@ class ConwaysGameOfLife:
         self.oled = Display()
         self.width = self.oled.width
         self.height = self.oled.height
-        self.buttonSelect = Button(0)
+        self.select_button = Button(0)
 
     def center_text(self, txt):
         return '{: ^{}}'.format(txt, self.oled.max_char)
@@ -35,23 +35,23 @@ class ConwaysGameOfLife:
 
     def begin(self, size=4, delay=20):
         self.size = size
-        self.delay = delay
+        self.delay = delay 
         delay = self.delay
         tick = self.tick
-        self.randomise()
+        self.randomise() 
         generations = 0
         try:
-            while (tick() and self.buttonSelect.isReleased()):
+            while (tick() and self.select_button.isReleased()):
                 generations = generations + 1
                 self.oled.display.show()
                 sleep_ms(delay)
         except KeyboardInterrupt:
             pass
 
-        if generations > self.best:
+        if generations > self.best: 
             self.best = generations
 
-        self.end(generations, self.best, self.size)
+        self.end(generations, self.best, self.size) 
 
     def randomise(self):
         size = self.size
@@ -73,10 +73,10 @@ class ConwaysGameOfLife:
         if not 0 <= x < self.width or not 0 <= y < self.height:
             return 0
         if self.oled.display.pixel(x, y) is None:
-            blnReturn = getrandbits(1)
+            bln_return = getrandbits(1)
         else:
-            blnReturn = self.oled.display.pixel(x, y)
-        return blnReturn & 1
+            bln_return = self.oled.display.pixel(x, y)
+        return bln_return & 1
 
     def tick(self):
         size = self.size
@@ -101,11 +101,11 @@ class ConwaysGameOfLife:
                 )
 
                 if alive and not 2 <= neighbours <= 3:
-                    cell(x, y, 0)
+                    cell(x, y, 0) 
                     if not something_happened:
                         something_happened = True
                 elif not alive and neighbours == 3:
-                    cell(x, y, 1)
+                    cell(x, y, 1) 
                     if not something_happened:
                         something_happened = True
         return something_happened

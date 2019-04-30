@@ -3,10 +3,6 @@ from console import Display
 
 oled = Display()
 
-"""
-Main code to execute below
-"""
-
 oled.print_wrapped("Scanning I2C Devices on the bus...")
 time.sleep(0.5)
 devices = oled.i2c.scan()
@@ -19,7 +15,7 @@ else:
     oled.print_wrapped('%s I2C devices found' % str(len(devices)))
     time.sleep(1.5)
 
-    for intloop in range(1,2):
+    for count in range(1, 2):
         for device in devices:
             oled.clear(0, 1)
             oled.print_on_line("Decimal address:", 2)

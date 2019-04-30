@@ -3,9 +3,10 @@ import console, time
 buttonSelect = console.Button(0)
 display = console.Display()
 
+
 def center_text(txt):
     """
-    This function will center all incomming strings to a fix size of the display
+    This function will center all incoming strings to a fix size of the display
     max_char property.
 
     Args:
@@ -15,6 +16,7 @@ def center_text(txt):
         type: String with the text centered
     """
     return '{: ^{}}'.format(txt, display.max_char)
+
 
 display.print_on_line(center_text("Wujuuu imported"), 0)
 display.print_on_line(center_text("Press the"), 3)

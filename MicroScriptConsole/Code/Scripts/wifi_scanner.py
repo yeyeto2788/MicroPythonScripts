@@ -1,8 +1,11 @@
 import time
 import network
+
 import gc
 gc.enable()
+
 from console import Display
+
 
 class WiFiScanner:
     def __init__(self):
@@ -20,6 +23,12 @@ class WiFiScanner:
         self.format()
 
     def prepare_wifi(self):
+        """
+        Function to disable WiFi if it is in an active connection.
+
+        Returns:
+            Nothing.
+        """
         if not self.wlan.active():
             self.oled.print_wrapped("Turning the WiFi ON.")
             time.sleep(0.5)
@@ -32,51 +41,72 @@ class WiFiScanner:
             self.wlan.disconnect()
 
     def format(self):
+        """
+        Format information looping from the wlan.scan performed.
+
+        Returns:
+            Nothing.
+        """
         try:
             wlan_list = self.wlan.scan()
         except:
             wlan_list = [['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE']]
-        for intCounter in wlan_list:
-            self.name = str(intCounter[0], 'utf8')
-            self.strength = str(intCounter[3]) + ' dBm'
-            self.kanaal = 'Channel: ' + str(intCounter[2])
-            self.status = self.get_secure(intCounter[4])
+        for counter in wlan_list:
+            self.name = str(counter[0], 'utf8')
+            self.strength = str(counter[3]) + ' dBm'
+            self.kanaal = 'Channel: ' + str(counter[2])
+            self.status = self.get_secure(counter[4])
             self.show_info()
             self.oled.clear(0, 1)
 
     @staticmethod
     def get_secure(num):
-        strReturn = ""
+        """
+        Convert the number from wlan.scan into something human readable.
+
+        Args:
+            num: Integer from the scan regarding authmode.
+
+        Returns:
+            String with the conversion of the authmode.
+        """
+        s_return = ""
         try:
             if int(num) == 0:
-                strReturn = 'Open wifi'
+                s_return = 'Open wifi'
             elif int(num) == 1:
-                strReturn = 'WEP'
+                s_return = 'WEP'
             elif int(num) ==2:
-                strReturn = 'WPA-PSK'
+                s_return = 'WPA-PSK'
             elif int(num) == 3:
-                strReturn = 'WPA2-PSK'
+                s_return = 'WPA2-PSK'
             elif int(num) == 4:
-                strReturn = 'WPA/WPA2-PSK'
+                s_return = 'WPA/WPA2-PSK'
             else:
-                strReturn = str("UNKNOWN %s" % num)
+                s_return = str("UNKNOWN %s" % num)
 
-            return strReturn
+            return s_return
         except:
-            return strReturn
+            return s_return
 
     def show_info(self):
+        """
+        Show information on the Display nicely.
+
+        Returns:
+            Nothing.
+        """
         self.oled.clear(0, 1)
         if len(self.name) > 15:
-            self.oled.print_on_line(self.name[0:15],0)
-            self.oled.print_on_line(self.name[15:int(len(self.name))],1)
+            self.oled.print_on_line(self.name[0:15], 0)
+            self.oled.print_on_line(self.name[15:int(len(self.name))], 1)
         else:
-            self.oled.print_on_line(self.name,0)
+            self.oled.print_on_line(self.name, 0)
 
         self.oled.print_on_line(self.strength, 2, 30)
         self.oled.print_on_line(self.status, 3, 30)
         self.oled.print_on_line(self.kanaal, 4, 30)
-        self.oled.print_on_line((str(gc.mem_free())+ " B"), 5, 30)
+        self.oled.print_on_line((str(gc.mem_free()) + " B"), 5, 30)
         time.sleep_ms(10000)
 
 ScannedWiFi = WiFiScanner()
