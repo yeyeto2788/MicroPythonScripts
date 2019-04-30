@@ -82,12 +82,11 @@ class WittyBoard:
                 cls.pins['leds'][strled]['mode'] = cls.OUT
             machine.Pin(cls.pins['leds'][strled]['pin'], machine.Pin.OUT).value(blnstatus)
 
-
     @classmethod
     def set_pwm_value(cls, strled, intduty):
         """
-        Will set a PWM pin for setting brightness off the led. There are some parameter to take into account which are
-        written below.
+        Will set a PWM pin for setting brightness off the led. There are some parameter to take into
+         account which are written below.
                 duty: 0 - 1023 (pin being high)
                 freq: 1Hz - 1Khz
         Args:

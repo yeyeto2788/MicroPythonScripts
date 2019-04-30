@@ -1,11 +1,13 @@
 import uln2003, time
 
+
 def hundred_steps():
     s1 = uln2003.Stepper(uln2003.HALF_STEP, 16, 15, 14, 13, delay=5000)
     print("Motor will move 100 steps clockwise")
     s1.step(100)     # Rotate 100 steps clockwise
     print("Motor will move 100 steps counter-clockwise")
     s1.step(100, -1) # Rotate 100 steps anti-clockwise
+
 
 def one_by_one():
     s1 = uln2003.Stepper(uln2003.HALF_STEP, 16, 15, 14, 13, delay=5000)
@@ -14,6 +16,7 @@ def one_by_one():
     s1.step(uln2003.FULL_ROTATION)
     print("Motor 2 will do a full rotation")
     s2.step(uln2003.FULL_ROTATION)
+
 
 def both_simultaneously():
     s1 = uln2003.Stepper(uln2003.HALF_STEP, 16, 15, 14, 13, delay=5000)
@@ -28,7 +31,6 @@ def both_simultaneously():
     runner = uln2003.Driver()
     print("Let's put both motors to run at the 'same' time")
     runner.run([c1, c2])
-
 
 
 print("Starting hundred_steps() function.")

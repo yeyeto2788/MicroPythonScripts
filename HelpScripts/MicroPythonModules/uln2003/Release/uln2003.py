@@ -1,32 +1,37 @@
-import time, machine
+import time
+import machine
 
+LOW = 0
+HIGH = 1
 FULL_ROTATION = int(4075.7728395061727 / 8)
 
 HALF_STEP = [
-[0, 0, 0, 1],
-[0, 0, 1, 1],
-[0, 0, 1, 0],
-[0, 1, 1, 0],
-[0, 1, 0, 0],
-[1, 1, 0, 0],
-[1, 0, 0, 0],
-[1, 0, 0, 1],
+    [LOW, LOW, LOW, HIGH],
+    [LOW, LOW, HIGH, HIGH],
+    [LOW, LOW, HIGH, LOW],
+    [LOW, HIGH, HIGH, LOW],
+    [LOW, HIGH, LOW, LOW],
+    [HIGH, HIGH, LOW, LOW],
+    [HIGH, LOW, LOW, LOW],
+    [HIGH, LOW, LOW, HIGH],
 ]
 
 FULL_STEP = [
-[1, 0, 1, 0],
-[0, 1, 1, 0],
-[0, 1, 0, 1],
-[1, 0, 0, 1]
+    [HIGH, LOW, HIGH, LOW],
+    [LOW, HIGH, HIGH, LOW],
+    [LOW, HIGH, LOW, HIGH],
+    [HIGH, LOW, LOW, HIGH]
 ]
 
-class Command():
+
+class Command:
+    
     def __init__(self, stepper, steps, direction=1):
         self.stepper = stepper
         self.steps = steps
         self.direction = direction
 
-class Driver():
+class Driver:
 
     @staticmethod
     def run(commands):
@@ -34,23 +39,23 @@ class Driver():
         count = 0
         while count != max_steps:
             for command in commands:
-                # we want to interleave the commands
                 if command.steps > 0:
                     command.stepper.step(1, command.direction)
                     command.steps -= 1
                     count += 1
 
-class Stepper():
+class Stepper:
+
     def __init__(self, mode, pin1, pin2, pin3, pin4, delay=2000):
         self.mode = mode
         self.pin1 = machine.Pin(pin1, machine.Pin.OUT)
         self.pin2 = machine.Pin(pin2, machine.Pin.OUT)
         self.pin3 = machine.Pin(pin3, machine.Pin.OUT)
         self.pin4 = machine.Pin(pin4, machine.Pin.OUT)
-        self.delay = delay  # Recommend 10000+ for FULL_STEP, 1000 is OK for HALF_STEP
+        self.delay = delay  
         self.steps_per_rev = FULL_ROTATION
         self.current_position = 0
-        self.reset()  # Initialize all to 0
+        self.reset()  
 
     def step(self, step_count, direction=1):
         for x in range(step_count):
@@ -75,7 +80,7 @@ class Stepper():
         self.step(rev_count * self.steps_per_rev)
 
     def set_step_delay(self, us):
-        if us < 20:  # 20 us is the shortest possible for esp8266
+        if us < 20:
             self.delay = 20
         else:
             self.delay = us

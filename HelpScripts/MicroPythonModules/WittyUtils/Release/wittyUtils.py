@@ -1,6 +1,5 @@
 import machine
 
-
 class WittyBoard:
     IN = 0
     OUT = 1
@@ -53,7 +52,6 @@ class WittyBoard:
                 machine.PWM(machine.Pin(cls.pins['leds'][strled]['pin'])).deinit()
                 cls.pins['leds'][strled]['mode'] = cls.OUT
             machine.Pin(cls.pins['leds'][strled]['pin'], machine.Pin.OUT).value(blnstatus)
-
 
     @classmethod
     def set_pwm_value(cls, strled, intduty):

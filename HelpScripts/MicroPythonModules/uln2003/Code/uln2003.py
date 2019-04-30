@@ -23,7 +23,8 @@ FULL_STEP = [
     [HIGH, LOW, LOW, HIGH]
 ]
 
-class Command():
+
+class Command:
     """
     Tell a stepper to move X many steps in a given direction
     """
@@ -32,7 +33,8 @@ class Command():
         self.steps = steps
         self.direction = direction
 
-class Driver():
+
+class Driver:
     """
     Drive a set of motors, each with their own commands
     """
@@ -61,7 +63,8 @@ class Driver():
                     command.steps -= 1
                     count += 1
 
-class Stepper():
+
+class Stepper:
     def __init__(self, mode, pin1, pin2, pin3, pin4, delay=2000):
         self.mode = mode
         self.pin1 = machine.Pin(pin1, machine.Pin.OUT)
