@@ -8,24 +8,28 @@ keys = console.Keypad()
 oled = console.Display()
 
 
-def print_menu(lstwords):
+def print_menu(words):
     """
     Function to print the menu when the script initializes.
 
+    Args:
+        words: List with words to be printed.
+
     Returns:
-        Nothing.
+        None.
     """
-    if isinstance(lstwords, list) and len(lstwords) <= 8:
+    if isinstance(words, list) and len(words) <= 8:
         line = 0
-        for script in lstwords:
+        for script in words:
             if line > len(oled.v_lines):
                 time.sleep(2)
                 line = 0
             oled.print_on_line(str(script), line)
             line += 1
     else:
-        oled.print_wrapped(lstwords)
+        oled.print_wrapped(words)
     time.sleep(3)
+
 
 def print_selection(scripts, selection):
     """
@@ -36,7 +40,7 @@ def print_selection(scripts, selection):
         selection: Integer with the selection of the script.
 
     Returns:
-        Nothing.
+        None.
     """
     oled.clear(0, 1)
     oled.print_on_line("Script selected:" + str(selection), 1)
@@ -47,11 +51,11 @@ def print_selection(scripts, selection):
 
 def get_files():
     """
-    Gets the files from the fylesystem except for the ones on the 'excluded_files'
+    Gets the files from the filesystem except for the ones on the 'excluded_files'
     variable.
 
     Returns:
-        Nothing.
+        None.
     """
     extensions = ".py"
     excluded_files = ["main.py", "boot.py", "console.py", __name__]
@@ -63,9 +67,6 @@ def get_files():
     return dirfiles
 
 
-"""
-Code to be executed.
-"""
 scripts = get_files()
 selection = 0
 while True:
@@ -100,7 +101,6 @@ while True:
                 console_idle = 0
             except:
                 pass
-            pass
         elif buttons and btnStart == 0:
             start_time = time.ticks_ms() // 1000
             try:
@@ -111,7 +111,6 @@ while True:
                 time.sleep(0.5)
                 continue
             del sys.modules[scripts[selection]]
-            pass
 
         if (time_now - start_time) > (3 * 60):
             if not console_idle:

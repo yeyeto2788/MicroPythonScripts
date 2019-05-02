@@ -3,7 +3,7 @@ This is a script that is used to implement the Pomodoro Technique, with a 25 min
 
 This uses the OLED LCD display on the board to show the remaining time, once the time finishes the alarm will go off.
 
-What we need to do is download all the code from the **`Release`** folder and rename the **`Pomodoro.py`** file to **`main.py`** so it will be executed after booting up.
+What we need to do is download all the code from the **`Release`** folder and rename the **`pomodoro.py`** file to **`main.py`** so it will be executed after booting up.
 
 
 ## Parts needed:
@@ -92,7 +92,7 @@ Eagle CAD files are within the **`Release`** folder
 **The PCB is still in testing stage.** (Currently testing Version 0.2)
 
 
-## Usefull links:
+## Useful links:
 
 [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
 

@@ -3,22 +3,20 @@ import os
 import sys
 import console
 
-
 keys = console.Keypad()
 oled = console.Display()
 
-
-def print_menu(lstwords):
-    if isinstance(lstwords, list) and len(lstwords) <= 8:
+def print_menu(words):
+    if isinstance(words, list) and len(words) <= 8:
         line = 0
-        for script in lstwords:
+        for script in words:
             if line > len(oled.v_lines):
                 time.sleep(2)
                 line = 0
             oled.print_on_line(str(script), line)
             line += 1
     else:
-        oled.print_wrapped(lstwords)
+        oled.print_wrapped(words)
     time.sleep(3)
 
 def print_selection(scripts, selection):
@@ -72,7 +70,6 @@ while True:
                 console_idle = 0
             except:
                 pass
-            pass
         elif buttons and btnStart == 0:
             start_time = time.ticks_ms() // 1000
             try:
@@ -83,7 +80,6 @@ while True:
                 time.sleep(0.5)
                 continue
             del sys.modules[scripts[selection]]
-            pass
 
         if (time_now - start_time) > (3 * 60):
             if not console_idle:

@@ -1,39 +1,32 @@
-"""
-IMPORT MODULES NEEDED
-"""
 import socket
 import dht
 import gc
 import machine
 
 
-"""
-DECLARE FUNCTIONS
-"""
-
 def read_sensors():
     """
-    Read the DHT11 sensor for Temperature and
+    Read the DHT11 sensor's Temperature and Humidity
 
     Returns:
-            An array with the temperature and the humidity read from the sensor.
+        Array with the temperature and the humidity read from the sensor.
     """
     data = []
     d = dht.DHT11(machine.Pin(2))
     d.measure()
-    Temperature = d.temperature()
-    Humidity = d.humidity()
-    for i in range(0,1):
-        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(Temperature), str(Humidity)))
+    temperature = d.temperature()
+    humidity = d.humidity()
+    for i in range(0, 1):
+        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(temperature), str(humidity)))
     return data
 
 
 def main():
     """
-    Main code to be executed, all logic it is within this function.
+    Main code to be executed, all logic is within this function.
 
     Returns:
-            None
+        None
     """
     html = b"""<!DOCTYPE html>
     <html lang="en">
@@ -103,8 +96,4 @@ def main():
             pass
         cl.close()
 
-
-"""
-EXECUTE THE CODE
-"""
 main()

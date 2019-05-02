@@ -6,7 +6,7 @@ This uses the OLED LCD display on the board to show the question being asked so 
 What we need to do is download all the code from the **`Release`** folder so it will be executed after booting up.
 
 So in the board you'll have the following files:
-* `main.py` (Renamed `MicroProblemSolver.py` file without comments.)
+* `main.py` (Renamed `problem_solver.py` file without comments.)
 * `questions.json` (File with questions that can be change or even add more.)
 
 Once all files are in the board, every time you want a random question you just need to reset the board.

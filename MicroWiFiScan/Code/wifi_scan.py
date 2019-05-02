@@ -38,17 +38,17 @@ class WiFiScanner:
         If WiFi scan fails the display will show NONE on the entire segments of the screen.
 
         Returns:
-            Nothing.
+            None.
         """
         try:
             wlan_list = self.wlan.scan()
         except:
             wlan_list = [['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE']]
-        for intCounter in wlan_list:
-            self.name = str(intCounter[0], 'utf8')
-            self.strength = str(intCounter[3]) + ' dBm'
-            self.kanaal = 'Channel: ' + str(intCounter[2])
-            self.status = self.get_secure(intCounter[4])
+        for counter in wlan_list:
+            self.name = str(counter[0], 'utf8')
+            self.strength = str(counter[3]) + ' dBm'
+            self.kanaal = 'Channel: ' + str(counter[2])
+            self.status = self.get_secure(counter[4])
             self.show_display()
             self.oled.fill(0)
             self.oled.show()
@@ -65,26 +65,26 @@ class WiFiScanner:
             num: integer with the type of security.
 
         Returns:
-            strReturn: String with the description of the Wifi security.
+            String with the description of the Wifi security.
         """
-        strReturn = ""
+        s_return = ""
         try:
             if int(num) == 0:
-                strReturn = 'Open wifi'
+                s_return = 'Open wifi'
             elif int(num) == 1:
-                strReturn = 'WEP'
+                s_return = 'WEP'
             elif int(num) ==2:
-                strReturn = 'WPA-PSK'
+                s_return = 'WPA-PSK'
             elif int(num) == 3:
-                strReturn = 'WPA2-PSK'
+                s_return = 'WPA2-PSK'
             elif int(num) == 4:
-                strReturn = 'WPA/WPA2-PSK'
+                s_return = 'WPA/WPA2-PSK'
             else:
-                strReturn = str(num)
+                s_return = str(num)
 
-            return strReturn
+            return s_return
         except:
-            return strReturn
+            return s_return
 
     def show_display(self):
         """
@@ -94,20 +94,20 @@ class WiFiScanner:
         and show it will be shown on row 1,2.
 
         Returns:
-            Nothing.
+            None.
         """
 
         self.oled.fill(0)
         self.oled.show()
         if len(self.name) > 15:
-            self.oled.text(self.name[0:15],0,0)
-            self.oled.text(self.name[15:int(len(self.name))],0,8)
+            self.oled.text(self.name[0:15], 0, 0)
+            self.oled.text(self.name[15:int(len(self.name))], 0, 8)
         else:
-            self.oled.text(self.name,0,0)
+            self.oled.text(self.name, 0, 0)
             self.oled.text(self.strength, 30, 20)
-            self.oled.text(self.status,30,30)
-            self.oled.text(self.kanaal, 30,40)
-            self.oled.text((str(gc.mem_free())+ " B"), 30,50)
+            self.oled.text(self.status, 30, 30)
+            self.oled.text(self.kanaal, 30, 40)
+            self.oled.text((str(gc.mem_free()) + " B"), 30, 50)
             self.oled.show()
             utime.sleep_ms(10000)
 

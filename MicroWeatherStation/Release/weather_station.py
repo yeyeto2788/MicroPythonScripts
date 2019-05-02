@@ -7,12 +7,11 @@ def read_sensors():
     data = []
     d = dht.DHT11(machine.Pin(2))
     d.measure()
-    Temperature = d.temperature()
-    Humidity = d.humidity()
-    for i in range(0,1):
-        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(Temperature), str(Humidity)))
+    temperature = d.temperature()
+    humidity = d.humidity()
+    for i in range(0, 1):
+        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(temperature), str(humidity)))
     return data
-
 
 def main():
     html = b"""<!DOCTYPE html>

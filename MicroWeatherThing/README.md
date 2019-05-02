@@ -4,7 +4,7 @@ This script is used on the Wemos D1 mini running MicroPython port for the ESP826
 
 It connects to OpenWeatherMap API in order to get the current weather from a location and it shows the local Temperature and Humidity read from the DHT11 sensor.
 
-What we need to do is download all the code from the `Relase` folder and rename the `MicroWeatherThing.py` file to `main.py` so it will be executed after booting up.
+What we need to do is download all the code from the `Relase` folder and rename the `weather_thing.py` file to `main.py` so it will be executed after booting up.
 
 ## Parts needed:
 

@@ -1,16 +1,10 @@
-"""
-IMPORT MODULES NEEDED
-"""
 import socket
 import os
 import gc
 
 
-"""
-DECLARE FUNCTIONS
-"""
-
 file_name = "messages.txt"
+
 
 def check_file():
     """
@@ -27,6 +21,7 @@ def check_file():
             f.close()
         return True
 
+
 def clear_file():
     """
     Clear all content in file.
@@ -37,6 +32,7 @@ def clear_file():
     with open(file_name, "w") as f:
         f.write("")
     f.close()
+
 
 def get_file_size():
     """
@@ -50,73 +46,77 @@ def get_file_size():
         f.close()
         return len(lines)
 
-def quick_decode(strdecode):
+
+def quick_decode(s_decode):
     """
     This will perform a nasty url decode on a given string.
     Args:
-        strdecode: String to be decoded.
+        s_decode: String to be decoded.
 
     Returns:
-        strdecode: String decoded.
+        String decoded.
     """
     elements = {"ñ": "%C3%B1", "€": "%E2,%AC", ";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A", "#": "%23", "&": "%26",
                 "=": "%3D", "+": "%2B", "$": "%24", ",": "%2C", "%": "%25", "<": "%3C", ">": "%3E", "@": "%40",
                 "(": "%28", ")": "%29", "‚": "%82", "!": "%21"}
-    if "+" in strdecode:
-        strdecode = strdecode.replace("+", " ")
-    if "%20" in strdecode:
-        strdecode = strdecode.replace("%20", " ")
+    if "+" in s_decode:
+        s_decode = s_decode.replace("+", " ")
+    if "%20" in s_decode:
+        s_decode = s_decode.replace("%20", " ")
     for element in elements:
-        if elements[element] in strdecode:
-            strdecode = strdecode.replace(elements[element], element)
-    return strdecode
+        if elements[element] in s_decode:
+            s_decode = s_decode.replace(elements[element], element)
+    return s_decode
 
-def write_file(strMessage):
+
+def write_file(message):
     """
     Write messages to the file 'messages.txt' coming from the input form.
 
     Args:
-        strMessage: String to be stored on the file
+        message: String to be stored on the file
 
     Returns:
             Nothing
     """
-    if (strMessage != "#") or (len(strMessage) > 2):
-        strMessage = quick_decode(strMessage)
+    if (message != "#") or (len(message) > 2):
+        message = quick_decode(message)
         total_messages = read_file()
         if get_file_size() > 15:
             del total_messages[0]
-        total_messages.append(strMessage)
+        total_messages.append(message)
         with open(file_name, "w") as f:
             for item in total_messages:
                 f.write(item + "\n")
             f.close()
+
 
 def read_file():
     """
     Read the 'messages.txt' file for the messages stored in it.
 
     Returns:
-            An array with the messages and the 'time' next to the message.
+        Array with the messages and the 'time' next to the message.
     """
     filedata = []
     if check_file() is True:
         with open(file_name, "r") as messages:
-            Data = messages.readlines()
-            if len(Data) > 0:
-                for line in Data:
+            data = messages.readlines()
+            if len(data) > 0:
+                for line in data:
                     message = line.rstrip()
                     filedata.append(message)
             else:
                 filedata.append("NO MESSAGES")
     return filedata
 
+
 def linted_data():
     """
     Add the HTML tags for each line on the file return by read_file method.
 
     Returns:
-        data: A list with the linted data.
+        List with the linted data.
     """
     data = []
     for element in read_file():
@@ -232,7 +232,5 @@ def main():
         cl.close()
         print("Free out: %d" % gc.mem_free())
 
-"""
-EXECUTE THE CODE
-"""
+
 main()

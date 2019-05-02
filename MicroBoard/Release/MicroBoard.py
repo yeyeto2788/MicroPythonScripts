@@ -23,26 +23,26 @@ def get_file_size():
         f.close()
         return len(lines)
 
-def quick_decode(strdecode):
+def quick_decode(s_decode):
     elements = {"ñ": "%C3%B1", "€": "%E2,%AC", ";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A", "#": "%23", "&": "%26",
                 "=": "%3D", "+": "%2B", "$": "%24", ",": "%2C", "%": "%25", "<": "%3C", ">": "%3E", "@": "%40",
                 "(": "%28", ")": "%29", "‚": "%82", "!": "%21"}
-    if "+" in strdecode:
-        strdecode = strdecode.replace("+", " ")
-    if "%20" in strdecode:
-        strdecode = strdecode.replace("%20", " ")
+    if "+" in s_decode:
+        s_decode = s_decode.replace("+", " ")
+    if "%20" in s_decode:
+        s_decode = s_decode.replace("%20", " ")
     for element in elements:
-        if elements[element] in strdecode:
-            strdecode = strdecode.replace(elements[element], element)
-    return strdecode
+        if elements[element] in s_decode:
+            s_decode = s_decode.replace(elements[element], element)
+    return s_decode
 
-def write_file(strMessage):
-    if (strMessage != "#") or (len(strMessage) > 2):
-        strMessage = quick_decode(strMessage)
+def write_file(message):
+    if (message != "#") or (len(message) > 2):
+        message = quick_decode(message)
         total_messages = read_file()
         if get_file_size() > 15:
             del total_messages[0]
-        total_messages.append(strMessage)
+        total_messages.append(message)
         with open(file_name, "w") as f:
             for item in total_messages:
                 f.write(item + "\n")
@@ -52,9 +52,9 @@ def read_file():
     filedata = []
     if check_file() is True:
         with open(file_name, "r") as messages:
-            Data = messages.readlines()
-            if len(Data) > 0:
-                for line in Data:
+            data = messages.readlines()
+            if len(data) > 0:
+                for line in data:
                     message = line.rstrip()
                     filedata.append(message)
             else:
@@ -67,10 +67,9 @@ def linted_data():
         data.append("<tr>\n<td>%s</td>\n</tr>" % element)
     return data
 
-
 def main():
     check_file()
-    html ="""<!DOCTYPE html>
+    html = """<!DOCTYPE html>
         <html lang="en">
         <head>
         <title>Message board</title>
@@ -108,14 +107,29 @@ def main():
         </div></div>
         <script>
         function alert_clear()
-        {if(confirm("Are you sure you want to clear the file?"))
-        {document.getElementById("clear_id").value="yes";document.getElementById("clear_id").submit();}
-        else
-        {document.getElementById("clear_id").value="no";}}
+        {
+            if (confirm("Are you sure you want to clear the file?")) 
+            {
+                document.getElementById("clear_id").value = "yes";
+                document.getElementById("clear_id").submit();
+            }
+            else 
+            {
+                document.getElementById("clear_id").value = "no";
+            }
+
+        }
         function currentTime()
-        {var date=new Date();datestring=date.toDateString()+" "+date.toTimeString();document.getElementById("humanTime").innerHTML=datestring.split(" ").slice(0,5).join(" ");}
-        var element=document.getElementById("humanTime");if(typeof(element)!="undefined"&&element!=null)
-        {window.load=setInterval(currentTime,1000);}
+        {
+            var date = new Date();
+            datestring = date.toDateString() + " " + date.toTimeString();
+            document.getElementById("humanTime").innerHTML = datestring.split(" ").slice(0, 5).join(" ");
+        }
+        var element = document.getElementById("humanTime");
+        if (typeof(element) != "undefined" && element != null)
+        {
+            window.load = setInterval(currentTime, 1000);
+        }
         </script>
         </body>
         </html>
@@ -154,6 +168,5 @@ def main():
             pass
         cl.close()
         print("Free out: %d" % gc.mem_free())
-
 
 main()

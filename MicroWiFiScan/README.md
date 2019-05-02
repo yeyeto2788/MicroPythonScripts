@@ -4,7 +4,7 @@ This script is used on the NODEMCU Wemos Wifi running MicroPython port for the E
 
 It scans all available networks, it will show the strenght, name and security of the WiFi available connections.
 
-What we need to do is download all the code from the `Relase` folder, upload the `MicroWiFiScan.py` to the board and you do one of the following things:
+What we need to do is download all the code from the `Relase` folder, upload the `wifi_scan.py` to the board and you do one of the following things:
 
 * Upload also the `main.py` so it will be executed after booting up.
 
