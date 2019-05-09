@@ -1,12 +1,51 @@
+"""
+Script to automate the process of cleaning micropython files and uploading them
+onto the board.
+
+It uses:
+pyminifier==2.1
+
+"""
+
 import os
-import token
-import tokenize
 import platform
 import subprocess
 
+from pyminifier import minification, obfuscate, token_utils
 
-def clean_file(source_file_name, destination_file_name, bln_print=0):
+
+class CleanOptions:
     """
+    Abstract class to define the options used for the pyminifier module.
+
+    """
+    def __init__(self, bln_obfuscate=False):
+        """
+        Simple constructor method to define the properties of the object.
+
+        If we want to obfuscate the code we can do it by setting the `bln_obfuscate`
+        argument to True so the code size will also be smaller.
+
+        It is recommended to test first without doing so.
+
+        Args:
+            bln_obfuscate: Whether we want to obfuscate the code.
+        """
+        self.tabs = False
+        self.obfuscate = bln_obfuscate
+        self.obf_classes = False
+        self.obf_functions = False
+        self.nominify = False
+        self.obf_variables = False
+        self.obf_builtins = False
+        self.obf_import_methods = False
+        self.replacement_length = 1
+        self.use_nonlatin = False
+
+
+def clean_file(source_file_name: str, destination_file_name: str, bln_print: bool = 0):
+    """
+    Perform a cleaning action by removing all types of DocStrings on the code.
 
     Args:
         source_file_name: name of the file_name to be parsed.
@@ -16,51 +55,37 @@ def clean_file(source_file_name, destination_file_name, bln_print=0):
     Returns:
         None
     """
-    source = open(source_file_name)
-    destination = open(destination_file_name, "w")
+    _file = source_file_name
 
-    prev_toktype = token.INDENT
-    last_lineno = -1
-    last_col = 0
+    module = os.path.split(_file)[1]
+    module = ".".join(module.split('.')[:-1])
 
-    tokgen = tokenize.generate_tokens(source.readline)
+    source = open(_file).read()
+    tokens = token_utils.listified_tokenizer(source)
 
-    for toktype, ttext, (slineno, scol), (elineno, ecol), ltext in tokgen:
+    # Change option below `bln_obfuscate` to True if you want to make the code even smaller.
+    options = CleanOptions(bln_obfuscate=False)
 
-        if bln_print:
-            print("{:>8} {:14} {!r:20} {!r}".format(
-                tokenize.tok_name.get(toktype, toktype),
-                "{:d}.{:d}-{:d}.{:d}".format(slineno, scol, elineno, ecol),
-                ttext,
-                ltext)
-            )
+    if not options.nominify:  # Perform minification
+        source = minification.minify(tokens, options)
+        # Convert back to tokens in case we're obfuscating
+        tokens = token_utils.listified_tokenizer(source)
 
-        if slineno > last_lineno:
-            last_col = 0
+    # Perform obfuscation if any of the related options were set
+    if options.obfuscate:
+        identifier_length = int(options.replacement_length)
+        name_generator = obfuscate.obfuscation_machine(identifier_length=identifier_length)
+        obfuscate.obfuscate(module, tokens, options)
 
-        if scol > last_col:
-            destination.write(" " * (scol - last_col))
+    result = token_utils.untokenize(tokens)
 
-        if toktype == token.STRING and prev_toktype == token.INDENT:
-            # Docstringcheck (Uncomment below to get a different result)
-            # destination.write("#--")
-            pass
+    if bln_print:
+        print(result)
 
-        elif toktype == tokenize.COMMENT:
-            # Comment check (Uncomment below to get a different result)
-            # destination.write("")
-            pass
+    with open(destination_file_name, 'w') as destination_file:
+        destination_file.write(result)
 
-        else:
-            destination.write(ttext)
-
-        prev_toktype = toktype
-        last_col = ecol
-        last_lineno = elineno
-
-    # Close files
-    source.close()
-    destination.close()
+    destination_file.close()
 
 
 def push_file(file_path: str, serial_port: str):
@@ -88,14 +113,16 @@ if __name__ == '__main__':
         input("Please type the directory from where code will be uncommented: \n>>>").rstrip()
     )
 
-    projects_py = os.path.normpath(os.path.join(project_path, "Code"))
+    projects_input = os.path.normpath(os.path.join(project_path, "Code"))
     projects_output = os.path.normpath(os.path.join(project_path, "Release"))
 
     if not os.path.exists(projects_output):
         os.mkdir(projects_output)
 
-    for file_name in os.listdir(projects_py):
-        current_py = os.path.join(projects_py, file_name)
+    python_files = [py_file for py_file in os.listdir(projects_input) if py_file.endswith('.py')]
+
+    for file_name in python_files:
+        current_py = os.path.join(projects_input, file_name)
         current_output = os.path.join(projects_output, file_name)
 
         clean_file(current_py, current_output)
