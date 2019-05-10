@@ -8,10 +8,24 @@ pyminifier==2.1
 """
 
 import os
+import argparse
 import platform
 import subprocess
+import importlib.util
 
-from pyminifier import minification, obfuscate, token_utils
+module_name = 'pyminifier'
+module_spec = importlib.util.find_spec(module_name)
+
+if module_spec is None:
+    print("Couldn't find the {} module".format(module_name))
+    exit(-1)
+else:
+    token_utils = importlib.import_module('{}.token_utils'.format(module_name), module_name)
+    minification = importlib.import_module('{}.minification'.format(module_name), module_name)
+    obfuscate = importlib.import_module('{}.obfuscate'.format(module_name), module_name)
+
+
+PY_EXTENSION = '.py'
 
 
 class CleanOptions:
@@ -31,10 +45,13 @@ class CleanOptions:
         Args:
             bln_obfuscate: Whether we want to obfuscate the code.
         """
+        # Use tabs instead of spaces
         self.tabs = False
+        # Obfuscate all code
         self.obfuscate = bln_obfuscate
         self.obf_classes = False
         self.obf_functions = False
+
         self.nominify = False
         self.obf_variables = False
         self.obf_builtins = False
@@ -43,7 +60,7 @@ class CleanOptions:
         self.use_nonlatin = False
 
 
-def clean_file(source_file_name: str, destination_file_name: str, bln_print: bool = 0):
+def clean_file(source_file_name: str, destination_file_name: str = "", bln_print: bool = 0):
     """
     Perform a cleaning action by removing all types of DocStrings on the code.
 
@@ -74,7 +91,9 @@ def clean_file(source_file_name: str, destination_file_name: str, bln_print: boo
     # Perform obfuscation if any of the related options were set
     if options.obfuscate:
         identifier_length = int(options.replacement_length)
-        name_generator = obfuscate.obfuscation_machine(identifier_length=identifier_length)
+        name_generator = obfuscate.obfuscation_machine(
+            identifier_length=identifier_length
+        )
         obfuscate.obfuscate(module, tokens, options)
 
     result = token_utils.untokenize(tokens)
@@ -82,10 +101,12 @@ def clean_file(source_file_name: str, destination_file_name: str, bln_print: boo
     if bln_print:
         print(result)
 
-    with open(destination_file_name, 'w') as destination_file:
-        destination_file.write(result)
+    if destination_file_name != "":
 
-    destination_file.close()
+        with open(destination_file_name, 'w') as destination_file:
+            destination_file.write(result)
+
+        destination_file.close()
 
 
 def push_file(file_path: str, serial_port: str):
@@ -98,34 +119,121 @@ def push_file(file_path: str, serial_port: str):
 
     """
 
-    command_arguments = ['sudo', 'ampy', '--port', serial_port, 'put', file_path]
+    if serial_port != '':
 
-    if os.name == "posix" and platform.system() == "Linux":
-        subprocess.call(command_arguments)
-    elif os.name == "nt" and platform.system() == "Windows":
-        subprocess.call(command_arguments[1:])
+        print('Flashing \'{}\'.\n'.format(file_path))
+
+        command_arguments = ['sudo', 'ampy', '--port', serial_port, 'put', file_path]
+
+        if os.name == "posix" and platform.system() == "Linux":
+            subprocess.call(command_arguments)
+        elif os.name == "nt" and platform.system() == "Windows":
+            subprocess.call(command_arguments[1:])
+        else:
+            print("Hhmm, seems like you have MacOs and we haven't implement the code for this yet.")
+
+
+def process_files(python_files: list, projects_input: str, projects_output: str,
+                  print_output: str, port: str):
+    """
+    Given a list files minify and/or obfuscate them, create new files if required and flash
+    them to the board.
+
+    Args:
+        python_files: Files to be processed.
+        projects_input: Folder where files are taken from.
+        projects_output: Folder where files are written on.
+        print_output:
+        port: Port to be used by `ampy` tool.
+
+    Returns:
+        None
+    """
+    for file_name in python_files:
+        current_input = os.path.join(projects_input, file_name)
+        msg = "Result:\n\n"
+
+        if projects_output != '':
+            current_output = os.path.join(projects_output, file_name)
+
+            if current_output.endswith(PY_EXTENSION):
+                msg = "The file {} will be written with the following:\n\n".format(current_output)
+        else:
+            current_output = projects_output
+
+        print(msg)
+        clean_file(current_input, current_output, bln_print=print_output)
+        print("\n\n")
+
+        push_file(current_output, port)
+
+
+def main(options):
+    """
+    Set variables needed to delete docstring and obfuscate the script before flashing them onto
+    the board.
+
+    Args:
+        options: `parser.parse_args()` arguments.
+
+    Returns:
+        None.
+    """
+    print_output = options.print
+    projects_input = os.path.abspath(os.path.normpath(options.input))
+
+    if not os.path.exists(projects_input):
+        print('Seems like the input directory does not exists.')
+        exit(-1)
+
+    if options.output != '':
+        projects_output = os.path.abspath(os.path.normpath(options.output))
+
+        if not os.path.exists(projects_output):
+            os.makedirs(projects_output)
     else:
-        print("Hhmm, seems like you have MacOs and we haven't implement the code for this yet.")
+        projects_output = options.output
+
+    python_files = [py_file for py_file in os.listdir(
+        projects_input) if py_file.endswith(PY_EXTENSION)]
+
+    if len(python_files) > 0:
+        process_files(python_files, projects_input, projects_output, print_output, options.port)
+    else:
+        print('No python files found on {}'.format(
+            os.path.abspath(os.path.normpath(options.input)))
+        )
 
 
 if __name__ == '__main__':
-    project_path = os.path.normpath(
-        input("Please type the directory from where code will be uncommented: \n>>>").rstrip()
-    )
 
-    projects_input = os.path.normpath(os.path.join(project_path, "Code"))
-    projects_output = os.path.normpath(os.path.join(project_path, "Release"))
+    parser = argparse.ArgumentParser(
+        description='Script to automate the process of cleaning micropython files and'
+                    ' uploading them onto the board.')
 
-    if not os.path.exists(projects_output):
-        os.mkdir(projects_output)
+    parser.add_argument('-o', '--output', action='store', nargs='?',
+                        default='', type=str, help='Output directory.')
 
-    python_files = [py_file for py_file in os.listdir(projects_input) if py_file.endswith('.py')]
+    parser.add_argument('-i', '--input', action='store', nargs='?',
+                        default='',  type=str, help='Input directory.')
 
-    for file_name in python_files:
-        current_py = os.path.join(projects_input, file_name)
-        current_output = os.path.join(projects_output, file_name)
+    parser.add_argument('-p', '--port', action='store', nargs='?',
+                        default='',  type=str, help='Port to flash files.')
 
-        clean_file(current_py, current_output)
-        print('Flashing \'{}\'.\n'.format(file_name))
-        push_file(current_output, "/dev/ttyUSB0")
+    parser.add_argument('--print', action='store', nargs='?',
+                        default=True,  type=bool, help='Print result.')
 
+    args = parser.parse_args()
+
+    if args.input and (not args.print) and (args.output != ''):
+        print("Please provide an output destination file directory.")
+        exit(-1)
+
+    elif args.input:
+        main(options=args)
+        exit(0)
+
+    else:
+        print('Please review usage of the application below.')
+        print(parser.print_help())
+        exit(-1)
