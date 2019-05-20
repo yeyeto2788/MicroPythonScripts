@@ -134,7 +134,7 @@ def push_file(file_path: str, serial_port: str):
 
 
 def process_files(python_files: list, projects_input: str, projects_output: str,
-                  print_output: str, port: str):
+                  print_output: bool, port: str):
     """
     Given a list files minify and/or obfuscate them, create new files if required and flash
     them to the board.
