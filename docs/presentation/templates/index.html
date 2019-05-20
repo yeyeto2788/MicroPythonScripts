@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Python on Microcontrollers</title>
+    <meta name="description" content="Python on Microcontrollers" />
+    <meta name="author" content="Juan Biondi" />
+    <!--<link rel="icon" type="image/icon" href="./static/images/favicon.ico">-->
+    <link rel="icon" type="image/icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <!--<link href="./static/css/presentation.css" rel="stylesheet" />-->
+    <link href="{{ url_for('static', filename='css/presentation.css') }}" rel="stylesheet">
+</head>
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<!-- Slides go from here -->
+<div id="impress">
+
+    <div id="introduction" class="step" data-scale="2" data-x="-500" data-y="-500" data-z="100">
+        <h1>Python on uControllers</h1>
+        <br>
+        <img src="./static/images/Mlogo_138bk.png" alt="Micropythong logo">
+        <br>
+        <code class="bottom">uControllers = Microcontrollers</code>
+    </div>
+
+    <div id="index" class="step" data-rel-x="500" data-rel-y="1500" data-scale="1">
+        <h1>Topics:</h1>
+
+        <ul>
+            <li>Self introduction.</li>
+            <li>What is uPython.</li>
+            <li>Other forks of uPython.</li>
+            <li>Microcontrollers supported.</li>
+            <li>Code comparison.</li>
+            <li>How it works.</li>
+            <li>Some basic examples.</li>
+            <li>Some "advance" examples.</li>
+            <li>Questions / Feedback.</li>
+        </ul>
+
+        <code class="bottom">uPython = MicroPython</code>
+    </div>
+
+    <div id="slide01" class="step" data-rel-x="1200" data-rel-y="0" data-scale="1">
+        <h1>A bit about me</h1>
+        <!--TODO search a good and funny profile picture-->
+        <!--<img src="./static/images/profile_image.jpg" alt="Profile image of Juan Biondi" class="right">-->
+        <ul>
+            <li>Pythonista.</li>
+            <li>Open Source lover.</li>
+            <li>Open Source contributor.</li>
+        </ul>
+    </div>
+
+    <!-- row slides (3) -->
+    <div id="slide02" class="step" data-x="2000" data-y="2000" data-z="200">
+        <h1>What is MicroPython</h1>
+
+        <p>in short:</p>
+        <blockquote>is a lean and efficient implementation of the Python3 programming language that is optimized to run on microcontrollers.</blockquote>
+
+        <h3>Pros</h3>
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h3>Cons</h3>
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div id="slide03" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>Other forks</h1>
+        <h3>CircuitPython</h3>
+        <h3>M5Stack</h3>
+
+        <h2>Microcontrollers supported</h2>
+
+    </div>
+
+    <div id="slide04" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>Code comparison</h1>
+
+        <p>Blinking a led in pure C</p>
+        <pre>
+            <code class="c++">
+            #include &lt;avr/io.h&gt;
+            #include &lt;util/delay.h&gt;
+
+            #define BLINK_DELAY_MS 1000
+
+            int main (void)
+            {
+             DDRB |= _BV(DDB5);
+
+             while(1) {
+              PORTB |= _BV(PORTB5);
+              _delay_ms(BLINK_DELAY_MS);
+
+              PORTB &= ~_BV(PORTB5);
+              _delay_ms(BLINK_DELAY_MS);
+             }
+            }
+            </code>
+        </pre>
+
+    </div>
+
+    <div id="slide05" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>Code comparison</h1>
+
+        <p>Blinking a led in MicroPython</p>
+        <pre>
+            <code class="python">
+                import time
+                import machine
+
+                led = machine.Pin(15, machine.Pin.OUT)
+                while True:
+                    led.high()
+                    time.sleep(0.5)
+                    led.low()
+                    time.sleep(0.5)
+            </code>
+        </pre>
+    </div>
+
+    <!-- row slides (3) -->
+    <div id="slide06" class="step" data-x="2000" data-y="3000" data-z="200">
+        <h1>How it works</h1>
+
+        <ul>
+            <li>REPL</li>
+            <li><code>boot.py</code></li>
+            <li><code>main.py</code></li>
+        </ul>
+    </div>
+
+    <div id="slide07" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>REPL</h1>
+
+        <ul>
+            <li><strong>R</strong>ead</li>
+            <li><strong>E</strong>valuate</li>
+            <li><strong>P</strong>rint</li>
+            <li><strong>L</strong>oop</li>
+        </ul>
+
+    </div>
+
+    <div id="slide08" class="step" data-rel-x="1200" data-rel-y="0">
+        <h3><code>boot.py</code></h3>
+        <h3><code>main.py</code></h3>
+        <!-- TODO add image of the a flowchart of boot sequence-->
+
+    </div>
+
+    <!-- row slides (4) -->
+    <div id="slide09" class="step" data-x="2000" data-y="4000">
+        <h1>Basic examples</h1>
+
+        <h3>Pet feeder.</h3>
+        <h3>Local weather reader.</h3>
+
+    </div>
+
+    <div id="slide10" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>Other basic examples</h1>
+
+        <h2>Pomodoro Technique.</h2>
+        <h2>Rubber duck debugging.</h2>
+
+    </div>
+
+    <div id="slide11" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>"Advance" examples</h1>
+
+        <h2>WeatherThing.</h2>
+        <p>Fecth weather conditions from OpenWeatherMap</p>
+        <h2>MicroBoard.</h2>
+        <p></p>
+
+    </div>
+
+    <div id="slide12" class="step" data-rel-x="1200" data-rel-y="0">
+        <h1>Other "Advance" examples</h1>
+
+        <h3>Bus time of arrival.</h3>
+        <p>Connection to local Python API replicating bus time of arrival.</p>
+        <h3>MicroScriptConsole.</h3>
+
+    </div>
+
+    <!-- Single slide below last one -->
+    <div id="slide13" class="step" data-rel-x="0" data-rel-y="1000">
+        <h3>Questions?</h3>
+        <br>
+        <h3>Feedback</h3>
+
+    </div>
+
+    <!-- Single slide below last one -->
+    <div id="slide14" class="step" data-rel-x="0" data-rel-y="1000">
+        <h1>Thanks!!!</h1>
+
+    </div>
+
+
+    <div id="more-info" class="step" data-rel-x="0" data-rel-y="1000">
+        <h1>More info:</h1>
+
+        <ul>
+            <li><a href="https://github.com/yeyeto2788/MicroPythonScripts">MicroPythonScripts</a> repository.</li>
+            <li><a href="http://micropyton.org">MicroPython</a> official site.</li>
+            <li><a href="https://circuitpython.org/">CircuitPython</a> official site.</li>
+            <li><a href="http://impress.js.org">impress.js</a> used on this presentation.</li>
+            <li><a href="https://openweathermap.org/">OpenWeatherMap</a> API.</li>
+        </ul>
+    </div>
+
+    <!-- Last slide -->
+    <div id="conclusion" class="step stop" data-rel-x="1200" data-rel-y="1000">
+        <img alt="keep calm and code python"
+             src="./static/images/keep_calm_and_code_python.jpg"/>
+    </div>
+
+    <!-- Since it has the class "stop" it won't go to this slide -->
+    <div id="main-overview" class="step" data-x="3000" data-y="2000" data-scale="10" style="pointer-events: none;">
+    </div>
+</div>
+
+<div id="impress-toolbar"></div>
+
+<div class="impress-progressbar"><div></div></div>
+<div class="impress-progress"></div>
+<div id="impress-help"></div>
+<!-- Syntax highlight module. -->
+<!--<link rel="stylesheet" href="./static/css/atom-one-dark.css">-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/atom-one-dark.css') }}">
+<!--<script src="./static/js/highlight.min.js"></script>-->
+<script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
+<!-- Mardown related -->
+<!--<script type="text/javascript" src="./static/js/markdown.js"></script>-->
+<script type="text/javascript" src="{{ url_for('static', filename='js/markdown.js') }}"></script>
+<!-- Main impress script -->
+<!--<script type="text/javascript" src="./static/js/impress.js"></script>-->
+<script type="text/javascript" src="{{ url_for('static', filename='js/impress.js') }}"></script>
+
+<script>
+  impress().init();
+  document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+</body>
+</html>
