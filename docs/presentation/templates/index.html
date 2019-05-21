@@ -60,16 +60,16 @@
     <div id="slide02" class="step" data-x="2000" data-y="2000" data-z="200">
         <h1>What is MicroPython</h1>
 
-        <p>in short:</p>
-        <blockquote>is a lean and efficient implementation of the Python3 programming language that is optimized to run on microcontrollers.</blockquote>
+        <p style="text-align: left;">Lean and efficient implementation of the Python3 programming language that is optimized to run on microcontrollers.</p>
+        <p style="text-align: left;">MicroPython implements Python 3.4 and some select features of Python 3.5</p>
 
-        <h3>Pros</h3>
+        <p style="text-align: left;"><stron>Pros</stron></p>
         <ul>
             <li></li>
             <li></li>
         </ul>
 
-        <h3>Cons</h3>
+        <p style="text-align: left;"><strong>Cons</strong></p>
         <ul>
             <li></li>
             <li></li>
@@ -78,17 +78,59 @@
 
     <div id="slide03" class="step" data-rel-x="1200" data-rel-y="0">
         <h1>Other forks</h1>
-        <h3>CircuitPython</h3>
-        <h3>M5Stack</h3>
+        <h3 style="text-align: left;">CircuitPython</h3>
+        <p style="text-align: left;">Adafruit's fork to work on its boards.</p>
+        <h3 style="text-align: left;">M5Stack</h3>
+        <p style="text-align: left;"></p>
 
-        <h2>Microcontrollers supported</h2>
+        <p style="text-align: left;">Microcontrollers supported:</p>
+        <table>
+            <thead>
+                <tr>
+                    <td>uController</td>
+                    <td>Some specs</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ESP8266</td>
+                    <td>
+                        <ul>
+                            <li>Bluetooth</li>
+                            <li>Wifi</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ESP32</td>
+                    <td>
+                        <ul>
+                            <li>Bluetooth</li>
+                            <li>Wifi</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>SAMD21</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>NRF82382</td>
+                    <td>
+                        <ul>
+                            <li>Bluetooth</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 
     <div id="slide04" class="step" data-rel-x="1200" data-rel-y="0">
         <h1>Code comparison</h1>
 
-        <p>Blinking a led in pure C</p>
+        <p style="text-align: left;">Blinking a led in pure C</p>
         <pre>
             <code class="c++">
             #include &lt;avr/io.h&gt;
@@ -116,7 +158,7 @@
     <div id="slide05" class="step" data-rel-x="1200" data-rel-y="0">
         <h1>Code comparison</h1>
 
-        <p>Blinking a led in MicroPython</p>
+        <p style="text-align: left;">Blinking a led in MicroPython</p>
         <pre>
             <code class="python">
                 import time
@@ -136,66 +178,74 @@
     <div id="slide06" class="step" data-x="2000" data-y="3000" data-z="200">
         <h1>How it works</h1>
 
-        <ul>
-            <li>REPL</li>
-            <li><code>boot.py</code></li>
-            <li><code>main.py</code></li>
-        </ul>
+        <h3 style="text-align: left;">REPL</h3>
+        <p style="text-align: left;"></p>
+        <h3 style="text-align: left;"><code>boot.py</code> and <code>main.py</code></h3>
+        <p style="text-align: left;">Main script run at boot time, first it will look for the <code>boot.py</code> and then for the <code>main.py</code></p>
+        <!-- TODO add image of the a flowchart of boot sequence-->
     </div>
 
     <div id="slide07" class="step" data-rel-x="1200" data-rel-y="0">
         <h1>REPL</h1>
+        <p style="text-align: left;">MicroPython Interactive Interpreter Mode AKA REPL</p>
+        <code style="text-align: left;">(<strong>R</strong>ead-<strong>E</strong>val-<strong>P</strong>rint-<strong>L</strong>oop)</code>
 
+        <p style="text-align: left;"><strong>Features:</strong></p>
         <ul>
-            <li><strong>R</strong>ead</li>
-            <li><strong>E</strong>valuate</li>
-            <li><strong>P</strong>rint</li>
-            <li><strong>L</strong>oop</li>
+            <li>Auto-indent</li>
+            <li>Auto-completion (TAB)</li>
+            <li>Interrupt a running program (Ctrl-C)</li>
+            <li>Paste Mode (Ctrl-E, Ctrl-V, Ctrl-D)</li>
+            <li>Soft Reset (Ctrl-D)</li>
         </ul>
 
     </div>
 
     <div id="slide08" class="step" data-rel-x="1200" data-rel-y="0">
-        <h3><code>boot.py</code></h3>
-        <h3><code>main.py</code></h3>
-        <!-- TODO add image of the a flowchart of boot sequence-->
-
+        <h1></h1>
+        <p style="text-align: left;"></p>
     </div>
 
     <!-- row slides (4) -->
     <div id="slide09" class="step" data-x="2000" data-y="4000">
-        <h1>Basic examples</h1>
-
-        <h3>Pet feeder.</h3>
-        <h3>Local weather reader.</h3>
+        <h1>Type of communications</h1>
+        <ul>
+            <li>Hardware and software SPI</li>
+            <li>I2C</li>
+            <li>OneWire driver</li>
+            <li>WiFi</li>
+            <li>Bluethoot (WIP)</li>
+        </ul>
 
     </div>
 
     <div id="slide10" class="step" data-rel-x="1200" data-rel-y="0">
-        <h1>Other basic examples</h1>
+        <h1>Basic examples</h1>
 
-        <h2>Pomodoro Technique.</h2>
-        <h2>Rubber duck debugging.</h2>
-
+        <h3>Pet feeder.</h3>
+        <h3>Local weather reader.</h3>
+        <h3>uPomodoro</h3>
+        <p>Pomodoro Technique, with a 25 mins working time and 5 mins break</p>
+        <h3>Rubber duck debugging.</h3>
     </div>
 
     <div id="slide11" class="step" data-rel-x="1200" data-rel-y="0">
         <h1>"Advance" examples</h1>
 
-        <h2>WeatherThing.</h2>
+        <h2>uWeatherThing.</h2>
         <p>Fecth weather conditions from OpenWeatherMap</p>
-        <h2>MicroBoard.</h2>
-        <p></p>
+        <h2>uBoard.</h2>
+        <p>Server with a simple bulletin board.</p>
+        <h3>Bus time of arrival.</h3>
+        <p>Connection to local Python API replicating bus time of arrival.</p>
+        <h3>uScriptConsole.</h3>
+        <p>convert your board into a console where you can execute all script on the board.</p>
 
     </div>
 
     <div id="slide12" class="step" data-rel-x="1200" data-rel-y="0">
-        <h1>Other "Advance" examples</h1>
-
-        <h3>Bus time of arrival.</h3>
-        <p>Connection to local Python API replicating bus time of arrival.</p>
-        <h3>MicroScriptConsole.</h3>
-
+        <h1></h1>
+        <p style="text-align: left;"></p>
     </div>
 
     <!-- Single slide below last one -->
