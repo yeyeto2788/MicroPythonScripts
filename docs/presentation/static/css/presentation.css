@@ -141,8 +141,9 @@ p {
     margin: 0.7em;
 }
 
+ul,
 li {
-    font-size: 25px;
+    font-size: 0.8em;
     margin: 0.2em;
 }
 
@@ -214,6 +215,47 @@ img {
     width: 300px
 }
 
+/* CSS color formatting */
+.light-blue{
+    color: SteelBlue;
+}
+
+.dark-blue{
+    color: MediumBlue;
+}
+
+.light-green{
+    color: YellowGreen;
+}
+
+.dark-green{
+    color: ForestGreen;
+}
+
+
+.light-red{
+    color: IndianRed;
+}
+
+.dark-red{
+    color: DarkRed;
+}
+
+light-orange{
+    color: DarkOrange;
+}
+
+.dark-orange{
+    color: OrangeRed;
+}
+
+/****************** CSS location formatting ******************/
+
+.container{
+    position: relative;
+}
+
+
 .right {
     float: right;
     margin-left:   40px;
@@ -242,7 +284,24 @@ img {
     margin-top:     20px;
 }
 
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 
+/****************** CSS text formatting ******************/
+.tsmall{
+    font-size: 0.6em;
+}
+
+.tmedium{
+    font-size: 0.8em;
+}
+
+.tlarge{
+    font-size: 1em;
+}
 /* Styles for animating the contents of a slide, such as a img, p, li or span element. ********/
 
 /*
