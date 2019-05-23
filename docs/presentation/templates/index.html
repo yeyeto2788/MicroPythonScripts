@@ -24,36 +24,57 @@
         <br>
         <img src="./static/images/Mlogo_138bk.png" alt="Micropythong logo">
         <br>
-        <code class="bottom">uControllers = Microcontrollers</code>
+        <p class="tips bottom"><strong><code>uControllers</code></strong> = <strong><code>Microcontrollers</code></strong></p>
     </div>
 
     <div id="index" class="step" data-rel-x="500" data-rel-y="1500" data-scale="1">
         <h1>Topics:</h1>
 
-        <ul>
-            <li>Self introduction.</li>
-            <li>What is uPython.</li>
-            <li>Other forks of uPython.</li>
-            <li>Microcontrollers supported.</li>
-            <li>Code comparison.</li>
-            <li>How it works.</li>
-            <li>Some basic examples.</li>
-            <li>Some "advance" examples.</li>
-            <li>Questions / Feedback.</li>
-        </ul>
-
-        <code class="bottom">uPython = MicroPython</code>
+        <div class="container" style="float: left;">
+            <ul class="tlarge">
+                <li>Self introduction.</li>
+                <li>What is uPython.
+                    <ul>
+                        <li>Pros</li>
+                        <li>Cons</li>
+                    </ul>
+                </li>
+                <li>Other forks of uPython.
+                    <ul>
+                        <li>Microcontrollers supported.</li>
+                    </ul>
+                </li>
+                <li>Code comparison.</li>
+                <li>How it works.
+                    <ul>
+                        <li>REPL</li>
+                        <li><code>boot.py</code> / <code>main.py</code></li>
+                    </ul>
+                </li>
+                <li>Boot process.</li>
+                <li>Type of communications.</li>
+                <li>Some basic examples.</li>
+                <li>Some "advance" examples.</li>
+                <li>Questions / Feedback.</li>
+            </ul>
+            <p class="tips"><strong><code>uPython</code></strong> = <strong><code>MicroPython</code></strong></p>
+        </div>
     </div>
 
-    <div id="slide01" class="step" data-rel-x="1200" data-rel-y="0" data-scale="1">
+    <div id="slide01" class="step" data-rel-x="1600" data-rel-y="0" data-scale="1">
         <h1>A bit about me</h1>
-        <!--TODO search a good and funny profile picture-->
-        <!--<img src="./static/images/profile_image.jpg" alt="Profile image of Juan Biondi" class="right">-->
-        <ul>
-            <li>Pythonista.</li>
-            <li>Open Source lover and contributor.</li>
-            <li>Kanda maker.</li>
-        </ul>
+
+        <div style="float: left; width: 50%">
+            <ul>
+                <li>Pythonista.</li>
+                <li>Open Source contributor.</li>
+                <li>Kinda maker.</li>
+            </ul>
+        </div>
+        <div style="float: right; width: 50%">
+            <!--TODO search a good and funny profile picture-->
+            <!--<img src="./static/images/profile_image.jpg" alt="Profile image of Juan Biondi" class="right">-->
+        </div>
     </div>
 
     <!-- row slides (3) -->
@@ -61,22 +82,24 @@
         <h1>What is MicroPython</h1>
 
         <p style="text-align: left;">Lean and efficient implementation of the Python3 programming language that is optimized to run on microcontrollers.</p>
-        <p style="text-align: left;">MicroPython implements Python 3.4 and some select features of Python 3.5</p>
+        <p style="text-align: left;">MicroPython implements Python 3.4 and some selected features of Python 3.5</p>
 
         <p class="light-green" style="text-align: left;"><strong>Pros</strong></p>
         <ul>
-            <li></li>
-            <li></li>
+            <li>No need to re-compile and re-download to modify code. (Interpreted language)</li>
+            <li>Much cleaner and simpler compared to languages that compile directly to CPU instructions.</li>
+            <li>It allows you to write code in C/C++ or even the board's native CPU assembly instructions</li>
         </ul>
 
         <p class="light-red" style="text-align: left;"><strong>Cons</strong></p>
         <ul>
-            <li></li>
-            <li></li>
+            <li>It isn't as fast and might use a little more memory compared to low-level C/C++-based code.</li>
+            <li>It can't implement the entire Python 3 standard library.</li>
+            <li>Less performance and sometimes more memory usage when interpreting code.</li>
         </ul>
     </div>
 
-    <div id="slide03" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide03" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>Other forks</h1>
 
         <div style="float: left; width: 50%">
@@ -90,15 +113,15 @@
 
         <div style="float: right; width: 50%">
             <p style="text-align: left;"><strong>Microcontrollers supported:</strong></p>
-            <p style="text-align: left;">ESP8266 - ESP32 (Bluetooth, Wifi)</p>
-            <p style="text-align: left;">SAMD21</p>
-            <p style="text-align: left;">NRF82382 (Bluetooth Low energy)</p>
-            <p style="text-align: left;">K210 (Image Recognition with hardware acceleration.)</p>
+            <p style="text-align: left;"><strong>ESP8266 - ESP32</strong> (Bluetooth, Wifi)</p>
+            <p style="text-align: left;"><strong>SAMD21</strong></p>
+            <p style="text-align: left;"><strong>NRF82382</strong> (Bluetooth Low energy)</p>
+            <p style="text-align: left;"><strong>K210</strong> (Image Recognition with hardware acceleration.)</p>
         </div>
 
     </div>
 
-    <div id="slide04" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide04" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>Code comparison</h1>
 
         <p style="text-align: left;">Blinking a led in pure C</p>
@@ -126,7 +149,7 @@
 
     </div>
 
-    <div id="slide05" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide05" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>Code comparison</h1>
 
         <p style="text-align: left;">Blinking a led in MicroPython</p>
@@ -167,26 +190,39 @@
             <div class="container" style="float: right; width: 50%">
                 <div style="height: 50%;">
                     <h3 class="tlarge" style="text-align: left;"><code class="light-blue">boot.py</code> / <code class="light-blue">main.py</code></h3>
-                    <p style="text-align: left;">Main script run at boot time, first it will look for the <code>boot.py</code> and then for the <code>main.py</code></p>
+                    <p style="text-align: left;">Main scripts run at boot time, first it will look for the <code>boot.py</code> and then for the <code>main.py</code></p>
                 </div>
                 <div style="height: 50%;">
-                    <object width="80%" type="image/svg+xml" data="{{ url_for('static', filename='images/upython_boot_sequence.svg') }}"></object>
-                    <!--<img src="{{ url_for('static', filename='images/read_publish_mqtt.svg') }}" />-->
+                    <p style="text-align: left;">Recommendations for <code>main.py</code>:</p>
+                    <ul>
+                        <li>
+                            Write your code on a separate module
+                            <pre>
+                                <code class="python">
+    import my_app
+    my_app.main()
+                                </code>
+                            </pre>
+                        </li>
+                        <li>If you want just test quickly a piece of code use the <strong>REPL</strong> and avoid placing it on <code>main.py</code>.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="slide07" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide07" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>Boot process</h1>
-        <!-- Image of the boot process -->
-        <p class="bottom">More info: uPython boot process
-            <a href="http://docs.micropython.org/en/v1.9.3/esp8266/esp8266/general.html#boot-process"> documentation</a>
-        </p>
+        <div class="container">
+            <img style="width: 400px; display: block; margin-left: auto; margin-right: auto;" src="{{ url_for('static', filename='images/upython_boot_sequence.svg') }}">
+            <p>More info: uPython boot process
+                <a href="http://docs.micropython.org/en/v1.9.4/esp8266/esp8266/general.html#boot-process"> documentation</a>
+            </p>
+        </div>
 
     </div>
 
-    <div id="slide08" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide08" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>FREE SLIDE</h1>
         <p style="text-align: left;"></p>
     </div>
@@ -204,7 +240,7 @@
 
     </div>
 
-    <div id="slide10" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide10" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>Basic examples</h1>
 
         <h3>Pet feeder.</h3>
@@ -214,7 +250,7 @@
         <h3>Rubber duck debugging.</h3>
     </div>
 
-    <div id="slide11" class="step" data-rel-x="1200" data-rel-y="0">
+    <div id="slide11" class="step" data-rel-x="1600" data-rel-y="0">
         <h1>"Advance" examples</h1>
 
         <h2>uWeatherThing.</h2>
@@ -228,8 +264,8 @@
 
     </div>
 
-    <div id="slide12" class="step" data-rel-x="1200" data-rel-y="0">
-        <h1></h1>
+    <div id="slide12" class="step" data-rel-x="1600" data-rel-y="0">
+        <h1>FREE SLIDE</h1>
         <p style="text-align: left;"></p>
     </div>
 
@@ -240,13 +276,6 @@
         <h3>Feedback</h3>
 
     </div>
-
-    <!-- Single slide below last one -->
-    <div id="slide14" class="step" data-rel-x="0" data-rel-y="1000">
-        <h1>Thanks!!!</h1>
-
-    </div>
-
 
     <div id="more-info" class="step" data-rel-x="0" data-rel-y="1000">
         <h1>More info:</h1>
@@ -261,7 +290,7 @@
     </div>
 
     <!-- Last slide -->
-    <div id="conclusion" class="step stop" data-rel-x="1200" data-rel-y="1000">
+    <div id="conclusion" class="step stop" data-rel-x="1600" data-rel-y="1000">
         <img alt="keep calm and code python"
              src="./static/images/keep_calm_and_code_python.jpg"/>
     </div>

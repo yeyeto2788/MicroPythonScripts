@@ -138,7 +138,6 @@ h3 {
 p {
     font-size: 25px;
     text-align: center;
-    margin: 0.7em;
 }
 
 ul,
@@ -212,10 +211,10 @@ small {
 }
 
 img {
-    width: 300px
+    width: 300px;
 }
 
-/* CSS color formatting */
+/****************** CSS color formatting ******************/
 .light-blue{
     color: SteelBlue;
 }
@@ -289,6 +288,20 @@ light-orange{
   top: 50%;
   left: 50%;
 }
+
+.tips::before{
+    font-weight: bold;
+    content: "Tip:  ";
+}
+
+.tips{
+    display:inline;
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+}
+
+
 
 /****************** CSS text formatting ******************/
 .tsmall{
