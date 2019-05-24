@@ -5,9 +5,7 @@
     <title>Python on Microcontrollers</title>
     <meta name="description" content="Python on Microcontrollers" />
     <meta name="author" content="Juan Biondi" />
-    <!--<link rel="icon" type="image/icon" href="./static/images/favicon.ico">-->
     <link rel="icon" type="image/icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <!--<link href="./static/css/presentation.css" rel="stylesheet" />-->
     <link href="{{ url_for('static', filename='css/presentation.css') }}" rel="stylesheet">
 </head>
 <body class="impress-not-supported">
@@ -22,7 +20,7 @@
     <div id="introduction" class="step" data-scale="2" data-x="-500" data-y="-500" data-z="100">
         <h1>Python on uControllers</h1>
         <br>
-        <img src="./static/images/Mlogo_138bk.png" alt="Micropythong logo">
+        <img src="{{ url_for('static', filename='images/Mlogo_138bk.png') }}" alt="Micropythong logo">
         <br>
         <p class="tips bottom"><strong><code>uControllers</code></strong> = <strong><code>Microcontrollers</code></strong></p>
     </div>
@@ -292,7 +290,7 @@
     <!-- Last slide -->
     <div id="conclusion" class="step stop" data-rel-x="1600" data-rel-y="1000">
         <img alt="keep calm and code python"
-             src="./static/images/keep_calm_and_code_python.jpg"/>
+             src="{{ url_for('static', filename='images/keep_calm_and_code_python.jpg') }}"/>
     </div>
 
     <!-- Since it has the class "stop" it won't go to this slide -->
@@ -306,15 +304,12 @@
 <div class="impress-progress"></div>
 <div id="impress-help"></div>
 <!-- Syntax highlight module. -->
-<!--<link rel="stylesheet" href="./static/css/atom-one-dark.css">-->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/atom-one-dark.css') }}">
 <!--<script src="./static/js/highlight.min.js"></script>-->
 <script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
-<!-- Mardown related -->
-<!--<script type="text/javascript" src="./static/js/markdown.js"></script>-->
+<!-- Markdown related -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/markdown.js') }}"></script>
 <!-- Main impress script -->
-<!--<script type="text/javascript" src="./static/js/impress.js"></script>-->
 <script type="text/javascript" src="{{ url_for('static', filename='js/impress.js') }}"></script>
 
 <script>

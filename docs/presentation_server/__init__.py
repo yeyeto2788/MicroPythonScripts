@@ -1,11 +1,13 @@
+"""
+Simple Flask server to show the usage of an API from a microcontroller
+with MicroPython and also server main presentation HTML file.
+
+"""
 import json
 import random
 
 import flask
 import flask_restful
-
-# Configuration of the server
-config = {'ip': '0.0.0.0', 'port': 80}
 
 # noinspection PyTypeChecker
 app = flask.Flask(__name__, static_url_path="/static")
@@ -67,5 +69,11 @@ API = flask_restful.Api(app)
 API.add_resource(APIGenerator, '/api/<string:bus>')
 
 
-if __name__ == "__main__":
-    app.run(host=config['ip'], port=config['port'], threaded=True, debug=True)
+VERSION_INFO = {
+    'MAJOR': 0,
+    'MINOR': 1,
+    'PATCH': 0,
+}
+__version__ = '{MAJOR:d}.{MINOR:d}.{PATCH:d}'.format(**VERSION_INFO)
+__author__ = 'Juan Biondi'
+__email__ = 'juanernestobiondi@gmail.com'
