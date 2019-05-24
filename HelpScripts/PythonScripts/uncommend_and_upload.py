@@ -17,12 +17,12 @@ module_name = 'pyminifier'
 module_spec = importlib.util.find_spec(module_name)
 
 if module_spec is None:
-    print("Couldn't find the {} module".format(module_name))
+    print(f"Couldn't find the {module_name} module")
     exit(-1)
 else:
-    token_utils = importlib.import_module('{}.token_utils'.format(module_name), module_name)
-    minification = importlib.import_module('{}.minification'.format(module_name), module_name)
-    obfuscate = importlib.import_module('{}.obfuscate'.format(module_name), module_name)
+    token_utils = importlib.import_module(f'{module_name}.token_utils', module_name)
+    minification = importlib.import_module(f'{module_name}.minification', module_name)
+    obfuscate = importlib.import_module(f'{module_name}.obfuscate', module_name)
 
 
 PY_EXTENSION = '.py'
@@ -157,7 +157,7 @@ def process_files(python_files: list, projects_input: str, projects_output: str,
             current_output = os.path.join(projects_output, file_name)
 
             if current_output.endswith(PY_EXTENSION):
-                msg = "The file {} will be written with the following:\n\n".format(current_output)
+                msg = f"The file {current_output} will be written with the following:\n\n"
         else:
             current_output = projects_output
 
