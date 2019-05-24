@@ -54,5 +54,9 @@ Folder containing everything related to MicroPython and some help classes and sc
 
 **NOTE:** Some of the code on this `HelpScript` folder might be commented and it would take more space than required on the board.
 ___
-### **README files on folders**
+### **README** files on folders
 Documentation of the script, class or other important information.
+
+___
+### **`requirements.txt`** files on python folders
+Needed Python packages needed on each python script. If you want to be able to use any of the Python scripts/modules use the `requirements.txt` placed on the root directory of this repository. 
