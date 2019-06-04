@@ -13,7 +13,7 @@ display.print_on_line(center_text("count presses"), 5)
 intCounter = 0
 
 while True:
-    if not buttonSelect.isReleased():
+    if not buttonSelect.is_released():
         intCounter += 1
         display.clear(0, 1)
         display.print_on_line(center_text("IT IS WORKING!!!"), 0)

@@ -41,7 +41,7 @@ class ConwaysGameOfLife:
         self.randomise() 
         generations = 0
         try:
-            while (tick() and self.select_button.isReleased()):
+            while (tick() and self.select_button.is_released()):
                 generations = generations + 1
                 self.oled.display.show()
                 sleep_ms(delay)

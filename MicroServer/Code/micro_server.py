@@ -12,7 +12,7 @@ def index(req, resp):
     for line in html_file:
         yield from resp.awrite(line)
 
-def getIP():
+def get_ip():
     wlan = network.WLAN(network.STA_IF)
     if wlan.active():
         addr = wlan.ifconfig()[0]
@@ -24,5 +24,5 @@ def getIP():
             print("No active connection")
     return addr
 
-host_ip = getIP()
+host_ip = get_ip()
 app.run(debug=True, host=host_ip)

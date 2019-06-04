@@ -16,10 +16,10 @@ def toggle_led(intmins, strled):
         Nothing.
     """
     initvalue = 0
-    initialTime = time.ticks_ms()
-    itertime = initialTime
+    initial_time = time.ticks_ms()
+    itertime = initial_time
     witty.clear_leds()
-    while ((time.ticks_ms() - initialTime) / 1000) < (intmins * 60):
+    while ((time.ticks_ms() - initial_time) / 1000) < (intmins * 60):
         if (time.ticks_ms() - itertime) >= 1000:
             initvalue = not initvalue
             witty.set_boolean_value(strled, initvalue)

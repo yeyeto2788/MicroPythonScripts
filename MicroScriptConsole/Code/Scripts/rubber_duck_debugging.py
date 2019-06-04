@@ -63,7 +63,7 @@ def main():
     oled.clear(0, 1)
 
     while True:
-        if not buttonSelect.isReleased():
+        if not buttonSelect.is_released():
             oled.clear(0, 1)
             time.sleep(1)
             oled.print_wrapped(get_random_str(questions))

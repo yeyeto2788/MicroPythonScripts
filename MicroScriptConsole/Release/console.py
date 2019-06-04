@@ -217,10 +217,10 @@ class Button(object):
     def read(self):
         return not self._pin.value()
 
-    def isPressed(self):
+    def is_pressed(self):
         return self.read()
 
-    def isReleased(self):
+    def is_released(self):
         return not self.read()
 
 class Keypad(object):
