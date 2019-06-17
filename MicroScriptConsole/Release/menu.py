@@ -17,7 +17,7 @@ def print_menu(words):
             line += 1
     else:
         oled.print_wrapped(words)
-    time.sleep(3)
+    time.sleep(1)
 
 def print_selection(scripts, selection):
     oled.clear(0, 1)
@@ -90,9 +90,12 @@ while True:
                 time.sleep(2)
                 oled.clear(0, 1)
                 console_idle = 1
-        elif (time_now - start_time) > 45:
+        elif (time_now - start_time) > 5:
             if not console_idle:
                 start_time = time.ticks_ms() // 1000
+                selection += 1
+                if selection > (len(scripts) - 1):
+                    selection = 0
                 print_selection(scripts, selection)
         time.sleep(0.1)
     del scripts
