@@ -1,6 +1,6 @@
 import console, time
 
-buttonSelect = console.Button(0)
+keys = console.Keypad()
 display = console.Display()
 
 def center_text(txt):
@@ -13,10 +13,13 @@ display.print_on_line(center_text("count presses"), 5)
 intCounter = 0
 
 while True:
-    if not buttonSelect.is_released():
+    buttons = keys.get_keypad()
+    if buttons and buttons[3] == 0:
         intCounter += 1
         display.clear(0, 1)
         display.print_on_line(center_text("IT IS WORKING!!!"), 0)
         display.print_on_line(center_text("Button presses"), 3)
         display.print_on_line(center_text(str(intCounter)), 5)
         time.sleep_ms(250)
+        if intCounter > 10:
+            break
