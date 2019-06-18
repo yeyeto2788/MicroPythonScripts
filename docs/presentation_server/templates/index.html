@@ -23,6 +23,14 @@
         <img src="{{ url_for('static', filename='images/Mlogo_138bk.png') }}" alt="Micropythong logo">
         <br>
         <p class="tips bottom"><strong><code>uControllers</code></strong> = <strong><code>Microcontrollers</code></strong></p>
+
+        <div class="notes">
+            <p>While the Python language has made programming more accessible, it was designed to run on PCs and other machines with plenty of processing, memory, and peripheral resources.</p>
+            <br>
+            <p>For embedded systems that face tighter resource and interface constraints, an optimized version for microcontrollers, called MicroPython, has become popular.</p>
+            <p>After a brief discussion of Python, as it compares to the classic embedded development language C++, the session will discuss how Python has evolved to MicroPython and CircuitPython.
+It will then describe the process of writing software using MicroPython.</p>
+        </div>
     </div>
 
     <div id="index" class="step" data-rel-x="500" data-rel-y="1500" data-scale="1">
@@ -66,7 +74,7 @@
         <h2 class="light-blue" style="text-align: left;">Kinda maker.</h2>
 
         <div style="float: right;">
-            <img src="./static/images/mad_scientist.jpg" alt="Profile image of Juan Biondi" class="right">
+            <img src="{{ url_for('static', filename='images/mad_scientist.jpg') }}" alt="Profile image of Juan Biondi" class="right">
         </div>
     </div>
 
@@ -222,7 +230,7 @@
             <li>I2C</li>
             <li>OneWire driver</li>
             <li>WiFi</li>
-            <li>Bluethoot (WIP)</li>
+            <li>Bluetooth (WIP)</li>
         </ul>
     </div>
 
@@ -258,9 +266,9 @@
     </div>
 
     <div id="slide12" class="step" data-rel-x="1600" data-rel-y="0">
-        <div class="centered">
-            <h1>Hands on</h1>
-        </div>
+        <h1>Hands on</h1>
+        <img src="{{ url_for('video_feed') }}" style="width: 90%">
+
 
     </div>
 

@@ -9,6 +9,8 @@ import random
 import flask
 import flask_restful
 
+from .camera import Camera
+
 # noinspection PyTypeChecker
 app = flask.Flask(__name__, static_url_path="/static")
 
@@ -26,6 +28,19 @@ def home():
     template_return = flask.render_template('index.html')
 
     return template_return
+
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+@app.route('/video_feed')
+def video_feed():
+    return flask.Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 class APIGenerator(flask_restful.Resource):
