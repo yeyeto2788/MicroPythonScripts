@@ -15,4 +15,4 @@ config = {'ip': '0.0.0.0', 'port': 80}
 app.secret_key = '3ZX\xb336\x15\x82/\xd5N1O\n\x9f\x8a'
 
 if __name__ == "__main__":
-    serve(app, listen='{}:{}'.format(config['ip'], config['port']))
+    serve(app, listen='{}:{}'.format(config['ip'], config['port']), threads=10)
