@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Script to automate the process of cleaning micropython files and uploading them
 onto the board.
@@ -24,7 +25,6 @@ else:
     minification = importlib.import_module(f'{module_name}.minification', module_name)
     obfuscate = importlib.import_module(f'{module_name}.obfuscate', module_name)
 
-
 PY_EXTENSION = '.py'
 
 
@@ -33,6 +33,7 @@ class CleanOptions:
     Abstract class to define the options used for the pyminifier module.
 
     """
+
     def __init__(self, bln_obfuscate=False):
         """
         Simple constructor method to define the properties of the object.
@@ -102,7 +103,6 @@ def clean_file(source_file_name: str, destination_file_name: str = "", bln_print
         print(result)
 
     if destination_file_name != "":
-
         with open(destination_file_name, 'w') as destination_file:
             destination_file.write(result)
 
@@ -127,14 +127,16 @@ def push_file(file_path: str, serial_port: str):
 
         if os.name == "posix" and platform.system() == "Linux":
             subprocess.call(command_arguments)
+
         elif os.name == "nt" and platform.system() == "Windows":
             subprocess.call(command_arguments[1:])
+
         else:
             print("Hhmm, seems like you have MacOs and we haven't implement the code for this yet.")
 
 
 def process_files(python_files: list, projects_input: str, projects_output: str,
-                  print_output: bool, port: str):
+                  print_output: bool, port: str, upload: bool):
     """
     Given a list files minify and/or obfuscate them, create new files if required and flash
     them to the board.
@@ -145,6 +147,7 @@ def process_files(python_files: list, projects_input: str, projects_output: str,
         projects_output: Folder where files are written on.
         print_output:
         port: Port to be used by `ampy` tool.
+        upload: condition to upload file onto the board.
 
     Returns:
         None
@@ -165,12 +168,35 @@ def process_files(python_files: list, projects_input: str, projects_output: str,
         clean_file(current_input, current_output, bln_print=print_output)
         print("\n\n")
 
-        push_file(current_output, port)
+        if upload:
+            push_file(current_output, port)
+
+
+def build_path_args(path: str) -> (str, str):
+    """Given a path extract the filename and the directory if possible.
+
+    Args:
+        path: Path on which apply the splitting.
+
+    Returns:
+        (file_directory, filename)
+    """
+    files_dir = path
+
+    if os.path.isdir(path):
+        python_files = [py_file for py_file in os.listdir(path) if py_file.endswith(PY_EXTENSION)]
+
+    else:
+        os.path.isfile(path)
+        filedir, filename = os.path.split(path)
+        python_files = [filename]
+        files_dir = filedir
+
+    return files_dir, python_files
 
 
 def main(options):
-    """
-    Set variables needed to delete docstring and obfuscate the script before flashing them onto
+    """Set variables needed to delete docstring and obfuscate the script before flashing them onto
     the board.
 
     Args:
@@ -187,22 +213,16 @@ def main(options):
         exit(-1)
 
     if options.output != '':
-        projects_output = os.path.abspath(os.path.normpath(options.output))
+        output_dir, _ = build_path_args(options.output)
+        projects_output = os.path.abspath(os.path.normpath(output_dir))
 
         if not os.path.exists(projects_output):
             os.makedirs(projects_output)
     else:
         projects_output = options.output
 
-    python_files = [py_file for py_file in os.listdir(
-        projects_input) if py_file.endswith(PY_EXTENSION)]
-
-    if len(python_files) > 0:
-        process_files(python_files, projects_input, projects_output, print_output, options.port)
-    else:
-        print('No python files found on {}'.format(
-            os.path.abspath(os.path.normpath(options.input)))
-        )
+    input_dir, input_files = build_path_args(projects_input)
+    process_files(input_files, input_dir, projects_output, print_output, options.port, options.upload)
 
 
 if __name__ == '__main__':
@@ -213,19 +233,18 @@ if __name__ == '__main__':
 
     parser.add_argument('-o', '--output', action='store', nargs='?',
                         default='', type=str, help='Output directory.')
-
     parser.add_argument('-i', '--input', action='store', nargs='?',
-                        default='',  type=str, help='Input directory.')
-
+                        default='', type=str, help='Input file or directory.')
     parser.add_argument('-p', '--port', action='store', nargs='?',
-                        default='',  type=str, help='Port to flash files.')
-
+                        default='', type=str, help='Port to flash files.')
+    parser.add_argument('-u', '--upload', action='store', nargs='?',
+                        default=False, type=bool, help='Upload file(s) to board.')
     parser.add_argument('--print', action='store', nargs='?',
-                        default=True,  type=bool, help='Print result.')
+                        default=True, type=bool, help='Print result.')
 
     args = parser.parse_args()
 
-    if args.input and (not args.print) and (args.output != ''):
+    if args.input and not args.print and (args.output != ''):
         print("Please provide an output destination file directory.")
         exit(-1)
 

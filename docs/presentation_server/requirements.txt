@@ -1,4 +1,0 @@
-Flask==1.0.2
-Flask-RESTful==0.3.7
-waitress>=1.2.1
-opencv-python==4.1.0.25
