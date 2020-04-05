@@ -1,62 +1,36 @@
 # MicroPythonScripts
+Main repository of MicroPython projects and modules I have built on my spare time.
 
-Repository for MicroPython scripts for different applications.
-
-## Structure for the Repository
-
-```
-Main Repository Folder(MicroPythonScripts)
-        └── Script Folders
-        |        |
-        |        ├── Code
-        |        |    └── Commented code
-        |        ├── Release
-        |        |    └── Uncomment Code
-        |        ├── Doc
-        |        └── README
-        └── HelpScript Folder
-            |
-            ├── MicroPythonModules Folder
-            |     ├── Code
-            |     |    └── Commented code
-            |     ├── Release
-            |     |    └── Uncomment Code
-            |     ├── Doc
-            |     └── Examples
-            |     └── README
-            ├── PythonScripts Folder
-            |     ├── Code
-            |     |    └── Commented code
-            |     └── README
-            ├── HTML
-            └── CSS
-```
-___
-## **Script Folder**
+## **`project` folder**
   Folder containing everything related to the script.
-  * ### Code Folder
+  * ### `code` folder
   Commented code for better understanding of it.
-  * ### Release Folder
+  * ### `release` folder
   Code without comments and trying to be as small as possible in order to save memory on the microcontroller.
-  * ### Doc Folder
-  Folder containing the files like images and so on for documentation purposes.
+  * ### `docs` folder
+  Files like images and so on for documentation purposes.
 ___
-## **HelpScript Folder**
+## **`modules` folder**
 Folder containing everything related to MicroPython and some help classes and scripts to make deployments more easy.
-  * ### Code Folder
+  * ### `code` folder
   Commented code for better understanding of it.
-  * ### Release Folder
-  Code without comment and trying to be as small as possible in order to save memory on the microcontroller.
-  * ### Doc Folder
-  Folder containing the files like images and so on for documentation purposes.
-  * ### Example Folder
-  Folder containing the example files that in some cases will need to be renamed into `main.py` so it will be run at boot time.
-
-**NOTE:** Some of the code on this `HelpScript` folder might be commented and it would take more space than required on the board.
+  * ### `release` folder
+  Code without comments and trying to be as small as possible in order to save memory on the microcontroller.
+  * ### `docs` folder
+  Files like images and so on for documentation purposes.
+  * ### `examples` folder
+  Example files that in some cases will need to be renamed into `main.py` so it will be run at boot time.
 ___
-### **README** files on folders
+## **`snipets` folder**
+Scripts used to saved some common code so I don't forget how to do some things.
+
+___
+## **`static` folder**
+Contains images for documentation purposes and other static files like HTML and CSS code.
+
+___
+## **`tools` folder**
+Tools used when developing within this repo.
+___
+### **`README.md`** files on folders
 Documentation of the script, class or other important information.
-
-___
-### **`requirements.txt`** files on python folders
-Needed Python packages needed on each python script. If you want to be able to use any of the Python scripts/modules use the `requirements.txt` placed on the root directory of this repository. 
