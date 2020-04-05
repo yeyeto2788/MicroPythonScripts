@@ -2,6 +2,7 @@ import time
 import json
 import machine
 import neopixel
+import urandom
 
 try:
     import ssd1306
@@ -10,10 +11,37 @@ except ImportError as error:
     print("Seems like there is no such module", error)
     blndisplay = False
 
+def load_config():
+    """Load configuration from the config.json file.
+
+    Returns:
+        json object with configuration.
+    """
+    with open("./config.json", "r") as conf_file:
+        return json.load(conf_file)
+
+config = load_config()
+
+def slow_fill_color(neostrip, colors, pstrColor, pixel_count):
+    for i in range(0, pixel_count):
+        neostrip[i] = colors[pstrColor]
+        time.sleep_ms(25)
+        neostrip.write()
+
+def get_random_int():
+    """Get a random integer 0-255 for color generation.
+
+    Returns:
+       integer 0-255
+    """
+    int_return = urandom.getrandbits(8)
+    if int_return < 256:
+        return int_return
+    else:
+        return 0
 
 def display_msg(message, line, start=0, show=0):
-    """
-    Display a message on the OLED screen
+    """Display a message on the OLED screen
     
     Args:
         message: String with the data to be written on the OLED screen.
@@ -25,15 +53,16 @@ def display_msg(message, line, start=0, show=0):
         None.
     """
     lines = [0, 8, 16, 24, 32, 40, 48]
+
     if line in lines:
         display.text(message, start, line)
+
     if show:
         display.show()
 
 
 def clear_display(fill=0, show=0):
-    """
-    This can be use either to clear the screen will all pixels activated or deactivated by changing
+    """This can be use either to clear the screen will all pixels activated or deactivated by changing
     the blnFill and if the show is set to one it will immediately shown on the OLED screen
     
     Args:
@@ -44,13 +73,13 @@ def clear_display(fill=0, show=0):
         None.
     """
     display.fill(fill)
+
     if show:
         display.show()
 
 
 def print_text(text):
-    """
-    This will print a text center on the OLED screen.
+    """This will print a text center on the OLED screen.
     
     Args:
         text: String with data to show.
@@ -67,9 +96,8 @@ def print_text(text):
     clear_display(0, 1)
 
 
-def lapse_time(minutes, color, message=''):
-    """
-    Countdown timer to execute on the code that will use other functions to clear the display
+def lapse_time(neostrip, minutes, color, message=''):
+    """Countdown timer to execute on the code that will use other functions to clear the display
     add other data like string on the screen with the countdown timer.
     
     If no message it will not show anything but the countdown timer.
@@ -82,13 +110,16 @@ def lapse_time(minutes, color, message=''):
         None.
     """
     t_mins = minutes - 1
+
     for mins in range(t_mins, -1, -1):
         for secs in range(60, 0, -1):
             data = '{:02d} : {:02d}'.format(mins, secs)
             print("Remaining time:", data)
+
             for milisecs in range(40, 0, -1):
-                set_pixel_color(milisecs % 12, color)
+                set_pixel_color(neostrip, milisecs % 12, color)
                 time.sleep_ms(25)
+
             if blndisplay:
                 clear_display()
                 display_msg(data, 24, 32)
@@ -96,8 +127,8 @@ def lapse_time(minutes, color, message=''):
                 display.show()
 
 
-def set_pixel_color(neopixel, color):
-    """
+def set_pixel_color(neostrip, neopixel, color):
+    """Fill a single pixel color on the neostrip.
 
     Args:
         neopixel: Pixel to be fill with color.
@@ -108,6 +139,7 @@ def set_pixel_color(neopixel, color):
     """
     if neostrip[neopixel] != (0, 0, 0):
         neostrip[neopixel] = (0, 0, 0)
+
     else:
         if color in config['colors']:
             neostrip[neopixel] = config['colors'][color]
@@ -115,8 +147,7 @@ def set_pixel_color(neopixel, color):
 
 
 def color_neostrip(neostrip, color, pixel_count):
-    """
-    Set a color to the neopixel.
+    """Set a color to all neopixels on the neostrip.
     
     Args:
         neostrip: neostrip.
@@ -133,8 +164,7 @@ def color_neostrip(neostrip, color, pixel_count):
 
 
 def clear_neostrip(neostrip):
-    """
-    Shutdown the neostrip or set the value to 0 for all Neopixel on the neostrip.
+    """Shutdown the neostrip or set the value to 0 for all Neopixel on the neostrip.
     
     Args:
         neostrip: neostrip.
@@ -145,41 +175,59 @@ def clear_neostrip(neostrip):
     neostrip.fill = (config['colors']['nocolor'])
     neostrip.write()
 
+def main_logic():
+    global display
+    global blndisplay
 
-def load_config():
-    """
-    Load configuration from the config.json file.
+    if blndisplay:
+        try:
+            i2c = machine.I2C(scl=machine.Pin(config['screen']['sda']), sda=machine.Pin(config['screen']['scl']))
+            display = ssd1306.SSD1306_I2C(config['screen']['width'], config['screen']['height'], i2c)
+            clear_display()
+        except OSError:
+            print("Error trying to initialize the code for the OLED")
+            blndisplay = False
+            display = None
 
-    Returns:
-        json object with configuration.
-    """
-    with open("./config.json", "r") as conf_file:
-        return json.load(conf_file)
+    button_ul = machine.Pin(config['button_ul']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
+    button_ur = machine.Pin(config['button_ur']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
+    button_dl = machine.Pin(config['button_dl']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
+    button_dr = machine.Pin(config['button_dr']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
+    neostrip = neopixel.NeoPixel(machine.Pin(config['neopixel']['pin']), config['neopixel']['count'])
+    clear_neostrip(neostrip)
 
+    colors = config["colors"]
 
-config = load_config()
+    while True:
 
-if blndisplay:
-    try:
-        i2c = machine.I2C(scl=machine.Pin(config['screen']['sda']), sda=machine.Pin(config['screen']['scl']))
-        display = ssd1306.SSD1306_I2C(config['screen']['width'], config['screen']['height'], i2c)
-        clear_display()
-    except OSError:
-        print("Error trying to initialize the code for the OLED")
-        blndisplay = False
+        if (button_ul.value() == 0):
+            print("Got 'button_ul' pressed.")
+            lapse_time(neostrip, 25, "red", "POMODORO")
+            lapse_time(neostrip, 5, "green", "FREE TIME")
 
-button = machine.Pin(config['button']['pin'], machine.Pin.IN, machine.Pin.PULL_UP)
-PIXEL_COUNT = config['neopixel']['count']
-neostrip = neopixel.NeoPixel(machine.Pin(config['neopixel']['pin']), PIXEL_COUNT)
-clear_neostrip(neostrip)
+        elif (button_ur.value() == 0):
+            print("Got 'button_ur' pressed.")
+            for color in colors:
+                color_neostrip(neostrip, color, config['neopixel']['count'])
+                time.sleep(0.5)
+                color_neostrip(neostrip, 'nocolor', config['neopixel']['count'])
 
+        elif (button_dl.value() == 0):
+            print("Got 'button_dl' pressed.")
 
-while True:
-    if (button.value() == 0):
-        # Add animation here
-        # time.sleep_ms(3000)
-        # Clear neostrip
-        lapse_time(25, "red", "POMODORO")
-        clear_neostrip(neostrip)
-        lapse_time(5, "green", "FREE TIME")
-        clear_neostrip(neostrip)
+            for color in colors:
+                slow_fill_color(neostrip, colors, color, config['neopixel']['count'])
+                time.sleep_ms(100)
+            color_neostrip(neostrip, 'nocolor', config['neopixel']['count'])
+
+        elif (button_dr.value() == 0):
+            print("Got 'button_dr' pressed.")
+
+            for i in range(0, config['neopixel']['count']):
+                color = [get_random_int(), get_random_int(), get_random_int()]
+                print(color)
+                neostrip[i] = color
+                time.sleep_ms(25)
+                neostrip.write()
+            time.sleep_ms(100)
+            color_neostrip(neostrip, 'nocolor', config['neopixel']['count'])

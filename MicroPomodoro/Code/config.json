@@ -7,10 +7,19 @@
   },
   "neopixel":{
     "count":12,
-    "pin":15
+    "pin":12
   },
-  "button": {
-    "pin": 12
+  "button_ul": {
+    "pin": 14
+  },
+  "button_ur": {
+    "pin": 0
+  },
+  "button_dl": {
+    "pin": 13
+  },
+  "button_dr": {
+    "pin": 2
   },
   "colors":{
     "red":[255, 0, 0],
