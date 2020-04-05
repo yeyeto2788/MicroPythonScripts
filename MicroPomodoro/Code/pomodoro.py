@@ -137,12 +137,20 @@ def set_pixel_color(neostrip, neopixel, color):
     Returns:
         None.
     """
+    brightness = config["neopixel"]["brightness"]
+
     if neostrip[neopixel] != (0, 0, 0):
         neostrip[neopixel] = (0, 0, 0)
 
     else:
         if color in config['colors']:
-            neostrip[neopixel] = config['colors'][color]
+            final_color = []
+            for sub_color in config['colors'][color]:
+                new_sub_color = int(sub_color * (brightness / 100))
+                if new_sub_color < 0:
+                    new_sub_color = sub_color
+                final_color.append(new_sub_color)
+            neostrip[neopixel] = tuple(final_color)
     neostrip.write()
 
 

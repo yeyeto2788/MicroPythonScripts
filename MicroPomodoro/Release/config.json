@@ -7,7 +7,8 @@
   },
   "neopixel":{
     "count":12,
-    "pin":12
+    "pin":12,
+    "brightness": 20
   },
   "button_ul": {
     "pin": 14
