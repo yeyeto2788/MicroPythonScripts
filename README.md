@@ -1,7 +1,7 @@
 # MicroPythonScripts
 Main repository of MicroPython projects and modules I have built on my spare time.
 
-## **`project` folder**
+## **`'project'`** folder
   Folder containing everything related to the script.
   * ### `code` folder
   Commented code for better understanding of it.
@@ -10,7 +10,7 @@ Main repository of MicroPython projects and modules I have built on my spare tim
   * ### `docs` folder
   Files like images and so on for documentation purposes.
 ___
-## **`modules` folder**
+## **`'modules'`** folder
 Folder containing everything related to MicroPython and some help classes and scripts to make deployments more easy.
   * ### `code` folder
   Commented code for better understanding of it.
@@ -21,15 +21,15 @@ Folder containing everything related to MicroPython and some help classes and sc
   * ### `examples` folder
   Example files that in some cases will need to be renamed into `main.py` so it will be run at boot time.
 ___
-## **`snipets` folder**
+## **`'snipets'`** folder
 Scripts used to saved some common code so I don't forget how to do some things.
 
 ___
-## **`static` folder**
+## **`'static'` ** folder
 Contains images for documentation purposes and other static files like HTML and CSS code.
 
 ___
-## **`tools` folder**
+## **`'tools'`** folder
 Tools used when developing within this repo.
 ___
 ### **`README.md`** files on folders
