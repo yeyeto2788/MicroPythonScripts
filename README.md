@@ -25,7 +25,7 @@ ___
 Scripts used to saved some common code so I don't forget how to do some things.
 
 ___
-## **`'static'` ** folder
+## **`'static'`** folder
 Contains images for documentation purposes and other static files like HTML and CSS code.
 
 ___
