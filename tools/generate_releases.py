@@ -4,11 +4,6 @@ import os
 import shutil
 import zipfile
 
-repo_dir = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
-
-projects_dir = os.path.abspath(os.path.join(repo_dir, 'projects'))
 log = False
 
 
@@ -20,10 +15,13 @@ def verbose(*arguments, **kwargs):
         print(*arguments, **kwargs)
 
 
-def get_release_files() -> dict:
+def get_release_files(projects_dir: str) -> dict:
     """Walk over the repo and find the release files.
 
     It will look over the folder named 'release' all files within that folder.
+
+    Args:
+        projects_dir: Directory where to look files in.
 
     Returns:
         Dictionary containing the following structure:
@@ -100,13 +98,16 @@ def print_data(data: dict):
 
 
 def main(options):
-
     global log
+    repo_dir = os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__))
+    )
+    projects_dir = os.path.abspath(os.path.join(repo_dir, 'projects'))
 
     if options.verbose:
         log = True
     # Get all project release files.
-    data = get_release_files()
+    data = get_release_files(projects_dir)
     print_data(data)
     copied_files = None
 
@@ -131,9 +132,6 @@ def main(options):
         # to invoke the zipping process.
         if copied_files is not None:
             generate_zip(copied_files, destination)
-
-        else:
-            print("Upsss seems like something happened trying to copy files.")
 
 
 if __name__ == '__main__':
