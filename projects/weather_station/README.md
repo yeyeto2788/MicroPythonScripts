@@ -10,15 +10,15 @@ This script will read the sensor DHT11 data and it will create a simple server s
 
 ## Parts needed:
 
-  * ESP8266
+- ESP8266
 
-  I'm using the Wemos D1 Mini board.
+I'm using the Wemos D1 Mini board.
 
   <p align="center">
   <img src="../../static/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="200"/>
   </p>
 
-  * DHT11 Sensor
+- DHT11 Sensor
 
   <p align="center">
   <img src="../../static/images/dht11.png" alt="DHT11 Sensor"  width="200"/>

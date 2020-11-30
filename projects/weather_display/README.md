@@ -8,21 +8,21 @@ What we need to do is download all the code from the `release` folder and rename
 
 ## Parts needed:
 
-  * **ESP8266**
+- **ESP8266**
 
-  I'm using the Wemos D1 Mini board.
+I'm using the Wemos D1 Mini board.
 
   <p align="center">
   <img src="../../static/images/wemos_d1_mini.png" alt="Wemos d1 mini board"  width="200"/>
   </p>
 
-  * **OLED display (I2C)**
+- **OLED display (I2C)**
 
   <p align="center">
   <img src="../../static/images/wemos_mini_oled.png" alt="Wemos D1 Oled Display"  width="200"/>
   </p>
 
-  * **DHT11 Humidity sensor.**
+- **DHT11 Humidity sensor.**
 
   <p align="center">
   <img src="../../static/images/DHT11.png" alt="DHT11 sensor"  width="100"/>
@@ -35,5 +35,5 @@ What we need to do is download all the code from the `release` folder and rename
 - [x] Better documentation.
 
 - [ ] Add images.
-    <ul><li> - [ ] Execution images.</li>
-    <li> - [ ] Board setup images.</li></ul>
+  <ul><li> - [ ] Execution images.</li>
+  <li> - [ ] Board setup images.</li></ul>
