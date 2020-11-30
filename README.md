@@ -4,7 +4,7 @@ Main repository of MicroPython projects and modules I have built on my spare tim
 
 ## Structure of the repository
 
-- **`'project'`** :file_folder:
+- **`'project'`**
 
   Folder containing everything related to the script.
 
@@ -14,7 +14,7 @@ Main repository of MicroPython projects and modules I have built on my spare tim
   | `release` | :file_folder: | Code without comments and trying to be as small as possible in order to save memory on the microcontroller. |
   | `docs`    | :file_folder: | Files like images and so on for documentation purposes.                                                     |
 
-- **`'modules'`** :file_folder:
+- **`'modules'`**
 
   Folder containing everything related to MicroPython and some help classes and scripts to make deployments more easy.
 
