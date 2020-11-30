@@ -45,17 +45,17 @@ Main repository of MicroPython projects and modules I have built on my spare tim
 
 ## Project list
 
-| Project name    | Description                                                                                              | Status | Link                                        |
-| :-------------- | :------------------------------------------------------------------------------------------------------- | :----- | ------------------------------------------- |
-| Bulleting board | Online messages board with its own Access Point.                                                         | DONE   | [Get me there!](./projects/bulleting_board) |
-| Camera slider   | Online camera slider controller.                                                                         | WIP    | [Get me there!](./projects/camera_slider)   |
-| Micro server    | Serve static site from your board.                                                                       | DONE   | [Get me there!](./projects/micro_server)    |
-| Pomodoro        | Implementation of the Pomodoro technique.                                                                | DONE   | [Get me there!](./projects/pomodoro)        |
-| Problem solver  | Rubber duck debugging Technique with OLED LCD.                                                           | DONE   | [Get me there!](./projects/problem_solver)  |
-| Script console  | Execute any python files on the filesystem.                                                              | DONE   | [Get me there!](./projects/script_console)  |
-| Weather display | Use OpenWeatherMap API to retrieve forecast and current weather and also local data from a DHT11 sensor. | DONE   | [Get me there!](./projects/weather_display) |
-| Weather station | Online server for DHT11 sensor readings.                                                                 | DONE   | [Get me there!](./projects/weather_station) |
-| WiFi scanner    | Scans all available networks, it will show the strength, name and security                               | DONE   | [Get me there!](./projects/wifi_scan)       |
+| Project name    | Status | Link                                        |
+| :-------------- | :----- | ------------------------------------------- |
+| Bulleting board | DONE   | [Get me there!](./projects/bulleting_board) |
+| Camera slider   | WIP    | [Get me there!](./projects/camera_slider)   |
+| Micro server    | DONE   | [Get me there!](./projects/micro_server)    |
+| Pomodoro        | DONE   | [Get me there!](./projects/pomodoro)        |
+| Problem solver  | DONE   | [Get me there!](./projects/problem_solver)  |
+| Script console  | DONE   | [Get me there!](./projects/script_console)  |
+| Weather display | DONE   | [Get me there!](./projects/weather_display) |
+| Weather station | DONE   | [Get me there!](./projects/weather_station) |
+| WiFi scanner    | DONE   | [Get me there!](./projects/wifi_scan)       |
 
 ---
 
