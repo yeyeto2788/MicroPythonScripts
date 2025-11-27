@@ -1,14 +1,14 @@
 {
-  "screen":{
-    "width":128,
-    "height":64,
-    "sda":4,
-    "scl":5
+  "screen": {
+    "width": 128,
+    "height": 64,
+    "sda": 4,
+    "scl": 5
   },
-  "neopixel":{
-    "count":12,
-    "pin":12,
-    "brightness": 20
+  "neopixel": {
+    "count": 12,
+    "pin": 12,
+    "brightness": 10
   },
   "button_ul": {
     "pin": 14
@@ -22,12 +22,36 @@
   "button_dr": {
     "pin": 2
   },
-  "colors":{
-    "red":[255, 0, 0],
-    "green":[0, 255, 0],
-    "blue":[0, 0, 255],
-    "yellow":[0, 255, 255],
-    "white":[255, 255, 255],
-    "nocolor":[0, 0, 0]
+  "colors": {
+    "red": [
+      255,
+      0,
+      0
+    ],
+    "green": [
+      0,
+      255,
+      0
+    ],
+    "blue": [
+      0,
+      0,
+      255
+    ],
+    "yellow": [
+      0,
+      255,
+      255
+    ],
+    "white": [
+      255,
+      255,
+      255
+    ],
+    "nocolor": [
+      0,
+      0,
+      0
+    ]
   }
 }

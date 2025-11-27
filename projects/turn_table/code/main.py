@@ -2,15 +2,12 @@ import gc
 import time
 import socket
 
-from uln2003 import Stepper, FULL_ROTATION, HALF_STEP
+from uln2003 import Stepper, HALF_STEP
 
 DIRECTION = 1
 SLOW = 5500
 FAST = 4000
-STATES = {
-    0: "Idle",
-    1: "Working"
-}
+STATES = {0: "Idle", 1: "Working"}
 STATE = STATES[0]
 ANGLE_STRING = b"angle="
 DELAY_STRING = b"delay="
@@ -44,7 +41,7 @@ def move_n_degrees(degrees, delay=0, count=1):
 
 def main():
     global STATE
-    addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
+    addr = socket.getaddrinfo("192.168.4.1", 80)[0][-1]
     s = socket.socket()
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(addr)
@@ -108,7 +105,7 @@ def main():
             # Parse headers to get the values.
             if ANGLE_STRING in h:
                 try:
-                    angle = int(h.split(ANGLE_STRING)[1].split(b'&')[0])
+                    angle = int(h.split(ANGLE_STRING)[1].split(b"&")[0])
                     STATE = STATES[1]
                 except ValueError:
                     angle = 0
@@ -136,10 +133,9 @@ def main():
 
         cl.close()
         print("Free out: %d" % gc.mem_free())
-        print("Got angle=%s, delay=%s and count=%s" % (
-            str(angle), str(delay), str(count)
+        print(
+            "Got angle=%s, delay=%s and count=%s" % (str(angle), str(delay), str(count))
         )
-              )
         if angle > 0:
             move_n_degrees(angle, delay, count)
         #  Reset the values.

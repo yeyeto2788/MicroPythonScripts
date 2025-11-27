@@ -1,3 +1,0 @@
-pylint==2.3.1
-pyminifier==2.1
-adafruit-ampy==1.0.7

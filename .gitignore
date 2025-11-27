@@ -9,6 +9,7 @@
 
 # Virtual environment
 /venv/*
+.venv
 
-# VS Code files
-.vscode/
+.ruff_cache
+tools/obfuscate.sh

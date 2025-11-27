@@ -28,7 +28,7 @@ class ConwaysGameOfLife:
         Returns:
             type: String with the text centered
         """
-        return '{: ^{}}'.format(txt, self.oled.max_char)
+        return "{: ^{}}".format(txt, self.oled.max_char)
 
     def intro(self):
         """
@@ -80,28 +80,28 @@ class ConwaysGameOfLife:
         Returns:
             Nothing.
         """
-        self.size = size # Size of lifeforms in pixels
-        self.delay = delay # Delay in ms between generations
+        self.size = size  # Size of lifeforms in pixels
+        self.delay = delay  # Delay in ms between generations
 
         # Localised to avoid self lookups
         # Possible performance optimisation, TBC
         delay = self.delay
         tick = self.tick
-        self.randomise() # Randomise initial pixels
+        self.randomise()  # Randomise initial pixels
 
-        generations = 0 # Begin
+        generations = 0  # Begin
         try:
-            while (tick() and self.select_button.is_released()):
+            while tick() and self.select_button.is_released():
                 generations = generations + 1
                 self.oled.display.show()
                 sleep_ms(delay)
         except KeyboardInterrupt:
             pass
 
-        if generations > self.best: # New high score?
+        if generations > self.best:  # New high score?
             self.best = generations
 
-        self.end(generations, self.best, self.size) # End
+        self.end(generations, self.best, self.size)  # End
 
     def randomise(self):
         """
@@ -175,28 +175,27 @@ class ConwaysGameOfLife:
 
         for x in range(0, width, size):
             for y in range(0, height, size):
-
-                alive = get(x, y) # Is the current cell alive
+                alive = get(x, y)  # Is the current cell alive
 
                 # Count number of neighbours
                 neighbours = (
-                    get(x - size, y - size) +
-                    get(x, y - size) +
-                    get(x + size, y - size) +
-                    get(x - size, y) +
-                    get(x + size, y) +
-                    get(x + size, y + size) +
-                    get(x, y + size) +
-                    get(x - size, y + size)
+                    get(x - size, y - size)
+                    + get(x, y - size)
+                    + get(x + size, y - size)
+                    + get(x - size, y)
+                    + get(x + size, y)
+                    + get(x + size, y + size)
+                    + get(x, y + size)
+                    + get(x - size, y + size)
                 )
 
                 # Apply the game rules
                 if alive and not 2 <= neighbours <= 3:
-                    cell(x, y, 0) # This pixel dies
+                    cell(x, y, 0)  # This pixel dies
                     if not something_happened:
                         something_happened = True
                 elif not alive and neighbours == 3:
-                    cell(x, y, 1) # A new pixel is born
+                    cell(x, y, 1)  # A new pixel is born
                     if not something_happened:
                         something_happened = True
         return something_happened

@@ -2,6 +2,7 @@ import time
 import network
 
 import gc
+
 gc.enable()
 
 from console import Display
@@ -9,10 +10,10 @@ from console import Display
 
 class WiFiScanner:
     def __init__(self):
-        self.name = ''
-        self.strength = ''
-        self.status = ''
-        self.kanaal = ''
+        self.name = ""
+        self.strength = ""
+        self.status = ""
+        self.kanaal = ""
         self.oled = Display()
         self.wlan = network.WLAN(network.STA_IF)
         self.prepare_wifi()
@@ -50,11 +51,11 @@ class WiFiScanner:
         try:
             wlan_list = self.wlan.scan()
         except:
-            wlan_list = [['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE']]
+            wlan_list = [["NONE", "NONE", "NONE", "NONE", "NONE", "NONE"]]
         for counter in wlan_list:
-            self.name = str(counter[0], 'utf8')
-            self.strength = str(counter[3]) + ' dBm'
-            self.kanaal = 'Channel: ' + str(counter[2])
+            self.name = str(counter[0], "utf8")
+            self.strength = str(counter[3]) + " dBm"
+            self.kanaal = "Channel: " + str(counter[2])
             self.status = self.get_secure(counter[4])
             self.show_info()
             self.oled.clear(0, 1)
@@ -73,15 +74,15 @@ class WiFiScanner:
         s_return = ""
         try:
             if int(num) == 0:
-                s_return = 'Open wifi'
+                s_return = "Open wifi"
             elif int(num) == 1:
-                s_return = 'WEP'
-            elif int(num) ==2:
-                s_return = 'WPA-PSK'
+                s_return = "WEP"
+            elif int(num) == 2:
+                s_return = "WPA-PSK"
             elif int(num) == 3:
-                s_return = 'WPA2-PSK'
+                s_return = "WPA2-PSK"
             elif int(num) == 4:
-                s_return = 'WPA/WPA2-PSK'
+                s_return = "WPA/WPA2-PSK"
             else:
                 s_return = str("UNKNOWN %s" % num)
 
@@ -99,7 +100,7 @@ class WiFiScanner:
         self.oled.clear(0, 1)
         if len(self.name) > 15:
             self.oled.print_on_line(self.name[0:15], 0)
-            self.oled.print_on_line(self.name[15:int(len(self.name))], 1)
+            self.oled.print_on_line(self.name[15 : int(len(self.name))], 1)
         else:
             self.oled.print_on_line(self.name, 0)
 
@@ -108,5 +109,6 @@ class WiFiScanner:
         self.oled.print_on_line(self.kanaal, 4, 30)
         self.oled.print_on_line((str(gc.mem_free()) + " B"), 5, 30)
         time.sleep_ms(10000)
+
 
 ScannedWiFi = WiFiScanner()

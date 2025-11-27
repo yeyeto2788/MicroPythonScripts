@@ -1,9 +1,10 @@
 """This project uses the module uln2003 that you can find
 at https://github.com/yeyeto2788/MicroPythonScripts/blob/master/modules/uln2003/release/uln2003.py
 """
+
 import time
 from machine import Pin
-from uln2003 import Stepper, FULL_ROTATION, HALF_STEP
+from uln2003 import Stepper, HALF_STEP
 
 start_switch = Pin(4, Pin.IN, Pin.PULL_UP)
 end_switch = Pin(5, Pin.IN, Pin.PULL_UP)

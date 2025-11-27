@@ -17,7 +17,10 @@ def read_sensors():
     temperature = d.temperature()
     humidity = d.humidity()
     for i in range(0, 1):
-        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(temperature), str(humidity)))
+        data.append(
+            '<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>'
+            % (str(temperature), str(humidity))
+        )
     return data
 
 
@@ -72,7 +75,7 @@ def main():
     </body>
     </html>
     """
-    addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
+    addr = socket.getaddrinfo("192.168.4.1", 80)[0][-1]
     s = socket.socket()
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(addr)
@@ -80,20 +83,21 @@ def main():
 
     while True:
         cl, addr = s.accept()
-        print('Client connected from', addr)
+        print("Client connected from", addr)
         print("Free in: %d" % gc.mem_free())
-        cl_file = cl.makefile('rwb', 0)
+        cl_file = cl.makefile("rwb", 0)
         while True:
             h = cl_file.readline()
             if h == b"" or h == b"\r\n":
                 break
         rows = read_sensors()
-        response = html % '\n'.join(rows)
+        response = html % "\n".join(rows)
         try:
             cl.sendall(response)
         except OSError as error:
             print("Error trying to send all information. %s" % error)
             pass
         cl.close()
+
 
 main()

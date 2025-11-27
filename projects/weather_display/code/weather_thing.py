@@ -1,5 +1,4 @@
 import ssd1306
-import json
 import urequests
 import time
 import dht
@@ -14,14 +13,15 @@ def connect_wifi(ssid, pwd):
         ssid: Name of the WIFI connection.
         pwd: Boolean for the connection.
 
-    Returns: 
+    Returns:
         True if it's connected to wifi
 
     """
     import network
+
     sta_if = network.WLAN(network.STA_IF)
     if not sta_if.isconnected():
-        display_msg('Connecting to network...', 8)
+        display_msg("Connecting to network...", 8)
         sta_if.active(True)
         sta_if.connect(ssid, pwd)
         while not sta_if.isconnected():
@@ -137,7 +137,7 @@ def parse_weather_data(data):
         else:
             final_line = data[i].split(": ")
             display_msg(final_line[0], 40)
-            display_msg('{:^16}'.format(final_line[1]), 48)
+            display_msg("{:^16}".format(final_line[1]), 48)
             draw_hline(WIDTH, 37)
         display.show()
 
@@ -151,6 +151,7 @@ def get_time():
 
     """
     import ntptime
+
     ntptime.settime()
     ts = time.localtime()
     year = ts[0]
@@ -158,7 +159,13 @@ def get_time():
     day = ts[2]
     hour = ts[3]
     mins = ts[4]
-    actual_time = "%s/%s/%s %s:%s" % (str(day), str(month), str(year), str(hour), str(mins))
+    actual_time = "%s/%s/%s %s:%s" % (
+        str(day),
+        str(month),
+        str(year),
+        str(hour),
+        str(mins),
+    )
     return actual_time
 
 
@@ -171,10 +178,10 @@ def show_time():
 
     """
     clear_display()
-    display_msg('{:^16}'.format("CLOCK"), 8)
+    display_msg("{:^16}".format("CLOCK"), 8)
     data = get_time().split(" ")
-    display_msg('{:^16}'.format(data[0]), 32)
-    display_msg('{:^16}'.format(data[1]), 40)
+    display_msg("{:^16}".format(data[0]), 32)
+    display_msg("{:^16}".format(data[1]), 40)
     display.show()
 
 
@@ -190,10 +197,10 @@ def get_local_conditions():
     """
     clear_display()
     d = dht.DHT11(machine.Pin(4))
-    display_msg('{:16}'.format("Local Temp:"), 16)
-    display_msg('{:^16}'.format(str(d.temperature())), 24)
-    display_msg('{:16}'.format("Local Humidity:"), 40)
-    display_msg('{:^16}'.format(str(d.humidity())), 48)
+    display_msg("{:16}".format("Local Temp:"), 16)
+    display_msg("{:^16}".format(str(d.temperature())), 24)
+    display_msg("{:16}".format("Local Humidity:"), 40)
+    display_msg("{:^16}".format(str(d.humidity())), 48)
     display.show()
 
 
@@ -202,10 +209,10 @@ WIDTH = 128
 HEIGHT = 64
 display = ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c)
 
-CITY = 'City you want the weather from'
-API_KEY = 'OpenWeatherAPI'
-SSID = 'Name of the WIFI connection'
-PWD = 'Wifi connection password'
+CITY = "City you want the weather from"
+API_KEY = "OpenWeatherAPI"
+SSID = "Name of the WIFI connection"
+PWD = "Wifi connection password"
 
 received_data = get_weather(CITY, API_KEY)
 start_time = time.ticks_ms() // 1000

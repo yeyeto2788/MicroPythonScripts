@@ -14,18 +14,18 @@ import platform
 import subprocess
 import importlib.util
 
-module_name = 'pyminifier'
+module_name = "pyminifier"
 module_spec = importlib.util.find_spec(module_name)
 
 if module_spec is None:
     print(f"Couldn't find the {module_name} module")
     exit(-1)
 else:
-    token_utils = importlib.import_module(f'{module_name}.token_utils', module_name)
-    minification = importlib.import_module(f'{module_name}.minification', module_name)
-    obfuscate = importlib.import_module(f'{module_name}.obfuscate', module_name)
+    token_utils = importlib.import_module(f"{module_name}.token_utils", module_name)
+    minification = importlib.import_module(f"{module_name}.minification", module_name)
+    obfuscate = importlib.import_module(f"{module_name}.obfuscate", module_name)
 
-PY_EXTENSION = '.py'
+PY_EXTENSION = ".py"
 
 
 class CleanOptions:
@@ -61,7 +61,9 @@ class CleanOptions:
         self.use_nonlatin = False
 
 
-def clean_file(source_file_name: str, destination_file_name: str = "", bln_print: bool = 0):
+def clean_file(
+    source_file_name: str, destination_file_name: str = "", bln_print: bool = 0
+):
     """
     Perform a cleaning action by removing all types of DocStrings on the code.
 
@@ -76,7 +78,7 @@ def clean_file(source_file_name: str, destination_file_name: str = "", bln_print
     _file = source_file_name
 
     module = os.path.split(_file)[1]
-    module = ".".join(module.split('.')[:-1])
+    module = ".".join(module.split(".")[:-1])
 
     source = open(_file).read()
     tokens = token_utils.listified_tokenizer(source)
@@ -103,7 +105,7 @@ def clean_file(source_file_name: str, destination_file_name: str = "", bln_print
         print(result)
 
     if destination_file_name != "":
-        with open(destination_file_name, 'w') as destination_file:
+        with open(destination_file_name, "w") as destination_file:
             destination_file.write(result)
 
         destination_file.close()
@@ -119,11 +121,10 @@ def push_file(file_path: str, serial_port: str):
 
     """
 
-    if serial_port != '':
+    if serial_port != "":
+        print("Flashing '{}'.\n".format(file_path))
 
-        print('Flashing \'{}\'.\n'.format(file_path))
-
-        command_arguments = ['sudo', 'ampy', '--port', serial_port, 'put', file_path]
+        command_arguments = ["sudo", "ampy", "--port", serial_port, "put", file_path]
 
         if os.name == "posix" and platform.system() == "Linux":
             subprocess.call(command_arguments)
@@ -132,11 +133,19 @@ def push_file(file_path: str, serial_port: str):
             subprocess.call(command_arguments[1:])
 
         else:
-            print("Hhmm, seems like you have MacOs and we haven't implement the code for this yet.")
+            print(
+                "Hhmm, seems like you have MacOs and we haven't implement the code for this yet."
+            )
 
 
-def process_files(python_files: list, projects_input: str, projects_output: str,
-                  print_output: bool, port: str, upload: bool):
+def process_files(
+    python_files: list,
+    projects_input: str,
+    projects_output: str,
+    print_output: bool,
+    port: str,
+    upload: bool,
+):
     """
     Given a list files minify and/or obfuscate them, create new files if required and flash
     them to the board.
@@ -156,11 +165,13 @@ def process_files(python_files: list, projects_input: str, projects_output: str,
         current_input = os.path.join(projects_input, file_name)
         msg = "Result:\n\n"
 
-        if projects_output != '':
+        if projects_output != "":
             current_output = os.path.join(projects_output, file_name)
 
             if current_output.endswith(PY_EXTENSION):
-                msg = f"The file {current_output} will be written with the following:\n\n"
+                msg = (
+                    f"The file {current_output} will be written with the following:\n\n"
+                )
         else:
             current_output = projects_output
 
@@ -184,7 +195,9 @@ def build_path_args(path: str) -> (str, str):
     files_dir = path
 
     if os.path.isdir(path):
-        python_files = [py_file for py_file in os.listdir(path) if py_file.endswith(PY_EXTENSION)]
+        python_files = [
+            py_file for py_file in os.listdir(path) if py_file.endswith(PY_EXTENSION)
+        ]
 
     else:
         os.path.isfile(path)
@@ -209,10 +222,10 @@ def main(options):
     projects_input = os.path.abspath(os.path.normpath(options.input))
 
     if not os.path.exists(projects_input):
-        print('Seems like the input directory does not exists.')
+        print("Seems like the input directory does not exists.")
         exit(-1)
 
-    if options.output != '':
+    if options.output != "":
         output_dir, _ = build_path_args(options.output)
         projects_output = os.path.abspath(os.path.normpath(output_dir))
 
@@ -222,29 +235,70 @@ def main(options):
         projects_output = options.output
 
     input_dir, input_files = build_path_args(projects_input)
-    process_files(input_files, input_dir, projects_output, print_output, options.port, options.upload)
+    process_files(
+        input_files,
+        input_dir,
+        projects_output,
+        print_output,
+        options.port,
+        options.upload,
+    )
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='Script to automate the process of cleaning micropython files and'
-                    ' uploading them onto the board.')
+        description="Script to automate the process of cleaning micropython files and"
+        " uploading them onto the board."
+    )
 
-    parser.add_argument('-o', '--output', action='store', nargs='?',
-                        default='', type=str, help='Output directory.')
-    parser.add_argument('-i', '--input', action='store', nargs='?',
-                        default='', type=str, help='Input file or directory.')
-    parser.add_argument('-p', '--port', action='store', nargs='?',
-                        default='', type=str, help='Port to flash files.')
-    parser.add_argument('-u', '--upload', action='store', nargs='?',
-                        default=False, type=bool, help='Upload file(s) to board.')
-    parser.add_argument('--print', action='store', nargs='?',
-                        default=True, type=bool, help='Print result.')
+    parser.add_argument(
+        "-o",
+        "--output",
+        action="store",
+        nargs="?",
+        default="",
+        type=str,
+        help="Output directory.",
+    )
+    parser.add_argument(
+        "-i",
+        "--input",
+        action="store",
+        nargs="?",
+        default="",
+        type=str,
+        help="Input file or directory.",
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        action="store",
+        nargs="?",
+        default="",
+        type=str,
+        help="Port to flash files.",
+    )
+    parser.add_argument(
+        "-u",
+        "--upload",
+        action="store",
+        nargs="?",
+        default=False,
+        type=bool,
+        help="Upload file(s) to board.",
+    )
+    parser.add_argument(
+        "--print",
+        action="store",
+        nargs="?",
+        default=True,
+        type=bool,
+        help="Print result.",
+    )
 
     args = parser.parse_args()
 
-    if args.input and not args.print and (args.output != ''):
+    if args.input and not args.print and (args.output != ""):
         print("Please provide an output destination file directory.")
         exit(-1)
 
@@ -253,6 +307,6 @@ if __name__ == '__main__':
         exit(0)
 
     else:
-        print('Please review usage of the application below.')
+        print("Please review usage of the application below.")
         print(parser.print_help())
         exit(-1)

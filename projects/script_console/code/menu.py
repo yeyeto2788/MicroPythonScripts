@@ -46,7 +46,9 @@ def print_selection(scripts, selection):
     oled.print_on_line("Script selected:" + str(selection), 1)
     oled.print_on_line(str(scripts[selection]), 2)
     oled.draw_rect(0, oled.v_lines[2], oled.width, oled.char_width)
-    oled.draw_rect_filled(oled.width - oled.char_width, oled.v_lines[2], oled.char_width, oled.char_width)
+    oled.draw_rect_filled(
+        oled.width - oled.char_width, oled.v_lines[2], oled.char_width, oled.char_width
+    )
 
 
 def get_files():
@@ -73,7 +75,7 @@ while True:
     start_time = time.ticks_ms() // 1000
     console_idle = 0
     oled.clear(0, 1)
-    print_menu(scripts[0:len(oled.v_lines)])
+    print_menu(scripts[0 : len(oled.v_lines)])
     while True:
         time_now = time.ticks_ms() // 1000
         buttons = keys.get_keypad()

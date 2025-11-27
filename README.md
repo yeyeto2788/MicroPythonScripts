@@ -57,6 +57,14 @@ Main repository of MicroPython projects and modules I have built on my spare tim
 | Weather station | **DONE** | [Get me there!](./projects/weather_station) |
 | WiFi scanner    | **DONE** | [Get me there!](./projects/wifi_scan)       |
 
+### Generating minified code:
+I made a quick script to generate the commands to be executed in order to minify the code in the `projects` folder. Might overkill but sometimes in Windows it behaves different and having all commands at once comes in handy.
+
+```console
+python ./tools/generate_commands.py
+chmod +x ./tools/obfuscate.sh
+./tools/obfuscate.sh
+```
 ---
 
 <!-- Support -->

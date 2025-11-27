@@ -3,6 +3,7 @@ import machine
 import ssd1306
 import utime
 import gc
+
 gc.enable()
 
 
@@ -19,11 +20,13 @@ class WiFiScanner:
         """
         self.sda_pin = sda_pin
         self.scl_pin = scl_pin
-        self.name = ''
-        self.strength = ''
-        self.status = ''
-        self.kanaal = ''
-        self.i2c = machine.I2C(scl=machine.Pin(self.scl_pin), sda=machine.Pin(self.sda_pin))
+        self.name = ""
+        self.strength = ""
+        self.status = ""
+        self.kanaal = ""
+        self.i2c = machine.I2C(
+            scl=machine.Pin(self.scl_pin), sda=machine.Pin(self.sda_pin)
+        )
         self.oled = ssd1306.SSD1306_I2C(128, 64, self.i2c)
         self.oled.fill(1)
         self.oled.show()
@@ -43,11 +46,11 @@ class WiFiScanner:
         try:
             wlan_list = self.wlan.scan()
         except:
-            wlan_list = [['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE']]
+            wlan_list = [["NONE", "NONE", "NONE", "NONE", "NONE", "NONE"]]
         for counter in wlan_list:
-            self.name = str(counter[0], 'utf8')
-            self.strength = str(counter[3]) + ' dBm'
-            self.kanaal = 'Channel: ' + str(counter[2])
+            self.name = str(counter[0], "utf8")
+            self.strength = str(counter[3]) + " dBm"
+            self.kanaal = "Channel: " + str(counter[2])
             self.status = self.get_secure(counter[4])
             self.show_display()
             self.oled.fill(0)
@@ -70,15 +73,15 @@ class WiFiScanner:
         s_return = ""
         try:
             if int(num) == 0:
-                s_return = 'Open wifi'
+                s_return = "Open wifi"
             elif int(num) == 1:
-                s_return = 'WEP'
-            elif int(num) ==2:
-                s_return = 'WPA-PSK'
+                s_return = "WEP"
+            elif int(num) == 2:
+                s_return = "WPA-PSK"
             elif int(num) == 3:
-                s_return = 'WPA2-PSK'
+                s_return = "WPA2-PSK"
             elif int(num) == 4:
-                s_return = 'WPA/WPA2-PSK'
+                s_return = "WPA/WPA2-PSK"
             else:
                 s_return = str(num)
 
@@ -101,7 +104,7 @@ class WiFiScanner:
         self.oled.show()
         if len(self.name) > 15:
             self.oled.text(self.name[0:15], 0, 0)
-            self.oled.text(self.name[15:int(len(self.name))], 0, 8)
+            self.oled.text(self.name[15 : int(len(self.name))], 0, 8)
         else:
             self.oled.text(self.name, 0, 0)
             self.oled.text(self.strength, 30, 20)
@@ -112,4 +115,6 @@ class WiFiScanner:
             utime.sleep_ms(10000)
 
     def __str__(self):
-        return "Name: {}.\n{}\n{}.\n{}.".format(self.name, self.strength, self.kanaal, self.status)
+        return "Name: {}.\n{}\n{}.\n{}.".format(
+            self.name, self.strength, self.kanaal, self.status
+        )

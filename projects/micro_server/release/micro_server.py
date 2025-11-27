@@ -1,19 +1,22 @@
-# This file is executed on every boot (including wake-boot from deepsleep)
-
-import gc
-import os
-
-def do_connect():
-    import network
-    sta_if = network.WLAN(network.STA_IF)
-    ap_if = network.WLAN(network.AP_IF)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-        sta_if.active(True)
-        sta_if.connect('<essid>', '<password>')
-        while not sta_if.isconnected():
-            pass
-    print('network config:', sta_if.ifconfig())
-
-do_connect()
-gc.collect()
+import picoweb
+import network
+app=picoweb.WebApp("app")
+@app.route("/")
+def index(req,resp):
+ yield from picoweb.start_response(resp,content_type="text/html")
+ html_file=open("index.html","r")
+ for line in html_file:
+  yield from resp.awrite(line)
+def get_ip():
+ wlan=network.WLAN(network.STA_IF)
+ if wlan.active():
+  addr=wlan.ifconfig()[0]
+ else:
+  wlan=network.WLAN(network.AP_IF)
+  if wlan.active():
+   addr=wlan.ifconfig()[0]
+  else:
+   print("No active connection")
+ return addr
+host_ip=get_ip()
+app.run(debug=True,host=host_ip)

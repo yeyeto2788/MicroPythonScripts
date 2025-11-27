@@ -30,8 +30,8 @@ def toggle_led(intmins, strled):
 witty.clear_leds()
 while True:
     if not witty.read_button():
-        witty.set_boolean_value('blue_led', 0)
+        witty.set_boolean_value("blue_led", 0)
         toggle_led(25, "red_led")
         toggle_led(5, "green_led")
     else:
-        witty.set_boolean_value('blue_led', 1)
+        witty.set_boolean_value("blue_led", 1)

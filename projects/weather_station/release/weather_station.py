@@ -2,19 +2,17 @@ import socket
 import dht
 import gc
 import machine
-
 def read_sensors():
-    data = []
-    d = dht.DHT11(machine.Pin(2))
-    d.measure()
-    temperature = d.temperature()
-    humidity = d.humidity()
-    for i in range(0, 1):
-        data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>' % (str(temperature), str(humidity)))
-    return data
-
+ data=[]
+ d=dht.DHT11(machine.Pin(2))
+ d.measure()
+ temperature=d.temperature()
+ humidity=d.humidity()
+ for i in range(0,1):
+  data.append('<tr><td align="center"><h3>%s C</h3></td><td align="center"><h3>%s &#37;</h3></td></tr>'%(str(temperature),str(humidity)))
+ return data
 def main():
-    html = b"""<!DOCTYPE html>
+ html=b"""<!DOCTYPE html>
     <html lang="en">
     <head>
     <title>Weather Station</title>
@@ -58,28 +56,26 @@ def main():
     </body>
     </html>
     """
-    addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
-    s = socket.socket()
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind(addr)
-    s.listen(5)
-
-    while True:
-        cl, addr = s.accept()
-        print('Client connected from', addr)
-        print("Free in: %d" % gc.mem_free())
-        cl_file = cl.makefile('rwb', 0)
-        while True:
-            h = cl_file.readline()
-            if h == b"" or h == b"\r\n":
-                break
-        rows = read_sensors()
-        response = html % '\n'.join(rows)
-        try:
-            cl.sendall(response)
-        except OSError as error:
-            print("Error trying to send all information. %s" % error)
-            pass
-        cl.close()
-
+ addr=socket.getaddrinfo("192.168.4.1",80)[0][-1]
+ s=socket.socket()
+ s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+ s.bind(addr)
+ s.listen(5)
+ while True:
+  cl,addr=s.accept()
+  print("Client connected from",addr)
+  print("Free in: %d"%gc.mem_free())
+  cl_file=cl.makefile("rwb",0)
+  while True:
+   h=cl_file.readline()
+   if h==b"" or h==b"\r\n":
+    break
+  rows=read_sensors()
+  response=html%"\n".join(rows)
+  try:
+   cl.sendall(response)
+  except OSError as error:
+   print("Error trying to send all information. %s"%error)
+   pass
+  cl.close()
 main()

@@ -56,9 +56,28 @@ def quick_decode(s_decode):
     Returns:
         String decoded.
     """
-    elements = {"ñ": "%C3%B1", "€": "%E2,%AC", ";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A", "#": "%23", "&": "%26",
-                "=": "%3D", "+": "%2B", "$": "%24", ",": "%2C", "%": "%25", "<": "%3C", ">": "%3E", "@": "%40",
-                "(": "%28", ")": "%29", "‚": "%82", "!": "%21"}
+    elements = {
+        "ñ": "%C3%B1",
+        "€": "%E2,%AC",
+        ";": "%3B",
+        "?": "%3F",
+        "/": "%2F",
+        ":": "%3A",
+        "#": "%23",
+        "&": "%26",
+        "=": "%3D",
+        "+": "%2B",
+        "$": "%24",
+        ",": "%2C",
+        "%": "%25",
+        "<": "%3C",
+        ">": "%3E",
+        "@": "%40",
+        "(": "%28",
+        ")": "%29",
+        "‚": "%82",
+        "!": "%21",
+    }
     if "+" in s_decode:
         s_decode = s_decode.replace("+", " ")
     if "%20" in s_decode:
@@ -216,7 +235,7 @@ def main():
             gotten_msg = b"GET /?messageinput="
             if gotten_msg in h:
                 msg = h.decode("utf-8").split("/?messageinput=")
-                final_msg = msg[1][:(len(msg)-12)]
+                final_msg = msg[1][: (len(msg) - 12)]
                 write_file(final_msg)
             elif b"GET /?cl=yes" in h:
                 clear_file()

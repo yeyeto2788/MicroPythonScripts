@@ -1,6 +1,7 @@
 """This need the module umqttsimple which comes from
 https://raw.githubusercontent.com/micropython/micropython-lib/master/umqtt.simple/umqtt/simple.py
 """
+
 import machine
 import ubinascii
 from umqttsimple import MQTTClient, MQTTException
@@ -19,7 +20,8 @@ def publish_message(topic, msg):
         ubinascii.hexlify(machine.unique_id()),
         server=HOST,
         user=USER,
-        password=PASSWORD)
+        password=PASSWORD,
+    )
     try:
         broker.connect()
     except (MQTTException, OSError):

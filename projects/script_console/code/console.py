@@ -10,7 +10,9 @@ class Display(object):
         self.height = height
         self.char_width = 8
         self.max_char = int(self.width / self.char_width)
-        self.v_lines = [i * self.char_width for i in range(int(self.height / self.char_width))]
+        self.v_lines = [
+            i * self.char_width for i in range(int(self.height / self.char_width))
+        ]
         self.display = ssd1306.SSD1306_I2C(self.width, self.height, self.i2c)
         self.clear(0, 1)
 
@@ -40,12 +42,14 @@ class Display(object):
             word_lines: List with the text sliced.
         """
         word_lines = []
-        if type(message) == str:
+        if isinstance(message, str):
             words = message.split(" ")
             msg = ""
             for iteration, word in enumerate(words):
                 remaining_chars = self.max_char - len(msg)
-                if (len(msg + " " + word) <= remaining_chars) or ((len(word) + 1) <= remaining_chars):
+                if (len(msg + " " + word) <= remaining_chars) or (
+                    (len(word) + 1) <= remaining_chars
+                ):
                     if iteration == len(words) - 1:
                         msg += word + " "
                         word_lines.append(msg)
@@ -322,10 +326,10 @@ class Display(object):
         """
         bitstr = ""
         for pos in range(0, len(hexstr) - 1, 2):
-            newhex = hexstr[pos:pos + 2]
+            newhex = hexstr[pos : pos + 2]
             newint = int(newhex, 16)
             newbin = bin(newint)[2:]
-            newbits = '0' * (8 - len(newbin)) + newbin
+            newbits = "0" * (8 - len(newbin)) + newbin
             bitstr += newbits
         return bitstr
 
@@ -345,7 +349,7 @@ class Display(object):
         image_file = open(file, "r")
         pic = image_file.readlines()
         for y, row in enumerate(pic):
-            line = self.hex2bits(row.rstrip('\r\n'))
+            line = self.hex2bits(row.rstrip("\r\n"))
             for x, col in enumerate(line):
                 if col == "1":
                     self.display.pixel(pint_x + x, pint_y + y, 1)
@@ -368,7 +372,6 @@ class Display(object):
 
 
 class Button(object):
-
     def __init__(self, pin):
         self._pin = machine.Pin(pin, machine.Pin.IN, machine.Pin.PULL_UP)
 
@@ -383,7 +386,6 @@ class Button(object):
 
 
 class Keypad(object):
-
     def __init__(self, up=14, down=13, select=12, start=0):
         self.UP = machine.Pin(up, machine.Pin.IN, machine.Pin.PULL_UP)
         self.DOWN = machine.Pin(down, machine.Pin.IN, machine.Pin.PULL_UP)

@@ -1,4 +1,5 @@
-import console, time
+import console
+import time
 
 keys = console.Keypad()
 display = console.Display()
@@ -15,7 +16,7 @@ def center_text(txt):
     Returns:
         type: String with the text centered
     """
-    return '{: ^{}}'.format(txt, display.max_char)
+    return "{: ^{}}".format(txt, display.max_char)
 
 
 display.print_on_line(center_text("Wujuuu imported"), 0)

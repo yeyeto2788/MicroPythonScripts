@@ -20,7 +20,7 @@ FULL_STEP = [
     [HIGH, LOW, HIGH, LOW],
     [LOW, HIGH, HIGH, LOW],
     [LOW, HIGH, LOW, HIGH],
-    [HIGH, LOW, LOW, HIGH]
+    [HIGH, LOW, LOW, HIGH],
 ]
 
 
@@ -28,6 +28,7 @@ class Command:
     """
     Tell a stepper to move X many steps in a given direction
     """
+
     def __init__(self, stepper, steps, direction=1):
         self.stepper = stepper
         self.steps = steps
@@ -94,7 +95,7 @@ class Stepper:
                 self.pin3.value(bit[2])
                 self.pin4.value(bit[3])
                 time.sleep_us(self.delay)
-        self.current_position += (direction * step_count)
+        self.current_position += direction * step_count
 
     def rel_angle(self, angle):
         """

@@ -14,7 +14,7 @@ if len(devices) == 0:
 
 else:
     oled.clear(0, 1)
-    oled.print_wrapped('%s I2C devices found' % str(len(devices)))
+    oled.print_wrapped("%s I2C devices found" % str(len(devices)))
     time.sleep(1.5)
 
     for count in range(1, 2):

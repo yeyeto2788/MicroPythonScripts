@@ -22,7 +22,7 @@ def clear_display(fill=0, show=0):
         display.show()
 
 
-def wrapped_text(message, max_chars = 16):
+def wrapped_text(message, max_chars=16):
     """
     It will split the text to fit the max_chars by line, by default is set to 16 but it could
     be changed.
@@ -38,7 +38,9 @@ def wrapped_text(message, max_chars = 16):
     msg = ""
     for iteraction, word in enumerate(words):
         remaining_chars = max_chars - len(msg)
-        if (len(msg + " " + word) <= remaining_chars) or ((len(word) + 1) <= remaining_chars):
+        if (len(msg + " " + word) <= remaining_chars) or (
+            (len(word) + 1) <= remaining_chars
+        ):
             if iteraction == len(words) - 1:
                 msg += word + " "
                 wordlines.append(msg)
@@ -54,7 +56,7 @@ def wrapped_text(message, max_chars = 16):
             else:
                 wordlines.append(msg)
                 msg = word + " "
-        if (len(msg) >= max_chars):
+        if len(msg) >= max_chars:
             wordlines.append(msg)
             msg = ""
     return wordlines

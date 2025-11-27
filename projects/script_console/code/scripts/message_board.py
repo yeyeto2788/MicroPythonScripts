@@ -1,4 +1,8 @@
-import socket, os, gc, time, console
+import socket
+import os
+import gc
+import time
+import console
 
 file_name = "messages.txt"
 
@@ -43,9 +47,28 @@ def quick_decode(s_decode):
         String decoded.
 
     """
-    elements = {"ñ": "%C3%B1", "€": "%E2,%AC", ";": "%3B", "?": "%3F", "/": "%2F", ":": "%3A",
-                "#": "%23", "&": "%26", "=": "%3D", "+": "%2B", "$": "%24", ",": "%2C", "%": "%25",
-                "<": "%3C", ">": "%3E", "@": "%40", "(": "%28", ")": "%29", "‚": "%82", "!": "%21"}
+    elements = {
+        "ñ": "%C3%B1",
+        "€": "%E2,%AC",
+        ";": "%3B",
+        "?": "%3F",
+        "/": "%2F",
+        ":": "%3A",
+        "#": "%23",
+        "&": "%26",
+        "=": "%3D",
+        "+": "%2B",
+        "$": "%24",
+        ",": "%2C",
+        "%": "%25",
+        "<": "%3C",
+        ">": "%3E",
+        "@": "%40",
+        "(": "%28",
+        ")": "%29",
+        "‚": "%82",
+        "!": "%21",
+    }
     if "+" in s_decode:
         s_decode = s_decode.replace("+", " ")
     if "%20" in s_decode:
@@ -181,7 +204,9 @@ def main():
 
     while True:
         cl, addr = s.accept()
-        oled.print_wrapped(str("Connection from : %s" % addr) + str("Free in: %d" % gc.mem_free()))
+        oled.print_wrapped(
+            str("Connection from : %s" % addr) + str("Free in: %d" % gc.mem_free())
+        )
         time.sleep(0.1)
         oled.clear(0, 1)
         connection_count += 1
@@ -191,7 +216,7 @@ def main():
             gotten_msg = b"GET /?messageinput="
             if gotten_msg in h:
                 msg = h.decode("utf-8").split("/?messageinput=")
-                final_msg = msg[1][:(len(msg)-12)]
+                final_msg = msg[1][: (len(msg) - 12)]
                 oled.clear(0, 1)
                 oled.print_wrapped(final_msg)
                 write_file(final_msg)
